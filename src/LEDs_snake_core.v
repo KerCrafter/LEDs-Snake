@@ -14,5 +14,13 @@ module LEDs_snake_core #(
     output wire [7:0] led_blue_intensity
 );
 
+  reg [7:0] r_led_red_intensity = 0;
+  reg [7:0] r_led_green_intensity = 0;
+  reg [7:0] r_led_blue_intensity = 0;
+
+  assign led_red_intensity = r_led_red_intensity;
+  assign led_green_intensity = r_led_green_intensity;
+  assign led_blue_intensity = r_led_blue_intensity;
+
 endmodule
 

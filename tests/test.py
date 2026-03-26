@@ -9,6 +9,6 @@ async def should_start_with_black_screen(dut):
 
     dut.current_led.value = 0
 
-    assert dut.led_red_intensity.value == "ZZZZZZZZ"
-    assert dut.led_green_intensity.value == "ZZZZZZZZ"
-    assert dut.led_blue_intensity.value == "ZZZZZZZZ"
+    assert dut.led_red_intensity.value == 0
+    assert dut.led_green_intensity.value == 0
+    assert dut.led_blue_intensity.value == 0
