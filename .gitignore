@@ -20,3 +20,4 @@ vunit_out/
 tests/__pycache__/
 tests/results.xml
 tests/sim_build/
+tests/tb.fst
