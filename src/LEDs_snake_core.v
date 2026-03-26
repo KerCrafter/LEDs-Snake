@@ -14,23 +14,23 @@ module LEDs_snake_core #(
     output wire [7:0] led_blue_intensity
 );
 
-  reg [7:0] r_led_red_intensity;
-  reg [7:0] r_led_green_intensity;
-  reg [7:0] r_led_blue_intensity;
+  reg [7:0] red_intensity;
+  reg [7:0] green_intensity;
+  reg [7:0] blue_intensity;
 
-  assign led_red_intensity = r_led_red_intensity;
-  assign led_green_intensity = r_led_green_intensity;
-  assign led_blue_intensity = r_led_blue_intensity;
+  assign led_red_intensity = red_intensity;
+  assign led_green_intensity = green_intensity;
+  assign led_blue_intensity = blue_intensity;
 
   always @(posedge clk) begin
     if(current_led == 128) begin
-      r_led_red_intensity <= 0;
-      r_led_green_intensity <= 10;
-      r_led_blue_intensity <= 0;
+      red_intensity <= 0;
+      green_intensity <= 10;
+      blue_intensity <= 0;
     end else begin
-      r_led_red_intensity <= 0;
-      r_led_green_intensity <= 0;
-      r_led_blue_intensity <= 0;
+      red_intensity <= 0;
+      green_intensity <= 0;
+      blue_intensity <= 0;
     end
   end
 
