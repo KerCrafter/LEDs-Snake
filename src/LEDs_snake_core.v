@@ -1,5 +1,5 @@
 module LEDs_snake_core #(
-    parameter MAX_POS = 16
+    parameter MAX_POS = 256
 )(
     input  wire reset,
     input  wire clk,

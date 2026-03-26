@@ -16,7 +16,7 @@ module tb ();
   wire players_commands_up;
   wire players_commands_down;
 
-  wire [3:0] current_led;
+  wire [7:0] current_led;
   wire update_frame;
   wire [7:0] led_red_intensity;
   wire [7:0] led_green_intensity;

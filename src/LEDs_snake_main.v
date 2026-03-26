@@ -1,7 +1,7 @@
 `default_nettype none
 
 module LEDs_snake_main #(
-    parameter MAX_POS = 109,
+    parameter MAX_POS = 256,
     parameter DEBOUNCE_CLK_CNT = 65536
 )(
     input  wire clk,

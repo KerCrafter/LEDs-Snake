@@ -9,7 +9,7 @@ module DE0_NANO_LEDs_snake_main(
 );
 
     LEDs_snake_main #(
-        .MAX_POS(109),
+        .MAX_POS(256),
         .DEBOUNCE_CLK_CNT(65536)
     ) u_LEDs_snake_main (
         .clk(clk),
