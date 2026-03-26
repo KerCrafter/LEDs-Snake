@@ -1,0 +1,38 @@
+`default_nettype none
+`timescale 1ns / 1ps
+
+module tb ();
+
+  // Dump the signals to a FST file. You can view it with gtkwave or surfer.
+  initial begin
+    $dumpfile("tb.fst");
+    $dumpvars(0, tb);
+    #1;
+  end
+
+  wire clk;
+  wire players_commands_left;
+  wire players_commands_right;
+  wire players_commands_up;
+  wire players_commands_down;
+
+  wire [3:0] current_led;
+  wire update_frame;
+  wire [7:0] led_red_intensity;
+  wire [7:0] led_green_intensity;
+  wire [7:0] led_blue_intensity;
+
+  LEDs_snake_core snake_core (
+      .clk  (clk),
+      .players_commands_left (players_commands_left),
+      .players_commands_right (players_commands_right),
+      .players_commands_up(players_commands_up),
+      .players_commands_down (players_commands_down),
+      .current_led(current_led),
+      .update_frame(update_frame),
+      .led_red_intensity(led_red_intensity),
+      .led_green_intensity(led_green_intensity),
+      .led_blue_intensity(led_blue_intensity)
+  );
+
+endmodule

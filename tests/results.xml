@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1774540368" />
+    <testcase name="should_start_with_black_screen" classname="test" file="/project/tests/test.py" lineno="5" time="0.00020432472229003906" sim_time_ns="0.0" ratio_time="0.0" />
+  </testsuite>
+</testsuites>
