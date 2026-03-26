@@ -23,7 +23,7 @@ module LEDs_snake_core #(
   assign led_blue_intensity = r_led_blue_intensity;
 
   always @(posedge clk) begin
-    if(current_led == 0) begin
+    if(current_led == 128) begin
       r_led_red_intensity <= 0;
       r_led_green_intensity <= 10;
       r_led_blue_intensity <= 0;

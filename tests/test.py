@@ -8,9 +8,12 @@ NUM_OF_LEDS=256;
 async def should_start_with_black_screen_only_first_LED_is_green_represent_snake_head(dut):
     dut._log.info("Start")
 
-    await check_LED_is_GREEN(dut, led_number=0);
+    for led_number in range(0, 127):
+      await check_LED_is_BLACK(dut, led_number);
 
-    for led_number in range(1, NUM_OF_LEDS-1):
+    await check_LED_is_GREEN(dut, led_number=128);
+
+    for led_number in range(129, NUM_OF_LEDS-1):
       await check_LED_is_BLACK(dut, led_number);
 
 async def check_LED(dut, led_number, red, green, blue):
