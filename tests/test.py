@@ -3,17 +3,18 @@ from cocotb.clock import Clock
 from cocotb.triggers import ClockCycles, Timer
 
 NUM_OF_LEDS=256;
+INITIAL_HEAD_LED_NUMBER=128;
 
 @cocotb.test()
 async def should_start_with_black_screen_only_first_LED_is_green_represent_snake_head(dut):
     dut._log.info("Start")
 
-    for led_number in range(0, 127):
+    for led_number in range(0, INITIAL_HEAD_LED_NUMBER-1):
       await check_LED_is_BLACK(dut, led_number);
 
-    await check_LED_is_GREEN(dut, led_number=128);
+    await check_LED_is_GREEN(dut, led_number=INITIAL_HEAD_LED_NUMBER);
 
-    for led_number in range(129, NUM_OF_LEDS-1):
+    for led_number in range(INITIAL_HEAD_LED_NUMBER+1, NUM_OF_LEDS-1):
       await check_LED_is_BLACK(dut, led_number);
 
 async def check_LED(dut, led_number, red, green, blue):
