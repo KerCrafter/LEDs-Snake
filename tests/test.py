@@ -2,12 +2,14 @@ import cocotb
 from cocotb.clock import Clock
 from cocotb.triggers import ClockCycles
 
+NUM_OF_LEDS=256;
+
 @cocotb.test()
 async def should_start_with_black_screen(dut):
     dut._log.info("Start")
 
-    check_LED_is_BLACK(dut, led_number=0);
-    check_LED_is_BLACK(dut, led_number=255);
+    for led_number in range(NUM_OF_LEDS):
+      check_LED_is_BLACK(dut, led_number);
 
 def check_LED(dut, led_number, red, green, blue):
     dut.current_led.value = led_number
