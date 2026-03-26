@@ -18,3 +18,5 @@ vunit_out/
 *.swn
 
 tests/__pycache__/
+tests/results.xml
+tests/sim_build/
