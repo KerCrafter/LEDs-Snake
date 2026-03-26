@@ -16,3 +16,5 @@ simulation/
 vunit_out/
 .qsys_edit/
 *.swn
+
+tests/__pycache__/
