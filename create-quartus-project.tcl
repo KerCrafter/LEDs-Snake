@@ -13,6 +13,7 @@ set_global_assignment -name VERILOG_FILE src/button-debouncer/button_debouncer.v
 set_global_assignment -name VERILOG_FILE src/WS2812B-driver/WS2812B_driver.v
 set_global_assignment -name VERILOG_FILE src/WS2812B-driver/NRZ_sequence.v
 set_global_assignment -name VERILOG_FILE src/WS2812B-driver/pipe_tri_bus.v
+set_global_assignment -name VERILOG_FILE src/snaked_led_number_to_2d_matrix/snaked_led_number_to_2d_matrix.v
 
 set_location_assignment PIN_R8 -to clk
 set_location_assignment PIN_T14 -to leds_line
