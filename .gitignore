@@ -16,8 +16,3 @@ simulation/
 vunit_out/
 .qsys_edit/
 *.swn
-
-tests/__pycache__/
-tests/results.xml
-tests/sim_build/
-tests/tb.fst
