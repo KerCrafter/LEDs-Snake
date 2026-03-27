@@ -7,7 +7,8 @@ module LEDs_snake_core #(
     input  wire players_commands_right,
     input  wire players_commands_up,
     input  wire players_commands_down,
-    input  wire [$clog2(MAX_POS)-1:0] current_led,
+    input  wire [3:0] current_led_x,
+    input  wire [3:0] current_led_y,
     output wire update_frame,
     output wire [7:0] led_red_intensity,
     output wire [7:0] led_green_intensity,
@@ -23,7 +24,7 @@ module LEDs_snake_core #(
   assign led_blue_intensity = blue_intensity;
 
   always @(posedge clk) begin
-    if(current_led == 128) begin
+    if(current_led_x == 7 && current_led_y == 7) begin
       red_intensity <= 0;
       green_intensity <= 10;
       blue_intensity <= 0;

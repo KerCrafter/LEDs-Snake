@@ -2,23 +2,20 @@ import cocotb
 from cocotb.clock import Clock
 from cocotb.triggers import ClockCycles, Timer
 
-NUM_OF_LEDS=256;
-INITIAL_HEAD_LED_NUMBER=128;
-
 @cocotb.test()
 async def should_start_with_black_screen_only_first_LED_is_green_represent_snake_head(dut):
     dut._log.info("Start")
 
-    for led_number in range(0, INITIAL_HEAD_LED_NUMBER-1):
-      await check_LED_is_BLACK(dut, led_number);
+    for x in range(0, 15):
+      for y in range(0, 15):
+        if x == 7 and y == 7:
+          await check_LED_is_GREEN(dut, x, y);
+        else:
+          await check_LED_is_BLACK(dut, x, y);
 
-    await check_LED_is_GREEN(dut, led_number=INITIAL_HEAD_LED_NUMBER);
-
-    for led_number in range(INITIAL_HEAD_LED_NUMBER+1, NUM_OF_LEDS-1):
-      await check_LED_is_BLACK(dut, led_number);
-
-async def check_LED(dut, led_number, red, green, blue):
-    dut.current_led.value = led_number
+async def check_LED(dut, x, y, red, green, blue):
+    dut.current_led_x.value = x;
+    dut.current_led_y.value = y;
 
     await Timer(10, unit="ns");
     dut.clk.value = 1;
@@ -29,8 +26,8 @@ async def check_LED(dut, led_number, red, green, blue):
     assert dut.led_green_intensity.value == green 
     assert dut.led_blue_intensity.value == blue 
 
-async def check_LED_is_BLACK(dut, led_number):
-    await check_LED(dut, led_number, red=0, green=0, blue=0);
+async def check_LED_is_BLACK(dut, x, y):
+    await check_LED(dut, x, y, red=0, green=0, blue=0);
 
-async def check_LED_is_GREEN(dut, led_number):
-    await check_LED(dut, led_number, red=0, green=10, blue=0);
+async def check_LED_is_GREEN(dut, x, y):
+    await check_LED(dut, x, y, red=0, green=10, blue=0);
