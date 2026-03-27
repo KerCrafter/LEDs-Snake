@@ -1,6 +1,4 @@
-module LEDs_snake_core #(
-    parameter MAX_POS = 256
-)(
+module LEDs_snake_core (
     input  wire reset,
     input  wire clk,
     input  wire players_commands_left,

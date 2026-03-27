@@ -1,4 +1,11 @@
 `default_nettype none
+module snaked_led_number_to_2d_matrix (
+  input wire [7:0] n,
+  output wire [3:0] x,
+  output wire [3:0] y
+);
+
+endmodule
 
 module LEDs_snake_main #(
     parameter MAX_POS = 256,
@@ -13,6 +20,8 @@ module LEDs_snake_main #(
     output wire leds_line
 );
 
+    wire [3:0] current_led_x;
+    wire [3:0] current_led_y;
     wire [$clog2(MAX_POS)-1:0] led_proceed;
     wire update_frame;
     wire [7:0] red_intensity;
@@ -73,9 +82,13 @@ module LEDs_snake_main #(
         .update_frame(update_frame)
     );
 
-    LEDs_snake_core #(
-        .MAX_POS(MAX_POS)
-    ) LEDs_snake_core_inst (
+    snaked_led_number_to_2d_matrix snaked_led_number_to_2d_matrix (
+      .n(led_proceed),
+      .x(current_led_x),
+      .y(current_led_y)
+    );
+
+    LEDs_snake_core LEDs_snake_core_inst (
         .clk(clk),
         .reset(reset),
         .update_frame(update_frame),
@@ -83,7 +96,8 @@ module LEDs_snake_main #(
         .players_commands_right(players_commands_right),
         .players_commands_up(players_commands_up),
         .players_commands_down(players_commands_down),
-        .current_led(led_proceed),
+        .current_led_x(current_led_x),
+        .current_led_y(current_led_y),
         .led_green_intensity(green_intensity),
         .led_red_intensity(red_intensity),
         .led_blue_intensity(blue_intensity)
