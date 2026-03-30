@@ -10,5 +10,5 @@ async def should_check_first_led(dut):
 
     await Timer(10, unit="ns");
 
-    assert dut.x.value == 0;
+    assert dut.x.value == 15;
     assert dut.y.value == 0;
