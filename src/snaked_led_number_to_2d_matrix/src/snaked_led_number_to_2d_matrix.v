@@ -7,16 +7,16 @@ module snaked_led_number_to_2d_matrix (
 );
 
   reg [3:0] line_num;
-  reg is_pair;
+  reg not_pair;
 
   always @(*) begin
     line_num = n / 16;
-    is_pair = line_num == 0 || line_num == 2 || line_num == 4 || line_num == 6;
+    not_pair = line_num;
 
-    if(is_pair) begin
-      x <= 15 - n;
-    end else begin
+    if(not_pair) begin
       x <= n - 16;
+    end else begin
+      x <= 15 - n;
     end
 
     y <= line_num;
