@@ -56,6 +56,10 @@ module LEDs_snake_core (
         blue_intensity <= 0;
     end else begin
 
+      if(players_commands_right) begin
+        direction <= 0;
+      end
+
       if(players_commands_left) begin
         direction <= 1;
       end
