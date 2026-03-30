@@ -11,6 +11,7 @@ module tb ();
   end
 
   wire clk;
+  wire move_timer;
   wire players_commands_left;
   wire players_commands_right;
   wire players_commands_up;
@@ -25,6 +26,7 @@ module tb ();
 
   LEDs_snake_core snake_core (
       .clk  (clk),
+      .move_timer (move_timer),
       .players_commands_left (players_commands_left),
       .players_commands_right (players_commands_right),
       .players_commands_up(players_commands_up),

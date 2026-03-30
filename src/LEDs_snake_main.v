@@ -83,6 +83,7 @@ module LEDs_snake_main #(
 
     LEDs_snake_core LEDs_snake_core_inst (
         .clk(clk),
+        .move_timer(0),
         .reset(reset),
         .update_frame(update_frame),
         .players_commands_left(players_commands_left),
