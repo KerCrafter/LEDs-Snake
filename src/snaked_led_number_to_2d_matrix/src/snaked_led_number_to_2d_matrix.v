@@ -18,7 +18,7 @@ module snaked_led_number_to_2d_matrix (
     end
 
     if(yy == 0 || yy == 2) begin
-      x <= (yy * 16) + 15 - n;
+      x <= 15 - n;
     end
   end
 
