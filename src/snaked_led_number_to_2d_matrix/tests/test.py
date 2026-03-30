@@ -191,6 +191,12 @@ async def should_check_9th_led_line(dut):
     await check_LED(dut, n=142, x=1, y=8)
     await check_LED(dut, n=143, x=0, y=8)
 
+@cocotb.test()
+async def should_check_last_led(dut):
+    dut._log.info("Start")
+
+    await check_LED(dut, n=255, x=15, y=15)
+
 async def check_LED(dut, n, x, y):
     dut.n.value = n;
 

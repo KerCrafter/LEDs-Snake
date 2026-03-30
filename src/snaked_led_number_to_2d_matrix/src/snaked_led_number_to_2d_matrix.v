@@ -20,7 +20,6 @@ module snaked_led_number_to_2d_matrix (
     end
 
     y <= line_num;
-
   end
 
 endmodule
