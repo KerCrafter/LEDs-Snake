@@ -7,7 +7,7 @@ module snaked_led_number_to_2d_matrix (
 );
 
   always @(*) begin
-    if(n >= 0 && n <= 3) begin
+    if(n >= 0 && n <= 15) begin
       x <= 15 - n;
       y <= 0;
     end
