@@ -102,6 +102,30 @@ async def snake_goes_off_screen_should_reappear_on_other_side(dut):
         else:
           await check_LED_is_BLACK(dut, x, y);
 
+
+@fpga_test
+async def snake_head_should_move_right_to_left_after_right_button_press(dut):
+    dut._log.info("Start")
+
+    dut.players_commands_right.value = 1;
+    await Timer(1, unit="ns");
+    dut.clk.value = 1;
+
+    await Timer(1, unit="ns");
+    dut.players_commands_right.value = 0;
+    dut.clk.value = 0;
+
+    dut.move_timer.value = 1;
+    await Timer(10, unit="ns");
+    dut.move_timer.value = 0;
+
+    for x in range(0, 15):
+      for y in range(0, 15):
+        if x == 6 and y == 7:
+          await check_LED_is_GREEN(dut, x, y);
+        else:
+          await check_LED_is_BLACK(dut, x, y);
+
 async def check_LED(dut, x, y, red, green, blue):
     dut.current_led_x.value = x;
     dut.current_led_y.value = y;
