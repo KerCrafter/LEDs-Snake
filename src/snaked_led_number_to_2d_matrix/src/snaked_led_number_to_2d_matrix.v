@@ -17,7 +17,7 @@ module snaked_led_number_to_2d_matrix (
       y <= 1;
     end
 
-    if(n >= 32) begin
+    if(n >= 32 && n <= 47) begin
       x <= 47 - n;
       y <= 2;
     end
