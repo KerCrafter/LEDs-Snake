@@ -1,8 +1,9 @@
-import cocotb
 from cocotb.clock import Clock
 from cocotb.triggers import ClockCycles, Timer
+from fpga_test import fpga_test
 
-@cocotb.test()
+
+@fpga_test
 async def should_start_with_black_screen_only_centered_LED_is_darkgreen_represent_snake_head(dut):
     dut._log.info("Start")
 
@@ -13,7 +14,7 @@ async def should_start_with_black_screen_only_centered_LED_is_darkgreen_represen
         else:
           await check_LED_is_BLACK(dut, x, y);
 
-@cocotb.test()
+@fpga_test
 async def snake_head_should_move_left_to_right(dut):
     dut._log.info("Start")
 
@@ -36,16 +37,15 @@ async def snake_head_should_move_left_to_right(dut):
         else:
           await check_LED_is_BLACK(dut, x, y);
 
-@cocotb.test()
+@fpga_test
 async def snake_goes_off_screen_should_reappear_on_other_side(dut):
     dut._log.info("Start")
 
-    for x in range(0, 15):
-      for y in range(0, 15):
-        if x == 8 and y == 7:
-          await check_LED_is_GREEN(dut, x, y);
-        else:
-          await check_LED_is_BLACK(dut, x, y);
+    #x = 8
+    await Timer(10, unit="ns");
+    dut.move_timer.value = 1;
+    await Timer(10, unit="ns");
+    dut.move_timer.value = 0;
 
     #x = 9
     await Timer(10, unit="ns");
@@ -120,3 +120,4 @@ async def check_LED_is_BLACK(dut, x, y):
 
 async def check_LED_is_GREEN(dut, x, y):
     await check_LED(dut, x, y, red=0, green=10, blue=0);
+

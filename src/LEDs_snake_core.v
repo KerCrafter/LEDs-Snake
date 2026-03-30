@@ -15,10 +15,7 @@ module LEDs_snake_core (
 );
 
   reg [3:0] snake_x_pos;
-  initial snake_x_pos = 7;
-
   reg [3:0] snake_y_pos;
-  initial snake_y_pos = 7;
 
   reg [7:0] red_intensity;
   reg [7:0] green_intensity;
@@ -33,15 +30,23 @@ module LEDs_snake_core (
     snake_x_pos = snake_x_pos + 1;
   end
 
-  always @(*) begin
-    if(current_led_x == snake_x_pos && current_led_y == snake_y_pos) begin
-      red_intensity <= 0;
-      green_intensity <= 10;
-      blue_intensity <= 0;
+  always @(clk) begin
+    if(reset) begin
+        snake_x_pos <= 7;
+        snake_y_pos <= 7;
+        red_intensity <= 0;
+        green_intensity <= 0;
+        blue_intensity <= 0;
     end else begin
-      red_intensity <= 0;
-      green_intensity <= 0;
-      blue_intensity <= 0;
+      if(current_led_x == snake_x_pos && current_led_y == snake_y_pos) begin
+        red_intensity <= 0;
+        green_intensity <= 10;
+        blue_intensity <= 0;
+      end else begin
+        red_intensity <= 0;
+        green_intensity <= 0;
+        blue_intensity <= 0;
+      end
     end
   end
 
