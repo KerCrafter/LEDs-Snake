@@ -29,10 +29,20 @@ module LEDs_snake_core (
   assign led_blue_intensity = blue_intensity;
 
   always @(posedge move_timer) begin
+    if(direction == 0) begin
+      snake_x_pos = snake_x_pos + 1;
+    end
+
     if(direction == 1) begin
       snake_x_pos = snake_x_pos - 1;
-    end else begin
-      snake_x_pos = snake_x_pos + 1;
+    end
+
+    if(direction == 2) begin
+      snake_y_pos = snake_y_pos + 1;
+    end
+
+    if(direction == 3) begin
+      snake_y_pos = snake_y_pos - 1;
     end
   end
 
@@ -46,10 +56,17 @@ module LEDs_snake_core (
         blue_intensity <= 0;
     end else begin
 
-      if(players_commands_right) begin
+      if(players_commands_left) begin
         direction <= 1;
       end
 
+      if(players_commands_down) begin
+        direction <= 2;
+      end
+
+      if(players_commands_up) begin
+        direction <= 3;
+      end
 
       if(current_led_x == snake_x_pos && current_led_y == snake_y_pos) begin
         red_intensity <= 0;
