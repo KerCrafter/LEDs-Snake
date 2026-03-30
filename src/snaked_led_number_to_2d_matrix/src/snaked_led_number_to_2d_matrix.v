@@ -13,7 +13,7 @@ module snaked_led_number_to_2d_matrix (
     yy = n / 16;
     y <= yy;
 
-    if(yy == 1) begin
+    if(yy == 1 || yy == 3) begin
       x <= n - 16;
     end
 

@@ -65,6 +65,27 @@ async def should_check_3rd_led_line(dut):
     await check_LED(dut, n=46, x=1, y=2)
     await check_LED(dut, n=47, x=0, y=2)
 
+@cocotb.test()
+async def should_check_4th_led_line(dut):
+    dut._log.info("Start")
+
+    await check_LED(dut, n=48, x=0, y=3)
+    await check_LED(dut, n=49, x=1, y=3)
+    await check_LED(dut, n=50, x=2, y=3)
+    await check_LED(dut, n=51, x=3, y=3)
+    await check_LED(dut, n=52, x=4, y=3)
+    await check_LED(dut, n=53, x=5, y=3)
+    await check_LED(dut, n=54, x=6, y=3)
+    await check_LED(dut, n=55, x=7, y=3)
+    await check_LED(dut, n=56, x=8, y=3)
+    await check_LED(dut, n=57, x=9, y=3)
+    await check_LED(dut, n=58, x=10, y=3)
+    await check_LED(dut, n=59, x=11, y=3)
+    await check_LED(dut, n=60, x=12, y=3)
+    await check_LED(dut, n=61, x=13, y=3)
+    await check_LED(dut, n=62, x=14, y=3)
+    await check_LED(dut, n=63, x=15, y=3)
+
 async def check_LED(dut, n, x, y):
     dut.n.value = n;
 
