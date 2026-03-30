@@ -15,9 +15,9 @@ module LEDs_snake_core (
 );
 
   reg [3:0] snake_x_pos;
-  reg [3:0] snake_y_pos;
-
   initial snake_x_pos = 7;
+
+  reg [3:0] snake_y_pos;
   initial snake_y_pos = 7;
 
   reg [7:0] red_intensity;
@@ -31,10 +31,9 @@ module LEDs_snake_core (
 
   always @(posedge move_timer) begin
     snake_x_pos = snake_x_pos + 1;
-    snake_y_pos = 7;
   end
 
-  always @(posedge clk) begin
+  always @(*) begin
     if(current_led_x == snake_x_pos && current_led_y == snake_y_pos) begin
       red_intensity <= 0;
       green_intensity <= 10;

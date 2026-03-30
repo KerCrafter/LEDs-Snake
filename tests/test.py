@@ -36,6 +36,72 @@ async def snake_head_should_move_left_to_right(dut):
         else:
           await check_LED_is_BLACK(dut, x, y);
 
+@cocotb.test()
+async def snake_goes_off_screen_should_reappear_on_other_side(dut):
+    dut._log.info("Start")
+
+    for x in range(0, 15):
+      for y in range(0, 15):
+        if x == 8 and y == 7:
+          await check_LED_is_GREEN(dut, x, y);
+        else:
+          await check_LED_is_BLACK(dut, x, y);
+
+    #x = 9
+    await Timer(10, unit="ns");
+    dut.move_timer.value = 1;
+    await Timer(10, unit="ns");
+    dut.move_timer.value = 0;
+
+    #x = 10
+    await Timer(10, unit="ns");
+    dut.move_timer.value = 1;
+    await Timer(10, unit="ns");
+    dut.move_timer.value = 0;
+
+    #x = 11
+    await Timer(10, unit="ns");
+    dut.move_timer.value = 1;
+    await Timer(10, unit="ns");
+    dut.move_timer.value = 0;
+
+    #x = 12
+    await Timer(10, unit="ns");
+    dut.move_timer.value = 1;
+    await Timer(10, unit="ns");
+    dut.move_timer.value = 0;
+
+    #x = 13
+    await Timer(10, unit="ns");
+    dut.move_timer.value = 1;
+    await Timer(10, unit="ns");
+    dut.move_timer.value = 0;
+
+    #x = 14
+    await Timer(10, unit="ns");
+    dut.move_timer.value = 1;
+    await Timer(10, unit="ns");
+    dut.move_timer.value = 0;
+
+    #x = 15
+    await Timer(10, unit="ns");
+    dut.move_timer.value = 1;
+    await Timer(10, unit="ns");
+    dut.move_timer.value = 0;
+
+    #x = 0 
+    await Timer(10, unit="ns");
+    dut.move_timer.value = 1;
+    await Timer(10, unit="ns");
+    dut.move_timer.value = 0;
+
+    for x in range(0, 15):
+      for y in range(0, 15):
+        if x == 0 and y == 7:
+          await check_LED_is_GREEN(dut, x, y);
+        else:
+          await check_LED_is_BLACK(dut, x, y);
+
 async def check_LED(dut, x, y, red, green, blue):
     dut.current_led_x.value = x;
     dut.current_led_y.value = y;
