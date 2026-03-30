@@ -23,3 +23,25 @@ async def should_check_second_led(dut):
 
     assert dut.x.value == 14;
     assert dut.y.value == 0;
+
+@cocotb.test()
+async def should_check_3rd_led(dut):
+    dut._log.info("Start")
+
+    dut.n.value = 2;
+
+    await Timer(1, unit="ns");
+
+    assert dut.x.value == 13;
+    assert dut.y.value == 0;
+
+@cocotb.test()
+async def should_check_led_4(dut):
+    dut._log.info("Start")
+
+    dut.n.value = 3;
+
+    await Timer(1, unit="ns");
+
+    assert dut.x.value == 12;
+    assert dut.y.value == 0;
