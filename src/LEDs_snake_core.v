@@ -2,8 +2,8 @@ module LEDs_snake_core (
     input  wire reset,
     input  wire clk,
     input  wire move_timer,
-    input  wire [3:0] bonus_x,
-    input  wire [3:0] bonus_y,
+    input  wire [3:0] bonus_random_x,
+    input  wire [3:0] bonus_random_y,
     input  wire players_commands_left,
     input  wire players_commands_right,
     input  wire players_commands_up,
@@ -75,8 +75,8 @@ module LEDs_snake_core (
         direction <= 0;
         snake_head_x_pos <= 7;
         snake_head_y_pos <= 7;
-        current_bonus_x_pos <= bonus_x;
-        current_bonus_y_pos <= bonus_y;
+        current_bonus_x_pos <= bonus_random_x;
+        current_bonus_y_pos <= bonus_random_y;
         current_bonus_ready <= 1;
         red_intensity <= 0;
         green_intensity <= 0;

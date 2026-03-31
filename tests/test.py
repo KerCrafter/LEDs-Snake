@@ -211,8 +211,8 @@ async def snake_head_should_move_right_after_left_move(dut):
 async def bonus_should_appear(dut):
     dut._log.info("Start")
 
-    dut.bonus_x.value = 10;
-    dut.bonus_y.value = 10;
+    dut.bonus_random_x.value = 10;
+    dut.bonus_random_y.value = 10;
     await Timer(1, unit="ns");
     await reset(dut);
 
@@ -234,8 +234,8 @@ async def bonus_should_appear(dut):
 async def snake_should_eat_the_bonus(dut):
     dut._log.info("Start")
 
-    dut.bonus_x.value = 8;
-    dut.bonus_y.value = 7;
+    dut.bonus_random_x.value = 8;
+    dut.bonus_random_y.value = 7;
     await Timer(1, unit="ns");
     await reset(dut);
 
