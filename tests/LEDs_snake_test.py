@@ -9,12 +9,12 @@ def LEDs_snake_test(_fn=None, **kwargs):
     async def wrapper(dut):
       await reset(dut, **kwargs)
 
-      async def move_timer_PULS(times=1):
-        await move_timer_PULSE(dut, times=times);
+      async def move_timer_PULSE(times=1):
+        await _move_timer_PULSE(dut, times=times);
 
       sig = inspect.signature(fn)
       if "move_timer_PULSE" in sig.parameters:
-        await fn(dut, move_timer_PULS)
+        await fn(dut, move_timer_PULSE)
       else:
         await fn(dut)
 
@@ -36,7 +36,7 @@ async def reset(dut, **kwargs):
     dut.clk.value = 0;
     dut.reset.value = 0;
 
-async def move_timer_PULSE(dut, times=1):
+async def _move_timer_PULSE(dut, times=1):
     for i in range(times):
       dut.move_timer.value = 1;
       await Timer(1, unit="ns");
