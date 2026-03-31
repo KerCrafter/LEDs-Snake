@@ -24,7 +24,7 @@ async def snake_head_should_move_left_to_right(dut):
         else:
           await check_LED_is_BLACK(dut, x, y);
 
-    await move_timer_pulse(dut);
+    await move_timer_PULSE(dut);
 
     for x in range(0, 15):
       for y in range(0, 15):
@@ -37,15 +37,7 @@ async def snake_head_should_move_left_to_right(dut):
 async def snake_goes_off_screen_should_reappear_on_other_side(dut):
     dut._log.info("Start")
 
-    await move_timer_pulse(dut); #x = 8
-    await move_timer_pulse(dut); #x = 9
-    await move_timer_pulse(dut); #x = 10
-    await move_timer_pulse(dut); #x = 11
-    await move_timer_pulse(dut); #x = 12
-    await move_timer_pulse(dut); #x = 13
-    await move_timer_pulse(dut); #x = 14
-    await move_timer_pulse(dut); #x = 15
-    await move_timer_pulse(dut); #x = 0
+    await move_timer_PULSE(dut, times=9); 
 
     for x in range(0, 15):
       for y in range(0, 15):
@@ -61,7 +53,7 @@ async def snake_head_should_move_right_to_left_after_left_button_press(dut):
 
     await player_press_LEFT(dut);
 
-    await move_timer_pulse(dut);
+    await move_timer_PULSE(dut);
 
     for x in range(0, 15):
       for y in range(0, 15):
@@ -76,7 +68,7 @@ async def snake_head_should_move_up_to_down_after_down_button_press(dut):
 
     await player_press_DOWN(dut);
 
-    await move_timer_pulse(dut);
+    await move_timer_PULSE(dut);
 
     for x in range(0, 15):
       for y in range(0, 15):
@@ -91,7 +83,7 @@ async def snake_head_should_move_down_to_up_after_up_button_press(dut):
 
     await player_press_UP(dut);
 
-    await move_timer_pulse(dut);
+    await move_timer_PULSE(dut);
 
     for x in range(0, 15):
       for y in range(0, 15):
@@ -106,11 +98,11 @@ async def snake_head_should_move_right_after_left_move(dut):
 
     await player_press_LEFT(dut);
 
-    await move_timer_pulse(dut);
+    await move_timer_PULSE(dut);
 
     await player_press_RIGHT(dut)
 
-    await move_timer_pulse(dut);
+    await move_timer_PULSE(dut);
 
     for x in range(0, 15):
       for y in range(0, 15):
@@ -248,11 +240,12 @@ async def check_LED_is_RED(dut, x, y):
     await check_LED(dut, x, y, red=10, green=0, blue=0);
 
 
-async def move_timer_pulse(dut):
-    dut.move_timer.value = 1;
-    await Timer(1, unit="ns");
-    dut.move_timer.value = 0;
-    await Timer(1, unit="ns");
+async def move_timer_PULSE(dut, times=1):
+    for i in range(times):
+      dut.move_timer.value = 1;
+      await Timer(1, unit="ns");
+      dut.move_timer.value = 0;
+      await Timer(1, unit="ns");
 
 async def player_press_RIGHT(dut):
     dut.players_commands_right.value = 1;
