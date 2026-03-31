@@ -1,6 +1,6 @@
 from cocotb.clock import Clock
 from cocotb.triggers import ClockCycles, Timer
-from fpga_test import fpga_test, reset
+from fpga_test import fpga_test
 
 
 @fpga_test
@@ -207,14 +207,12 @@ async def snake_head_should_move_right_after_left_move(dut):
         else:
           await check_LED_is_BLACK(dut, x, y);
 
-@fpga_test
+@fpga_test(
+  first_bonus_x=10,
+  first_bonus_y=10
+)
 async def bonus_should_appear(dut):
     dut._log.info("Start")
-
-    dut.bonus_random_x.value = 10;
-    dut.bonus_random_y.value = 10;
-    await Timer(1, unit="ns");
-    await reset(dut);
 
     await Timer(1, unit="ns");
     dut.clk.value = 1;
@@ -230,14 +228,12 @@ async def bonus_should_appear(dut):
         else:
           await check_LED_is_BLACK(dut, x, y);
 
-@fpga_test
+@fpga_test(
+  first_bonus_x=8,
+  first_bonus_y=7
+)
 async def snake_should_eat_the_bonus(dut):
     dut._log.info("Start")
-
-    dut.bonus_random_x.value = 8;
-    dut.bonus_random_y.value = 7;
-    await Timer(1, unit="ns");
-    await reset(dut);
 
     dut.move_timer.value = 1;
     await Timer(10, unit="ns");
