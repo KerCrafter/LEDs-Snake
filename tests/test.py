@@ -207,6 +207,27 @@ async def snake_head_should_move_right_after_left_move(dut):
         else:
           await check_LED_is_BLACK(dut, x, y);
 
+@fpga_test
+async def bonus_should_appear(dut):
+    dut._log.info("Start")
+
+    dut.bonus_x.value = 10;
+    dut.bonus_y.value = 10;
+    await Timer(1, unit="ns");
+    dut.bonus_spawn.value = 1;
+
+    await Timer(1, unit="ns");
+    dut.bonus_spawn.value = 0;
+
+    for x in range(0, 15):
+      for y in range(0, 15):
+        if x == 7 and y == 7:
+          await check_LED_is_GREEN(dut, x, y);
+        elif x == 10 and y == 10:
+          await check_LED_is_RED(dut, x, y);
+        else:
+          await check_LED_is_BLACK(dut, x, y);
+
 async def check_LED(dut, x, y, red, green, blue):
     dut.current_led_x.value = x;
     dut.current_led_y.value = y;
@@ -225,4 +246,8 @@ async def check_LED_is_BLACK(dut, x, y):
 
 async def check_LED_is_GREEN(dut, x, y):
     await check_LED(dut, x, y, red=0, green=10, blue=0);
+
+async def check_LED_is_RED(dut, x, y):
+    await check_LED(dut, x, y, red=10, green=0, blue=0);
+
 

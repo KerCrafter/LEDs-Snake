@@ -17,6 +17,9 @@ module tb ();
   wire players_commands_right;
   wire players_commands_up;
   wire players_commands_down;
+  wire [3:0] bonus_x;
+  wire [3:0] bonus_y;
+  wire bonus_spawn;
 
   wire [3:0] current_led_x;
   wire [3:0] current_led_y;
@@ -29,6 +32,9 @@ module tb ();
       .clk  (clk),
       .reset  (reset),
       .move_timer (move_timer),
+      .bonus_x (bonus_x),
+      .bonus_y (bonus_y),
+      .bonus_spawn (bonus_spawn),
       .players_commands_left (players_commands_left),
       .players_commands_right (players_commands_right),
       .players_commands_up(players_commands_up),

@@ -2,6 +2,9 @@ module LEDs_snake_core (
     input  wire reset,
     input  wire clk,
     input  wire move_timer,
+    input  wire [3:0] bonus_x,
+    input  wire [3:0] bonus_y,
+    input  wire bonus_spawn,
     input  wire players_commands_left,
     input  wire players_commands_right,
     input  wire players_commands_up,
@@ -17,6 +20,9 @@ module LEDs_snake_core (
   reg [3:0] snake_x_pos;
   reg [3:0] snake_y_pos;
 
+  reg [3:0] current_bonus_x;
+  reg [3:0] current_bonus_y;
+
   reg [7:0] red_intensity;
   reg [7:0] green_intensity;
   reg [7:0] blue_intensity;
@@ -27,6 +33,11 @@ module LEDs_snake_core (
   assign led_red_intensity = red_intensity;
   assign led_green_intensity = green_intensity;
   assign led_blue_intensity = blue_intensity;
+
+  always @(posedge bonus_spawn) begin
+    current_bonus_x = bonus_x;
+    current_bonus_y = bonus_y;
+  end
 
   always @(posedge move_timer) begin
     if(direction == 0) begin
@@ -75,6 +86,10 @@ module LEDs_snake_core (
       if(current_led_x == snake_x_pos && current_led_y == snake_y_pos) begin
         red_intensity <= 0;
         green_intensity <= 10;
+        blue_intensity <= 0;
+      end else if(current_led_x == current_bonus_x && current_led_y == current_bonus_x) begin
+        red_intensity <= 10;
+        green_intensity <= 0;
         blue_intensity <= 0;
       end else begin
         red_intensity <= 0;
