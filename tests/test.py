@@ -14,7 +14,7 @@ async def should_start_with_black_screen_only_centered_LED_is_darkgreen_represen
           await check_LED_is_BLACK(dut, x, y);
 
 @LEDs_snake_test
-async def snake_head_should_move_left_to_right(dut):
+async def snake_head_should_move_left_to_right(dut, move_timer_PULSE):
     dut._log.info("Start")
 
     for x in range(0, 15):
@@ -24,7 +24,7 @@ async def snake_head_should_move_left_to_right(dut):
         else:
           await check_LED_is_BLACK(dut, x, y);
 
-    await move_timer_PULSE(dut);
+    await move_timer_PULSE();
 
     for x in range(0, 15):
       for y in range(0, 15):
@@ -34,10 +34,10 @@ async def snake_head_should_move_left_to_right(dut):
           await check_LED_is_BLACK(dut, x, y);
 
 @LEDs_snake_test
-async def snake_goes_off_screen_should_reappear_on_other_side(dut):
+async def snake_goes_off_screen_should_reappear_on_other_side(dut, move_timer_PULSE):
     dut._log.info("Start")
 
-    await move_timer_PULSE(dut, times=9); 
+    await move_timer_PULSE(times=9); 
 
     for x in range(0, 15):
       for y in range(0, 15):
@@ -48,12 +48,12 @@ async def snake_goes_off_screen_should_reappear_on_other_side(dut):
 
 
 @LEDs_snake_test
-async def snake_head_should_move_right_to_left_after_left_button_press(dut):
+async def snake_head_should_move_right_to_left_after_left_button_press(dut, move_timer_PULSE):
     dut._log.info("Start")
 
     await player_press_LEFT(dut);
 
-    await move_timer_PULSE(dut);
+    await move_timer_PULSE();
 
     for x in range(0, 15):
       for y in range(0, 15):
@@ -63,12 +63,12 @@ async def snake_head_should_move_right_to_left_after_left_button_press(dut):
           await check_LED_is_BLACK(dut, x, y);
 
 @LEDs_snake_test
-async def snake_head_should_move_up_to_down_after_down_button_press(dut):
+async def snake_head_should_move_up_to_down_after_down_button_press(dut, move_timer_PULSE):
     dut._log.info("Start")
 
     await player_press_DOWN(dut);
 
-    await move_timer_PULSE(dut);
+    await move_timer_PULSE();
 
     for x in range(0, 15):
       for y in range(0, 15):
@@ -78,12 +78,12 @@ async def snake_head_should_move_up_to_down_after_down_button_press(dut):
           await check_LED_is_BLACK(dut, x, y);
 
 @LEDs_snake_test
-async def snake_head_should_move_down_to_up_after_up_button_press(dut):
+async def snake_head_should_move_down_to_up_after_up_button_press(dut, move_timer_PULSE):
     dut._log.info("Start")
 
     await player_press_UP(dut);
 
-    await move_timer_PULSE(dut);
+    await move_timer_PULSE();
 
     for x in range(0, 15):
       for y in range(0, 15):
@@ -93,16 +93,16 @@ async def snake_head_should_move_down_to_up_after_up_button_press(dut):
           await check_LED_is_BLACK(dut, x, y);
 
 @LEDs_snake_test
-async def snake_head_should_move_right_after_left_move(dut):
+async def snake_head_should_move_right_after_left_move(dut, move_timer_PULSE):
     dut._log.info("Start")
 
     await player_press_LEFT(dut);
 
-    await move_timer_PULSE(dut);
+    await move_timer_PULSE();
 
     await player_press_RIGHT(dut)
 
-    await move_timer_PULSE(dut);
+    await move_timer_PULSE();
 
     for x in range(0, 15):
       for y in range(0, 15):
@@ -118,11 +118,6 @@ async def snake_head_should_move_right_after_left_move(dut):
 async def bonus_should_appear(dut):
     dut._log.info("Start")
 
-    await Timer(1, unit="ns");
-    dut.clk.value = 1;
-    await Timer(1, unit="ns");
-    dut.clk.value = 0;
-
     for x in range(0, 15):
       for y in range(0, 15):
         if x == 7 and y == 7:
@@ -136,16 +131,10 @@ async def bonus_should_appear(dut):
   first_bonus_x=8,
   first_bonus_y=7
 )
-async def snake_should_eat_the_bonus(dut):
+async def snake_should_eat_the_bonus(dut, move_timer_PULSE):
     dut._log.info("Start")
 
-    dut.move_timer.value = 1;
-    await Timer(1, unit="ns");
-    dut.move_timer.value = 0;
-
-    dut.clk.value = 1;
-    await Timer(1, unit="ns");
-    dut.clk.value = 0;
+    await move_timer_PULSE();
 
     for x in range(0, 15):
       for y in range(0, 15):
@@ -160,18 +149,10 @@ async def snake_should_eat_the_bonus(dut):
   first_bonus_x=8,
   first_bonus_y=7
 )
-async def snake_queue_should_follow_head(dut):
+async def snake_queue_should_follow_head(dut, move_timer_PULSE):
     dut._log.info("Start")
 
-    dut.move_timer.value = 1;
-    await Timer(1, unit="ns");
-    dut.move_timer.value = 0;
-
-    await Timer(1, unit="ns");
-
-    dut.move_timer.value = 1;
-    await Timer(1, unit="ns");
-    dut.move_timer.value = 0;
+    await move_timer_PULSE(times=2);
 
     for x in range(0, 15):
       for y in range(0, 15):
@@ -186,24 +167,10 @@ async def snake_queue_should_follow_head(dut):
   first_bonus_x=8,
   first_bonus_y=7
 )
-async def snake_queue_should_continue_follow_head(dut):
+async def snake_queue_should_continue_follow_head(dut, move_timer_PULSE):
     dut._log.info("Start")
 
-    dut.move_timer.value = 1;
-    await Timer(1, unit="ns");
-    dut.move_timer.value = 0;
-
-    await Timer(1, unit="ns");
-
-    dut.move_timer.value = 1;
-    await Timer(1, unit="ns");
-    dut.move_timer.value = 0;
-
-    await Timer(1, unit="ns");
-
-    dut.move_timer.value = 1;
-    await Timer(1, unit="ns");
-    dut.move_timer.value = 0;
+    await move_timer_PULSE(times=3);
 
     for x in range(0, 15):
       for y in range(0, 15):
@@ -238,14 +205,6 @@ async def check_LED_is_GREEN(dut, x, y):
 
 async def check_LED_is_RED(dut, x, y):
     await check_LED(dut, x, y, red=10, green=0, blue=0);
-
-
-async def move_timer_PULSE(dut, times=1):
-    for i in range(times):
-      dut.move_timer.value = 1;
-      await Timer(1, unit="ns");
-      dut.move_timer.value = 0;
-      await Timer(1, unit="ns");
 
 async def player_press_RIGHT(dut):
     dut.players_commands_right.value = 1;

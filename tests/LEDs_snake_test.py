@@ -1,13 +1,22 @@
 import cocotb
 from cocotb.triggers import Timer
 import functools
+import inspect
 
 def LEDs_snake_test(_fn=None, **kwargs):
   def decorator(fn):
     @functools.wraps(fn)
     async def wrapper(dut):
       await reset(dut, **kwargs)
-      await fn(dut)
+
+      async def move_timer_PULS(times=1):
+        await move_timer_PULSE(dut, times=times);
+
+      sig = inspect.signature(fn)
+      if "move_timer_PULSE" in sig.parameters:
+        await fn(dut, move_timer_PULS)
+      else:
+        await fn(dut)
 
     return cocotb.test()(wrapper)
 
@@ -26,3 +35,10 @@ async def reset(dut, **kwargs):
 
     dut.clk.value = 0;
     dut.reset.value = 0;
+
+async def move_timer_PULSE(dut, times=1):
+    for i in range(times):
+      dut.move_timer.value = 1;
+      await Timer(1, unit="ns");
+      dut.move_timer.value = 0;
+      await Timer(1, unit="ns");
