@@ -1,9 +1,8 @@
 from cocotb.clock import Clock
 from cocotb.triggers import ClockCycles, Timer
-from fpga_test import fpga_test
+from LEDs_snake_test import LEDs_snake_test
 
-
-@fpga_test
+@LEDs_snake_test
 async def should_start_with_black_screen_only_centered_LED_is_darkgreen_represent_snake_head(dut):
     dut._log.info("Start")
 
@@ -14,7 +13,7 @@ async def should_start_with_black_screen_only_centered_LED_is_darkgreen_represen
         else:
           await check_LED_is_BLACK(dut, x, y);
 
-@fpga_test
+@LEDs_snake_test
 async def snake_head_should_move_left_to_right(dut):
     dut._log.info("Start")
 
@@ -37,7 +36,7 @@ async def snake_head_should_move_left_to_right(dut):
         else:
           await check_LED_is_BLACK(dut, x, y);
 
-@fpga_test
+@LEDs_snake_test
 async def snake_goes_off_screen_should_reappear_on_other_side(dut):
     dut._log.info("Start")
 
@@ -103,7 +102,7 @@ async def snake_goes_off_screen_should_reappear_on_other_side(dut):
           await check_LED_is_BLACK(dut, x, y);
 
 
-@fpga_test
+@LEDs_snake_test
 async def snake_head_should_move_right_to_left_after_left_button_press(dut):
     dut._log.info("Start")
 
@@ -126,7 +125,7 @@ async def snake_head_should_move_right_to_left_after_left_button_press(dut):
         else:
           await check_LED_is_BLACK(dut, x, y);
 
-@fpga_test
+@LEDs_snake_test
 async def snake_head_should_move_up_to_down_after_down_button_press(dut):
     dut._log.info("Start")
 
@@ -149,7 +148,7 @@ async def snake_head_should_move_up_to_down_after_down_button_press(dut):
         else:
           await check_LED_is_BLACK(dut, x, y);
 
-@fpga_test
+@LEDs_snake_test
 async def snake_head_should_move_down_to_up_after_up_button_press(dut):
     dut._log.info("Start")
 
@@ -172,7 +171,7 @@ async def snake_head_should_move_down_to_up_after_up_button_press(dut):
         else:
           await check_LED_is_BLACK(dut, x, y);
 
-@fpga_test
+@LEDs_snake_test
 async def snake_head_should_move_right_after_left_move(dut):
     dut._log.info("Start")
 
@@ -207,7 +206,7 @@ async def snake_head_should_move_right_after_left_move(dut):
         else:
           await check_LED_is_BLACK(dut, x, y);
 
-@fpga_test(
+@LEDs_snake_test(
   first_bonus_x=10,
   first_bonus_y=10
 )
@@ -228,7 +227,7 @@ async def bonus_should_appear(dut):
         else:
           await check_LED_is_BLACK(dut, x, y);
 
-@fpga_test(
+@LEDs_snake_test(
   first_bonus_x=8,
   first_bonus_y=7
 )

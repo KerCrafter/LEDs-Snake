@@ -2,7 +2,7 @@ import cocotb
 from cocotb.triggers import Timer
 import functools
 
-def fpga_test(_fn=None, **kwargs):
+def LEDs_snake_test(_fn=None, **kwargs):
   def decorator(fn):
     @functools.wraps(fn)
     async def wrapper(dut):
