@@ -17,6 +17,10 @@ module LEDs_snake_core (
     output wire [7:0] led_blue_intensity
 );
 
+  reg queue_1_exist;
+  reg [3:0] queue_1_x;
+  reg [3:0] queue_1_y;
+
   reg [3:0] snake_head_x_pos;
   reg [3:0] snake_head_y_pos;
 
@@ -43,7 +47,18 @@ module LEDs_snake_core (
 
   always @(posedge move_timer) begin
     if(direction == 0) begin
-      snake_head_x_pos = snake_head_x_pos + 1;
+      if(snake_head_x_pos + 1 == current_bonus_x_pos) begin
+        queue_1_exist = 1;
+        queue_1_x = snake_head_x_pos;
+        queue_1_y = snake_head_y_pos;
+
+        snake_head_x_pos = current_bonus_x_pos;
+
+        current_bonus_ready = 0;
+        
+      end else begin
+        snake_head_x_pos = snake_head_x_pos + 1;
+      end
     end
 
     if(direction == 1) begin
@@ -61,6 +76,9 @@ module LEDs_snake_core (
 
   always @(clk) begin
     if(reset) begin
+        queue_1_exist <= 0;
+        queue_1_x <= 0;
+        queue_1_y <= 0;
         direction <= 0;
         snake_head_x_pos <= 7;
         snake_head_y_pos <= 7;
@@ -88,7 +106,12 @@ module LEDs_snake_core (
         direction <= 3;
       end
 
-      if(current_led_x == snake_head_x_pos && current_led_y == snake_head_y_pos) begin
+
+      if(queue_1_exist && current_led_x == queue_1_x && current_led_y == queue_1_y) begin
+        red_intensity <= 0;
+        green_intensity <= 5;
+        blue_intensity <= 0;
+      end else if(current_led_x == snake_head_x_pos && current_led_y == snake_head_y_pos) begin
         red_intensity <= 0;
         green_intensity <= 10;
         blue_intensity <= 0;
