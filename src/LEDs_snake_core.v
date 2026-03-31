@@ -22,6 +22,7 @@ module LEDs_snake_core (
 
   reg [3:0] current_bonus_x_pos;
   reg [3:0] current_bonus_y_pos;
+  reg current_bonus_ready;
 
   reg [7:0] red_intensity;
   reg [7:0] green_intensity;
@@ -35,6 +36,7 @@ module LEDs_snake_core (
   assign led_blue_intensity = blue_intensity;
 
   always @(posedge bonus_spawn) begin
+    current_bonus_ready = 1;
     current_bonus_x_pos = bonus_x;
     current_bonus_y_pos = bonus_y;
   end
@@ -62,6 +64,9 @@ module LEDs_snake_core (
         direction <= 0;
         snake_head_x_pos <= 7;
         snake_head_y_pos <= 7;
+        current_bonus_x_pos <= 0;
+        current_bonus_y_pos <= 0;
+        current_bonus_ready <= 0;
         red_intensity <= 0;
         green_intensity <= 0;
         blue_intensity <= 0;
@@ -87,7 +92,7 @@ module LEDs_snake_core (
         red_intensity <= 0;
         green_intensity <= 10;
         blue_intensity <= 0;
-      end else if(current_led_x == current_bonus_x_pos && current_led_y == current_bonus_y_pos) begin
+      end else if(current_bonus_ready && current_led_x == current_bonus_x_pos && current_led_y == current_bonus_y_pos) begin
         red_intensity <= 10;
         green_intensity <= 0;
         blue_intensity <= 0;
