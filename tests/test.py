@@ -59,13 +59,7 @@ async def snake_goes_off_screen_should_reappear_on_other_side(dut):
 async def snake_head_should_move_right_to_left_after_left_button_press(dut):
     dut._log.info("Start")
 
-    dut.players_commands_left.value = 1;
-    await Timer(1, unit="ns");
-    dut.clk.value = 1;
-
-    await Timer(1, unit="ns");
-    dut.players_commands_left.value = 0;
-    dut.clk.value = 0;
+    await player_press_LEFT(dut);
 
     await move_timer_pulse(dut);
 
@@ -122,23 +116,11 @@ async def snake_head_should_move_down_to_up_after_up_button_press(dut):
 async def snake_head_should_move_right_after_left_move(dut):
     dut._log.info("Start")
 
-    dut.players_commands_left.value = 1;
-    await Timer(1, unit="ns");
-    dut.clk.value = 1;
-
-    await Timer(1, unit="ns");
-    dut.players_commands_left.value = 0;
-    dut.clk.value = 0;
+    await player_press_LEFT(dut);
 
     await move_timer_pulse(dut);
 
-    dut.players_commands_right.value = 1;
-    await Timer(1, unit="ns");
-    dut.clk.value = 1;
-
-    await Timer(1, unit="ns");
-    dut.players_commands_right.value = 0;
-    dut.clk.value = 0;
+    await player_press_RIGHT(dut)
 
     await move_timer_pulse(dut);
 
@@ -282,4 +264,24 @@ async def move_timer_pulse(dut):
     dut.move_timer.value = 1;
     await Timer(1, unit="ns");
     dut.move_timer.value = 0;
+    await Timer(1, unit="ns");
+
+async def player_press_RIGHT(dut):
+    dut.players_commands_right.value = 1;
+    await Timer(1, unit="ns");
+    dut.clk.value = 1;
+
+    await Timer(1, unit="ns");
+    dut.players_commands_right.value = 0;
+    dut.clk.value = 0;
+    await Timer(1, unit="ns");
+
+async def player_press_LEFT(dut):
+    dut.players_commands_left.value = 1;
+    await Timer(1, unit="ns");
+    dut.clk.value = 1;
+
+    await Timer(1, unit="ns");
+    dut.players_commands_left.value = 0;
+    dut.clk.value = 0;
     await Timer(1, unit="ns");
