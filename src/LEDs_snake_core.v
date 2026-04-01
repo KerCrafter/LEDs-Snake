@@ -68,7 +68,18 @@ module LEDs_snake_core (
     end
 
     if(direction == 3) begin
-      snake_head_y_pos = snake_head_y_pos - 1;
+      if(snake_head_y_pos - 1 == current_bonus_y_pos) begin
+        queue_1_exist = 1;
+        queue_1_x = snake_head_x_pos;
+        queue_1_y = snake_head_y_pos;
+
+        snake_head_y_pos = current_bonus_y_pos;
+
+        current_bonus_ready = 0;
+
+      end else begin
+        snake_head_y_pos = snake_head_y_pos - 1;
+      end
     end
   end
 

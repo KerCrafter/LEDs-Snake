@@ -159,6 +159,25 @@ async def snake_queue_should_continue_follow_head(dut, move_timer_PULSE):
         else:
           await check_LED_is_BLACK(dut, x, y);
 
+@LEDs_snake_test(
+  first_bonus_x=7,
+  first_bonus_y=6
+)
+async def snake_should_eat_the_bonus_down_to_up(dut, move_timer_PULSE):
+
+    await player_press_UP(dut);
+
+    await move_timer_PULSE();
+
+    for x in range(0, 15):
+      for y in range(0, 15):
+        if x is 7 and y is 7:
+          await check_LED_is_LIGHT_GREEN(dut, x, y);
+        elif x is 7 and y is 6:
+          await check_LED_is_GREEN(dut, x, y);
+        else:
+          await check_LED_is_BLACK(dut, x, y);
+
 async def check_LED(dut, x, y, red, green, blue):
     dut.current_led_x.value = x;
     dut.current_led_y.value = y;
