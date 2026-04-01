@@ -26,6 +26,7 @@ module tb ();
   wire [7:0] led_red_intensity;
   wire [7:0] led_green_intensity;
   wire [7:0] led_blue_intensity;
+  wire [7:0] score;
 
   LEDs_snake_core snake_core (
       .clk  (clk),
@@ -42,7 +43,8 @@ module tb ();
       .update_frame(update_frame),
       .led_red_intensity(led_red_intensity),
       .led_green_intensity(led_green_intensity),
-      .led_blue_intensity(led_blue_intensity)
+      .led_blue_intensity(led_blue_intensity),
+      .score(score)
   );
 
 endmodule

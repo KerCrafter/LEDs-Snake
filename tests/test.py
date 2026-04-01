@@ -115,7 +115,7 @@ async def bonus_should_appear(dut):
   first_bonus_x=8,
   first_bonus_y=7
 )
-async def snake_should_eat_the_bonus(dut, move_timer_PULSE):
+async def snake_should_eat_the_bonus_to_right_direction(dut, move_timer_PULSE):
     await move_timer_PULSE();
 
     for x in range(0, 15):
@@ -234,6 +234,23 @@ async def snake_should_eat_the_bonus_to_left(dut, move_timer_PULSE):
           await check_LED_is_GREEN(dut, x, y);
         else:
           await check_LED_is_BLACK(dut, x, y);
+
+
+@LEDs_snake_test(
+  first_bonus_x=8,
+  first_bonus_y=7
+)
+async def starting_score_is_zero(dut, move_timer_PULSE):
+    dut.score.value = 1
+
+#@LEDs_snake_test(
+#  first_bonus_x=8,
+#  first_bonus_y=7
+#)
+#async def eating_the_bonus_to_right_direction_increment_score(dut, move_timer_PULSE):
+#    await move_timer_PULSE();
+#
+#    dut.score.value = 1
 
 async def check_LED(dut, x, y, red, green, blue):
     dut.current_led_x.value = x;

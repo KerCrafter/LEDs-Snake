@@ -13,7 +13,8 @@ module LEDs_snake_core (
     output wire update_frame,
     output wire [7:0] led_red_intensity,
     output wire [7:0] led_green_intensity,
-    output wire [7:0] led_blue_intensity
+    output wire [7:0] led_blue_intensity,
+    output reg [7:0] score
 );
 
   reg queue_1_exist;
@@ -73,6 +74,7 @@ module LEDs_snake_core (
 
   always @(clk) begin
     if(reset) begin
+        score <= 0;
         queue_1_exist <= 0;
         queue_1_x <= 0;
         queue_1_y <= 0;
