@@ -52,7 +52,7 @@ module LEDs_snake_core (
       end else begin
 
         if(queue_1_exist) begin
-          queue_1_x = queue_1_x + 1;
+          queue_1_x = snake_head_x_pos;
         end
 
         snake_head_x_pos = snake_head_x_pos + 1;
@@ -80,7 +80,7 @@ module LEDs_snake_core (
       end else begin
 
         if(queue_1_exist) begin
-          queue_1_y = queue_1_y - 1;
+          queue_1_y = snake_head_y_pos;
         end
 
         snake_head_y_pos = snake_head_y_pos - 1;
