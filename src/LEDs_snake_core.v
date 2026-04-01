@@ -40,6 +40,7 @@ module LEDs_snake_core (
   always @(posedge move_timer) begin
     if(
       (direction == 0 && snake_head_x_pos + 1 == current_bonus_x_pos) ||
+      (direction == 1 && snake_head_x_pos - 1 == current_bonus_x_pos) ||
       (direction == 2 && snake_head_y_pos + 1 == current_bonus_y_pos) ||
       (direction == 3 && snake_head_y_pos - 1 == current_bonus_y_pos)
     ) begin
