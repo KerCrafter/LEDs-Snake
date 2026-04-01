@@ -316,6 +316,44 @@ async def eating_the_second_bonus_should_extend_queue(dut, move_timer_PULSE):
   first_bonus_x=8,
   first_bonus_y=7
 )
+async def eating_the_3rd_bonus_should_extend_queue(dut, move_timer_PULSE):
+
+    dut.bonus_random_x.value = 9; 
+    dut.bonus_random_y.value = 7; 
+
+    await move_timer_PULSE(); #x=8 y=7
+
+    dut.bonus_random_x.value = 10; 
+    dut.bonus_random_y.value = 7; 
+
+    await move_timer_PULSE(); #x=9 y=7
+
+    dut.bonus_random_x.value = 0; 
+    dut.bonus_random_y.value = 0; 
+
+    await move_timer_PULSE(); #x=10 y=7
+
+    assert dut.score.value == 3
+
+    for x in range(0, 15):
+      for y in range(0, 15):
+        if x == 10 and y == 7:
+          await check_LED_is_GREEN(dut, x, y);
+        elif x == 9 and y == 7:
+          await check_LED_is_LIGHT_GREEN(dut, x, y);
+        elif x == 8 and y == 7:
+          await check_LED_is_LIGHT_GREEN(dut, x, y);
+        elif x == 7 and y == 7:
+          await check_LED_is_LIGHT_GREEN(dut, x, y);
+        elif x == 0 and y == 0:
+          await check_LED_is_RED(dut, x, y);
+        else:
+          await check_LED_is_BLACK(dut, x, y);
+
+@LEDs_snake_test(
+  first_bonus_x=8,
+  first_bonus_y=7
+)
 async def after_eat_one_bonus_impossible_to_press_inverse_direction_to_left(dut, move_timer_PULSE):
 
     await move_timer_PULSE();

@@ -23,6 +23,9 @@ module LEDs_snake_core (
   reg [3:0] queue_2_x;
   reg [3:0] queue_2_y;
 
+  reg [3:0] queue_3_x;
+  reg [3:0] queue_3_y;
+
   reg [3:0] snake_head_x_pos;
   reg [3:0] snake_head_y_pos;
 
@@ -40,6 +43,8 @@ module LEDs_snake_core (
     queue_2_x <= queue_1_x;
     queue_2_y <= queue_1_y;
 
+    queue_3_x <= queue_2_x;
+    queue_3_y <= queue_2_y;
 
     if(
       (direction == 0 && snake_head_x_pos + 1 == current_bonus_x_pos) ||
@@ -75,6 +80,8 @@ module LEDs_snake_core (
         queue_1_y <= 0;
         queue_2_x <= 0;
         queue_2_y <= 0;
+        queue_3_x <= 0;
+        queue_3_y <= 0;
         direction <= 0;
         snake_head_x_pos <= 7;
         snake_head_y_pos <= 7;
@@ -85,7 +92,6 @@ module LEDs_snake_core (
         led_green_intensity <= 0;
         led_blue_intensity <= 0;
     end else begin
-
       if(players_commands_right && (direction != 1 || score == 0)) begin
         direction <= 0;
       end
@@ -102,12 +108,15 @@ module LEDs_snake_core (
         direction <= 3;
       end
 
-
       if(score >= 1 && current_led_x == queue_1_x && current_led_y == queue_1_y) begin
         led_red_intensity <= 0;
         led_green_intensity <= 5;
         led_blue_intensity <= 0;
       end else if(score >= 2 && current_led_x == queue_2_x && current_led_y == queue_2_y) begin
+        led_red_intensity <= 0;
+        led_green_intensity <= 5;
+        led_blue_intensity <= 0;
+      end else if(score >= 3 && current_led_x == queue_3_x && current_led_y == queue_3_y) begin
         led_red_intensity <= 0;
         led_green_intensity <= 5;
         led_blue_intensity <= 0;
