@@ -11,9 +11,9 @@ module LEDs_snake_core (
     input  wire [3:0] current_led_x,
     input  wire [3:0] current_led_y,
     output wire update_frame,
-    output wire [7:0] led_red_intensity,
-    output wire [7:0] led_green_intensity,
-    output wire [7:0] led_blue_intensity,
+    output reg [7:0] led_red_intensity,
+    output reg [7:0] led_green_intensity,
+    output reg [7:0] led_blue_intensity,
     output reg [7:0] score
 );
 
@@ -30,15 +30,7 @@ module LEDs_snake_core (
   reg [3:0] current_bonus_y_pos;
   reg current_bonus_ready;
 
-  reg [7:0] red_intensity;
-  reg [7:0] green_intensity;
-  reg [7:0] blue_intensity;
-
   reg [1:0] direction;
-
-  assign led_red_intensity = red_intensity;
-  assign led_green_intensity = green_intensity;
-  assign led_blue_intensity = blue_intensity;
 
   always @(posedge move_timer) begin
 
@@ -89,9 +81,9 @@ module LEDs_snake_core (
         current_bonus_x_pos <= bonus_random_x;
         current_bonus_y_pos <= bonus_random_y;
         current_bonus_ready <= 1;
-        red_intensity <= 0;
-        green_intensity <= 0;
-        blue_intensity <= 0;
+        led_red_intensity <= 0;
+        led_green_intensity <= 0;
+        led_blue_intensity <= 0;
     end else begin
 
       if(players_commands_right) begin
@@ -112,25 +104,25 @@ module LEDs_snake_core (
 
 
       if(score >= 1 && current_led_x == queue_1_x && current_led_y == queue_1_y) begin
-        red_intensity <= 0;
-        green_intensity <= 5;
-        blue_intensity <= 0;
+        led_red_intensity <= 0;
+        led_green_intensity <= 5;
+        led_blue_intensity <= 0;
       end else if(score >= 2 && current_led_x == queue_2_x && current_led_y == queue_2_y) begin
-        red_intensity <= 0;
-        green_intensity <= 5;
-        blue_intensity <= 0;
+        led_red_intensity <= 0;
+        led_green_intensity <= 5;
+        led_blue_intensity <= 0;
       end else if(current_led_x == snake_head_x_pos && current_led_y == snake_head_y_pos) begin
-        red_intensity <= 0;
-        green_intensity <= 10;
-        blue_intensity <= 0;
+        led_red_intensity <= 0;
+        led_green_intensity <= 10;
+        led_blue_intensity <= 0;
       end else if(current_bonus_ready && current_led_x == current_bonus_x_pos && current_led_y == current_bonus_y_pos) begin
-        red_intensity <= 10;
-        green_intensity <= 0;
-        blue_intensity <= 0;
+        led_red_intensity <= 10;
+        led_green_intensity <= 0;
+        led_blue_intensity <= 0;
       end else begin
-        red_intensity <= 0;
-        green_intensity <= 0;
-        blue_intensity <= 0;
+        led_red_intensity <= 0;
+        led_green_intensity <= 0;
+        led_blue_intensity <= 0;
       end
     end
   end
