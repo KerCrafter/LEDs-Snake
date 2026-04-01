@@ -94,7 +94,7 @@ module LEDs_snake_core (
         direction <= 1;
       end
 
-      if(players_commands_down) begin
+      if(players_commands_down && direction != 3 || players_commands_down && score == 0) begin
         direction <= 2;
       end
 
