@@ -33,56 +33,48 @@ module LEDs_snake_core (
 
   reg [1:0] direction;
 
-
   assign led_red_intensity = red_intensity;
   assign led_green_intensity = green_intensity;
   assign led_blue_intensity = blue_intensity;
 
   always @(posedge move_timer) begin
-    if(direction == 0) begin
-      if(snake_head_x_pos + 1 == current_bonus_x_pos) begin
-        queue_1_exist = 1;
-        queue_1_x = snake_head_x_pos;
+    if(direction == 0 && snake_head_x_pos + 1 == current_bonus_x_pos) begin
+      queue_1_exist = 1;
+      queue_1_x = snake_head_x_pos;
+      queue_1_y = snake_head_y_pos;
+
+      snake_head_x_pos = current_bonus_x_pos;
+
+      current_bonus_ready = 0;
+
+    end else if(direction == 3 && snake_head_y_pos - 1 == current_bonus_y_pos) begin
+      queue_1_exist = 1;
+      queue_1_x = snake_head_x_pos;
+      queue_1_y = snake_head_y_pos;
+
+      snake_head_y_pos = current_bonus_y_pos;
+
+      current_bonus_ready = 0;
+
+    end else begin
+      if(queue_1_exist) begin
         queue_1_y = snake_head_y_pos;
+        queue_1_x = snake_head_x_pos;
+      end
 
-        snake_head_x_pos = current_bonus_x_pos;
-
-        current_bonus_ready = 0;
-        
-      end else begin
-
-        if(queue_1_exist) begin
-          queue_1_x = snake_head_x_pos;
-        end
-
+      if(direction == 0) begin
         snake_head_x_pos = snake_head_x_pos + 1;
       end
-    end
+        
+      if(direction == 1) begin
+        snake_head_x_pos = snake_head_x_pos - 1;
+      end
 
-    if(direction == 1) begin
-      snake_head_x_pos = snake_head_x_pos - 1;
-    end
+      if(direction == 2) begin
+        snake_head_y_pos = snake_head_y_pos + 1;
+      end
 
-    if(direction == 2) begin
-      snake_head_y_pos = snake_head_y_pos + 1;
-    end
-
-    if(direction == 3) begin
-      if(snake_head_y_pos - 1 == current_bonus_y_pos) begin
-        queue_1_exist = 1;
-        queue_1_x = snake_head_x_pos;
-        queue_1_y = snake_head_y_pos;
-
-        snake_head_y_pos = current_bonus_y_pos;
-
-        current_bonus_ready = 0;
-
-      end else begin
-
-        if(queue_1_exist) begin
-          queue_1_y = snake_head_y_pos;
-        end
-
+      if(direction == 3) begin
         snake_head_y_pos = snake_head_y_pos - 1;
       end
     end
