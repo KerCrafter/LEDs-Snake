@@ -148,6 +148,10 @@ async def snake_queue_should_follow_head(dut, move_timer_PULSE):
   first_bonus_y=7
 )
 async def snake_queue_should_continue_follow_head(dut, move_timer_PULSE):
+
+    dut.bonus_random_x.value = 0; 
+    dut.bonus_random_y.value = 0; 
+
     await move_timer_PULSE(times=3);
 
     for x in range(0, 15):
@@ -156,6 +160,8 @@ async def snake_queue_should_continue_follow_head(dut, move_timer_PULSE):
           await check_LED_is_LIGHT_GREEN(dut, x, y);
         elif x is 10 and y is 7:
           await check_LED_is_GREEN(dut, x, y);
+        elif x is 0 and y is 0:
+          await check_LED_is_RED(dut, x, y);
         else:
           await check_LED_is_BLACK(dut, x, y);
 
@@ -251,6 +257,29 @@ async def eating_the_bonus_to_right_direction_increment_score(dut, move_timer_PU
     await move_timer_PULSE();
 
     assert dut.score.value == 1
+
+
+@LEDs_snake_test(
+  first_bonus_x=8,
+  first_bonus_y=7
+)
+async def eating_the_bonus_to_right_direction_should_appear_new_bonus(dut, move_timer_PULSE):
+
+    dut.bonus_random_x.value = 10; 
+    dut.bonus_random_y.value = 10; 
+
+    await move_timer_PULSE();
+
+    for x in range(0, 15):
+      for y in range(0, 15):
+        if x is 7 and y is 7:
+          await check_LED_is_LIGHT_GREEN(dut, x, y);
+        elif x is 8 and y is 7:
+          await check_LED_is_GREEN(dut, x, y);
+        elif x == 10 and y == 10:
+          await check_LED_is_RED(dut, x, y);
+        else:
+          await check_LED_is_BLACK(dut, x, y);
 
 async def check_LED(dut, x, y, red, green, blue):
     dut.current_led_x.value = x;
