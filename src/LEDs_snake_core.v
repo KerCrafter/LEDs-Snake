@@ -44,6 +44,7 @@ module LEDs_snake_core (
       queue_1_y = snake_head_y_pos;
 
       snake_head_x_pos = current_bonus_x_pos;
+      snake_head_y_pos = current_bonus_y_pos;
 
       current_bonus_ready = 0;
 
@@ -52,6 +53,7 @@ module LEDs_snake_core (
       queue_1_x = snake_head_x_pos;
       queue_1_y = snake_head_y_pos;
 
+      snake_head_x_pos = current_bonus_x_pos;
       snake_head_y_pos = current_bonus_y_pos;
 
       current_bonus_ready = 0;
