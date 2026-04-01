@@ -281,6 +281,37 @@ async def eating_the_bonus_to_right_direction_should_appear_new_bonus(dut, move_
         else:
           await check_LED_is_BLACK(dut, x, y);
 
+@LEDs_snake_test(
+  first_bonus_x=8,
+  first_bonus_y=7
+)
+async def eating_the_second_bonus_should_extend_queue(dut, move_timer_PULSE):
+
+    dut.bonus_random_x.value = 9; 
+    dut.bonus_random_y.value = 7; 
+
+    await move_timer_PULSE();
+
+    dut.bonus_random_x.value = 0; 
+    dut.bonus_random_y.value = 0; 
+
+    await move_timer_PULSE();
+
+    assert dut.score.value == 2
+
+    for x in range(0, 15):
+      for y in range(0, 15):
+        if x is 9 and y is 7:
+          await check_LED_is_GREEN(dut, x, y);
+        elif x is 8 and y is 7:
+          await check_LED_is_LIGHT_GREEN(dut, x, y);
+        elif x is 7 and y is 7:
+          await check_LED_is_LIGHT_GREEN(dut, x, y);
+        elif x == 0 and y == 0:
+          await check_LED_is_RED(dut, x, y);
+        else:
+          await check_LED_is_BLACK(dut, x, y);
+
 async def check_LED(dut, x, y, red, green, blue):
     dut.current_led_x.value = x;
     dut.current_led_y.value = y;
