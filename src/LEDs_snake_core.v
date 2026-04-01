@@ -78,6 +78,11 @@ module LEDs_snake_core (
         current_bonus_ready = 0;
 
       end else begin
+
+        if(queue_1_exist) begin
+          queue_1_y = queue_1_y - 1;
+        end
+
         snake_head_y_pos = snake_head_y_pos - 1;
       end
     end
