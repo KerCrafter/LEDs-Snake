@@ -61,17 +61,11 @@ module LEDs_snake_core (
 
       if(direction == 0) begin
         snake_head_x_pos = snake_head_x_pos + 1;
-      end
-        
-      if(direction == 1) begin
+      end else if(direction == 1) begin
         snake_head_x_pos = snake_head_x_pos - 1;
-      end
-
-      if(direction == 2) begin
+      end else if(direction == 2) begin
         snake_head_y_pos = snake_head_y_pos + 1;
-      end
-
-      if(direction == 3) begin
+      end else if(direction == 3) begin
         snake_head_y_pos = snake_head_y_pos - 1;
       end
     end
