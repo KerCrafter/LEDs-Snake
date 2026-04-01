@@ -6,7 +6,7 @@ from LEDs_snake_test import LEDs_snake_test
 async def should_start_with_black_screen_only_centered_LED_is_darkgreen_represent_snake_head(dut):
     for x in range(0, 15):
       for y in range(0, 15):
-        if x is 7 and y is 7:
+        if x == 7 and y == 7:
           await check_LED_is_GREEN(dut, x, y);
         else:
           await check_LED_is_BLACK(dut, x, y);
@@ -15,7 +15,7 @@ async def should_start_with_black_screen_only_centered_LED_is_darkgreen_represen
 async def snake_head_should_move_left_to_right(dut, move_timer_PULSE):
     for x in range(0, 15):
       for y in range(0, 15):
-        if x is 7 and y is 7:
+        if x == 7 and y == 7:
           await check_LED_is_GREEN(dut, x, y);
         else:
           await check_LED_is_BLACK(dut, x, y);
@@ -24,7 +24,7 @@ async def snake_head_should_move_left_to_right(dut, move_timer_PULSE):
 
     for x in range(0, 15):
       for y in range(0, 15):
-        if x is 8 and y is 7:
+        if x == 8 and y == 7:
           await check_LED_is_GREEN(dut, x, y);
         else:
           await check_LED_is_BLACK(dut, x, y);
@@ -35,7 +35,7 @@ async def snake_goes_off_screen_should_reappear_on_other_side(dut, move_timer_PU
 
     for x in range(0, 15):
       for y in range(0, 15):
-        if x is 0 and y is 7:
+        if x == 0 and y == 7:
           await check_LED_is_GREEN(dut, x, y);
         else:
           await check_LED_is_BLACK(dut, x, y);
@@ -49,7 +49,7 @@ async def snake_head_should_move_right_to_left_after_left_button_press(dut, move
 
     for x in range(0, 15):
       for y in range(0, 15):
-        if x is 6 and y is 7:
+        if x == 6 and y == 7:
           await check_LED_is_GREEN(dut, x, y);
         else:
           await check_LED_is_BLACK(dut, x, y);
@@ -62,7 +62,7 @@ async def snake_head_should_move_up_to_down_after_down_button_press(dut, move_ti
 
     for x in range(0, 15):
       for y in range(0, 15):
-        if x is 7 and y is 8:
+        if x == 7 and y == 8:
           await check_LED_is_GREEN(dut, x, y);
         else:
           await check_LED_is_BLACK(dut, x, y);
@@ -75,7 +75,7 @@ async def snake_head_should_move_down_to_up_after_up_button_press(dut, move_time
 
     for x in range(0, 15):
       for y in range(0, 15):
-        if x is 7 and y is 6:
+        if x == 7 and y == 6:
           await check_LED_is_GREEN(dut, x, y);
         else:
           await check_LED_is_BLACK(dut, x, y);
@@ -92,7 +92,7 @@ async def snake_head_should_move_right_after_left_move(dut, move_timer_PULSE):
 
     for x in range(0, 15):
       for y in range(0, 15):
-        if x is 7 and y is 7:
+        if x == 7 and y == 7:
           await check_LED_is_GREEN(dut, x, y);
         else:
           await check_LED_is_BLACK(dut, x, y);
@@ -104,9 +104,9 @@ async def snake_head_should_move_right_after_left_move(dut, move_timer_PULSE):
 async def bonus_should_appear(dut):
     for x in range(0, 15):
       for y in range(0, 15):
-        if x is 7 and y is 7:
+        if x == 7 and y == 7:
           await check_LED_is_GREEN(dut, x, y);
-        elif x is 10 and y is 10:
+        elif x == 10 and y == 10:
           await check_LED_is_RED(dut, x, y);
         else:
           await check_LED_is_BLACK(dut, x, y);
@@ -120,9 +120,9 @@ async def snake_should_eat_the_bonus_to_right_direction(dut, move_timer_PULSE):
 
     for x in range(0, 15):
       for y in range(0, 15):
-        if x is 7 and y is 7:
+        if x == 7 and y == 7:
           await check_LED_is_LIGHT_GREEN(dut, x, y);
-        elif x is 8 and y is 7:
+        elif x == 8 and y == 7:
           await check_LED_is_GREEN(dut, x, y);
         else:
           await check_LED_is_BLACK(dut, x, y);
@@ -136,9 +136,9 @@ async def snake_queue_should_follow_head(dut, move_timer_PULSE):
 
     for x in range(0, 15):
       for y in range(0, 15):
-        if x is 8 and y is 7:
+        if x == 8 and y == 7:
           await check_LED_is_LIGHT_GREEN(dut, x, y);
-        elif x is 9 and y is 7:
+        elif x == 9 and y == 7:
           await check_LED_is_GREEN(dut, x, y);
         else:
           await check_LED_is_BLACK(dut, x, y);
@@ -156,11 +156,11 @@ async def snake_queue_should_continue_follow_head(dut, move_timer_PULSE):
 
     for x in range(0, 15):
       for y in range(0, 15):
-        if x is 9 and y is 7:
+        if x == 9 and y == 7:
           await check_LED_is_LIGHT_GREEN(dut, x, y);
-        elif x is 10 and y is 7:
+        elif x == 10 and y == 7:
           await check_LED_is_GREEN(dut, x, y);
-        elif x is 0 and y is 0:
+        elif x == 0 and y == 0:
           await check_LED_is_RED(dut, x, y);
         else:
           await check_LED_is_BLACK(dut, x, y);
@@ -177,9 +177,9 @@ async def snake_should_eat_the_bonus_down_to_up(dut, move_timer_PULSE):
 
     for x in range(0, 15):
       for y in range(0, 15):
-        if x is 7 and y is 7:
+        if x == 7 and y == 7:
           await check_LED_is_LIGHT_GREEN(dut, x, y);
-        elif x is 7 and y is 6:
+        elif x == 7 and y == 6:
           await check_LED_is_GREEN(dut, x, y);
         else:
           await check_LED_is_BLACK(dut, x, y);
@@ -196,9 +196,9 @@ async def snake_queue_should_follow_head_when_direction_is_UP(dut, move_timer_PU
 
     for x in range(0, 15):
       for y in range(0, 15):
-        if x is 7 and y is 6:
+        if x == 7 and y == 6:
           await check_LED_is_LIGHT_GREEN(dut, x, y);
-        elif x is 7 and y is 5:
+        elif x == 7 and y == 5:
           await check_LED_is_GREEN(dut, x, y);
         else:
           await check_LED_is_BLACK(dut, x, y);
@@ -215,9 +215,9 @@ async def snake_should_eat_the_bonus_to_down(dut, move_timer_PULSE):
 
     for x in range(0, 15):
       for y in range(0, 15):
-        if x is 7 and y is 7:
+        if x == 7 and y == 7:
           await check_LED_is_LIGHT_GREEN(dut, x, y);
-        elif x is 7 and y is 8:
+        elif x == 7 and y == 8:
           await check_LED_is_GREEN(dut, x, y);
         else:
           await check_LED_is_BLACK(dut, x, y);
@@ -234,9 +234,9 @@ async def snake_should_eat_the_bonus_to_left(dut, move_timer_PULSE):
 
     for x in range(0, 15):
       for y in range(0, 15):
-        if x is 7 and y is 7:
+        if x == 7 and y == 7:
           await check_LED_is_LIGHT_GREEN(dut, x, y);
-        elif x is 6 and y is 7:
+        elif x == 6 and y == 7:
           await check_LED_is_GREEN(dut, x, y);
         else:
           await check_LED_is_BLACK(dut, x, y);
@@ -272,9 +272,9 @@ async def eating_the_bonus_to_right_direction_should_appear_new_bonus(dut, move_
 
     for x in range(0, 15):
       for y in range(0, 15):
-        if x is 7 and y is 7:
+        if x == 7 and y == 7:
           await check_LED_is_LIGHT_GREEN(dut, x, y);
-        elif x is 8 and y is 7:
+        elif x == 8 and y == 7:
           await check_LED_is_GREEN(dut, x, y);
         elif x == 10 and y == 10:
           await check_LED_is_RED(dut, x, y);
@@ -301,11 +301,11 @@ async def eating_the_second_bonus_should_extend_queue(dut, move_timer_PULSE):
 
     for x in range(0, 15):
       for y in range(0, 15):
-        if x is 9 and y is 7:
+        if x == 9 and y == 7:
           await check_LED_is_GREEN(dut, x, y);
-        elif x is 8 and y is 7:
+        elif x == 8 and y == 7:
           await check_LED_is_LIGHT_GREEN(dut, x, y);
-        elif x is 7 and y is 7:
+        elif x == 7 and y == 7:
           await check_LED_is_LIGHT_GREEN(dut, x, y);
         elif x == 0 and y == 0:
           await check_LED_is_RED(dut, x, y);
