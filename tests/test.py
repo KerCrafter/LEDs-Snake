@@ -241,7 +241,7 @@ async def snake_should_eat_the_bonus_to_left(dut, move_timer_PULSE):
   first_bonus_y=7
 )
 async def starting_score_is_zero(dut, move_timer_PULSE):
-    dut.score.value = 1
+    assert dut.score.value == 0
 
 #@LEDs_snake_test(
 #  first_bonus_x=8,
