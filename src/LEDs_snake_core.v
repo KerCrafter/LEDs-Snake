@@ -17,7 +17,6 @@ module LEDs_snake_core (
     output reg [7:0] score
 );
 
-  reg queue_1_exist;
   reg [3:0] queue_1_x;
   reg [3:0] queue_1_y;
 
@@ -47,8 +46,6 @@ module LEDs_snake_core (
     ) begin
       score = score + 1;
 
-
-      queue_1_exist = 1;
       queue_1_x = snake_head_x_pos;
       queue_1_y = snake_head_y_pos;
 
@@ -58,10 +55,8 @@ module LEDs_snake_core (
       current_bonus_ready = 0;
 
     end else begin
-      if(queue_1_exist) begin
-        queue_1_y = snake_head_y_pos;
-        queue_1_x = snake_head_x_pos;
-      end
+      queue_1_y = snake_head_y_pos;
+      queue_1_x = snake_head_x_pos;
 
       if(direction == 0) begin
         snake_head_x_pos = snake_head_x_pos + 1;
@@ -78,7 +73,6 @@ module LEDs_snake_core (
   always @(clk) begin
     if(reset) begin
         score <= 0;
-        queue_1_exist <= 0;
         queue_1_x <= 0;
         queue_1_y <= 0;
         direction <= 0;
@@ -109,7 +103,7 @@ module LEDs_snake_core (
       end
 
 
-      if(queue_1_exist && current_led_x == queue_1_x && current_led_y == queue_1_y) begin
+      if(score >= 1 && current_led_x == queue_1_x && current_led_y == queue_1_y) begin
         red_intensity <= 0;
         green_intensity <= 5;
         blue_intensity <= 0;
