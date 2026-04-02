@@ -159,6 +159,9 @@ module LEDs_snake_core (
 
   wire [1:0] direction;
 
+  wire [3:0] current_bonus_x_pos;
+  wire [3:0] current_bonus_y_pos;
+
   PlayerCommandsManager player_commands (
     .clk(clk),
     .reset(reset),
@@ -222,9 +225,6 @@ module LEDs_snake_core (
     .x_pos(queue_3_x),
     .y_pos(queue_3_y)
   );
-
-  reg [3:0] current_bonus_x_pos;
-  reg [3:0] current_bonus_y_pos;
 
   reg end_game;
 
