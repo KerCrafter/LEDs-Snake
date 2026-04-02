@@ -30,6 +30,30 @@ module SnakeHead (
 
 endmodule
 
+module SnakeQueue (
+  input wire reset,
+  input wire clk,
+  input wire move_act,
+  input wire [3:0] next_x_pos,
+  input wire [3:0] next_y_pos,
+  output reg [3:0] x_pos,
+  output reg [3:0] y_pos
+);
+
+  always @(posedge move_act) begin
+    x_pos <= next_x_pos;
+    y_pos <= next_y_pos;
+  end
+
+  always @(clk) begin
+    if(reset) begin
+      x_pos <= 0;
+      y_pos <= 0;
+    end
+  end
+
+endmodule
+
 module LEDs_snake_core (
     input  wire reset,
     input  wire clk,
@@ -49,8 +73,8 @@ module LEDs_snake_core (
     output reg [7:0] score
 );
 
-  reg [3:0] queue_1_x;
-  reg [3:0] queue_1_y;
+  wire [3:0] queue_1_x;
+  wire [3:0] queue_1_y;
 
   reg [3:0] queue_2_x;
   reg [3:0] queue_2_y;
@@ -70,6 +94,16 @@ module LEDs_snake_core (
     .y_pos(snake_head_y_pos)
   );
 
+  SnakeQueue queue1 (
+    .clk(clk),
+    .reset(reset),
+    .move_act(move_timer),
+    .next_x_pos(snake_head_x_pos),
+    .next_y_pos(snake_head_y_pos),
+    .x_pos(queue_1_x),
+    .y_pos(queue_1_y)
+  );
+
   reg [3:0] current_bonus_x_pos;
   reg [3:0] current_bonus_y_pos;
   reg current_bonus_ready;
@@ -79,9 +113,6 @@ module LEDs_snake_core (
   reg end_game;
 
   always @(posedge move_timer) begin
-
-    queue_1_x <= snake_head_x_pos;
-    queue_1_y <= snake_head_y_pos;
 
     queue_2_x <= queue_1_x;
     queue_2_y <= queue_1_y;
@@ -114,8 +145,6 @@ module LEDs_snake_core (
   always @(clk) begin
     if(reset) begin
         score <= 0;
-        queue_1_x <= 0;
-        queue_1_y <= 0;
         queue_2_x <= 0;
         queue_2_y <= 0;
         queue_3_x <= 0;
