@@ -48,13 +48,12 @@ module LEDs_snake_core (
     queue_3_x <= queue_2_x;
     queue_3_y <= queue_2_y;
 
-    if(direction == 2 && snake_head_y_pos + 1 == queue_3_y && snake_head_x_pos == queue_3_x) begin
-      end_game <= 1; 
-    end else if(direction == 3 && snake_head_y_pos - 1 == queue_3_y && snake_head_x_pos == queue_3_x) begin
-      end_game <= 1; 
-    end else if(direction == 0 && snake_head_x_pos + 1 == queue_3_x && snake_head_y_pos == queue_3_y) begin
-      end_game <= 1; 
-    end else if(direction == 1 && snake_head_x_pos - 1 == queue_3_x && snake_head_y_pos == queue_3_y) begin
+    if(
+      (direction == 0 && snake_head_x_pos + 1 == queue_3_x && snake_head_y_pos == queue_3_y) || 
+      (direction == 1 && snake_head_x_pos - 1 == queue_3_x && snake_head_y_pos == queue_3_y) ||
+      (direction == 2 && score >= 2 && snake_head_y_pos + 1 == queue_3_y && snake_head_x_pos == queue_3_x) ||
+      (direction == 3 && snake_head_y_pos - 1 == queue_3_y && snake_head_x_pos == queue_3_x) 
+    ) begin
       end_game <= 1; 
     end else if(
       (direction == 0 && snake_head_x_pos + 1 == current_bonus_x_pos) ||
