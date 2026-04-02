@@ -1,3 +1,38 @@
+module PlayerCommandsManager (
+  input wire clk,
+  input wire reset,
+  input wire left,
+  input wire right,
+  input wire up,
+  input wire down,
+  input wire [7:0] score,
+  output reg [1:0] direction
+);
+
+  always @(clk) begin
+    if(reset) begin
+      direction <= 0;
+    end else begin
+      if(right && (direction != 1 || score == 0)) begin
+        direction <= 0;
+      end
+
+      if(left && (direction != 0 || score == 0)) begin
+        direction <= 1;
+      end
+
+      if(down && (direction != 3 || score == 0)) begin
+        direction <= 2;
+      end
+
+      if(up && (direction != 2 || score == 0)) begin
+        direction <= 3;
+      end
+    end
+  end
+
+endmodule
+
 module SnakeHead (
   input wire reset,
   input wire clk,
@@ -85,7 +120,20 @@ module LEDs_snake_core (
   wire [3:0] queue_3_x;
   wire [3:0] queue_3_y;
 
-  SnakeHead snake_head(
+  reg [1:0] direction;
+
+  PlayerCommandsManager player_commands (
+    .clk(clk),
+    .reset(reset),
+    .left(players_commands_left),
+    .right(players_commands_right),
+    .up(players_commands_up),
+    .down(players_commands_down),
+    .score(score),
+    .direction(direction)
+  );
+
+  SnakeHead snake_head (
     .clk(clk),
     .reset(reset),
     .direction(direction),
@@ -128,7 +176,6 @@ module LEDs_snake_core (
   reg [3:0] current_bonus_y_pos;
   reg current_bonus_ready;
 
-  reg [1:0] direction;
 
   reg end_game;
 
@@ -158,7 +205,6 @@ module LEDs_snake_core (
   always @(clk) begin
     if(reset) begin
       score <= 0;
-      direction <= 0;
       current_bonus_x_pos <= bonus_random_x;
       current_bonus_y_pos <= bonus_random_y;
       current_bonus_ready <= 1;
@@ -167,22 +213,6 @@ module LEDs_snake_core (
       led_blue_intensity <= 0;
       end_game <= 0;
     end else begin
-      if(players_commands_right && (direction != 1 || score == 0)) begin
-        direction <= 0;
-      end
-
-      if(players_commands_left && (direction != 0 || score == 0)) begin
-        direction <= 1;
-      end
-
-      if(players_commands_down && (direction != 3 || score == 0)) begin
-        direction <= 2;
-      end
-
-      if(players_commands_up && (direction != 2 || score == 0)) begin
-        direction <= 3;
-      end
-
       if(end_game) begin
         led_red_intensity <= 10;
         led_green_intensity <= 0;
