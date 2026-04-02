@@ -142,7 +142,7 @@ module LEDs_snake_core (
     output reg [7:0] led_red_intensity,
     output reg [7:0] led_green_intensity,
     output reg [7:0] led_blue_intensity,
-    output reg [7:0] score
+    output wire [7:0] score
 );
 
   wire [3:0] snake_head_x_pos;
