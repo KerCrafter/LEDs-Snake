@@ -518,6 +518,54 @@ async def eating_his_own_queue_finish_game_with_red_screen_from_UP_direction(dut
       for y in range(0, 15):
         await check_LED_is_RED(dut, x, y);
 
+@LEDs_snake_test(
+  first_bonus_x=8,
+  first_bonus_y=7
+)
+async def eating_his_own_queue_finish_game_with_red_screen_from_RIGHT_direction(dut, move_timer_PULSE):
+
+    dut.bonus_random_x.value = 9; 
+    dut.bonus_random_y.value = 7; 
+
+    await move_timer_PULSE(); #x=8 y=7
+
+    dut.bonus_random_x.value = 10; 
+    dut.bonus_random_y.value = 7; 
+
+    await move_timer_PULSE(); #x=9 y=7
+
+    dut.bonus_random_x.value = 11; 
+    dut.bonus_random_y.value = 7; 
+
+    await move_timer_PULSE(); #x=10 y=7
+
+    dut.bonus_random_x.value = 0; 
+    dut.bonus_random_y.value = 0; 
+
+    await move_timer_PULSE(); #x=11 y=7
+
+    await player_press_UP(dut);
+
+    await move_timer_PULSE(); #x=11 y=6
+    await move_timer_PULSE(); #x=11 y=5
+    await move_timer_PULSE(); #x=11 y=4
+
+    await player_press_LEFT(dut);
+
+    await move_timer_PULSE(); #x=9 y=4
+
+    await player_press_DOWN(dut);
+
+    await move_timer_PULSE(); #x=9 y=5
+
+    await player_press_RIGHT(dut);
+
+    await move_timer_PULSE(); #eat his queue
+
+    for x in range(0, 15):
+      for y in range(0, 15):
+        await check_LED_is_RED(dut, x, y);
+
 async def check_LED(dut, x, y, red, green, blue):
     dut.current_led_x.value = x;
     dut.current_led_y.value = y;
