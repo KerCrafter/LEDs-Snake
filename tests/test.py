@@ -444,7 +444,7 @@ async def after_eat_one_bonus_impossible_to_press_inverse_direction_to_down(dut,
   first_bonus_x=8,
   first_bonus_y=7
 )
-async def eating_his_own_queue_finish_game_with_red_screen(dut, move_timer_PULSE):
+async def eating_his_own_queue_finish_game_with_red_screen_from_DOWN_direction(dut, move_timer_PULSE):
 
     dut.bonus_random_x.value = 9; 
     dut.bonus_random_y.value = 7; 
@@ -470,6 +470,49 @@ async def eating_his_own_queue_finish_game_with_red_screen(dut, move_timer_PULSE
 
     await player_press_DOWN(dut);
     await move_timer_PULSE(); #x=7 y=7 -eat his own queue
+
+    for x in range(0, 15):
+      for y in range(0, 15):
+        await check_LED_is_RED(dut, x, y);
+
+
+@LEDs_snake_test(
+  first_bonus_x=8,
+  first_bonus_y=7
+)
+async def eating_his_own_queue_finish_game_with_red_screen_from_UP_direction(dut, move_timer_PULSE):
+
+    dut.bonus_random_x.value = 9; 
+    dut.bonus_random_y.value = 7; 
+
+    await move_timer_PULSE(); #x=8 y=7
+
+    dut.bonus_random_x.value = 10; 
+    dut.bonus_random_y.value = 7; 
+
+    await move_timer_PULSE(); #x=9 y=7
+
+    dut.bonus_random_x.value = 11; 
+    dut.bonus_random_y.value = 7; 
+
+    await move_timer_PULSE(); #x=10 y=7
+
+    dut.bonus_random_x.value = 0; 
+    dut.bonus_random_y.value = 0; 
+
+    await move_timer_PULSE(); #x=11 y=7
+
+    await player_press_DOWN(dut);
+
+    await move_timer_PULSE(); #x=11 y=8
+
+    await player_press_LEFT(dut);
+
+    await move_timer_PULSE(); #x=10 y=8
+
+    await player_press_UP(dut);
+
+    await move_timer_PULSE(); #eat his own queue
 
     for x in range(0, 15):
       for y in range(0, 15):
