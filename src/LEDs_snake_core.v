@@ -1,3 +1,11 @@
+module SnakeHead (
+  input wire reset,
+  input wire [1:0] direction,
+  input wire move_act
+);
+
+endmodule
+
 module LEDs_snake_core (
     input  wire reset,
     input  wire clk,
@@ -28,6 +36,12 @@ module LEDs_snake_core (
 
   reg [3:0] snake_head_x_pos;
   reg [3:0] snake_head_y_pos;
+
+  SnakeHead snake_head(
+    .reset(reset),
+    .direction(direction),
+    .move_act(move_timer)
+  );
 
   reg [3:0] current_bonus_x_pos;
   reg [3:0] current_bonus_y_pos;
