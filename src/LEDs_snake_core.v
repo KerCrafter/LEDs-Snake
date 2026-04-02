@@ -1,3 +1,40 @@
+module BonusManager (
+  input wire move_act,
+  input wire clk,
+  input wire reset,
+  input wire [1:0] direction,
+  input wire [3:0] snake_head_x_pos,
+  input wire [3:0] snake_head_y_pos,
+  input wire [3:0] bonus_random_x,
+  input wire [3:0] bonus_random_y,
+  output reg [3:0] x_pos,
+  output reg [3:0] y_pos,
+  output reg [7:0] score
+);
+
+  always @(posedge move_act) begin
+    if(
+      (direction == 0 && snake_head_x_pos + 1 == x_pos) ||
+      (direction == 1 && snake_head_x_pos - 1 == x_pos) ||
+      (direction == 2 && snake_head_y_pos + 1 == y_pos) ||
+      (direction == 3 && snake_head_y_pos - 1 == y_pos)
+    ) begin
+      score <= score + 1;
+
+      x_pos <= bonus_random_x;
+      y_pos <= bonus_random_y;
+    end
+  end
+
+  always @(clk) begin
+    if(reset) begin
+      score <= 0;
+      x_pos <= bonus_random_x;
+      y_pos <= bonus_random_y;
+    end
+  end
+endmodule
+
 module PlayerCommandsManager (
   input wire clk,
   input wire reset,
@@ -133,6 +170,20 @@ module LEDs_snake_core (
     .direction(direction)
   );
 
+  BonusManager bonus_manager (
+    .clk(clk),
+    .reset(reset),
+    .move_act(move_timer),
+    .direction(direction),
+    .snake_head_x_pos(snake_head_x_pos),
+    .snake_head_y_pos(snake_head_y_pos),
+    .bonus_random_x(bonus_random_x),
+    .bonus_random_y(bonus_random_y),
+    .x_pos(current_bonus_x_pos),
+    .y_pos(current_bonus_y_pos),
+    .score(score)
+  );
+
   SnakeHead snake_head (
     .clk(clk),
     .reset(reset),
@@ -187,26 +238,10 @@ module LEDs_snake_core (
       end_game <= 1; 
     end
 
-    if(
-      (direction == 0 && snake_head_x_pos + 1 == current_bonus_x_pos) ||
-      (direction == 1 && snake_head_x_pos - 1 == current_bonus_x_pos) ||
-      (direction == 2 && snake_head_y_pos + 1 == current_bonus_y_pos) ||
-      (direction == 3 && snake_head_y_pos - 1 == current_bonus_y_pos)
-    ) begin
-      score <= score + 1;
-
-      current_bonus_x_pos <= bonus_random_x;
-      current_bonus_y_pos <= bonus_random_y;
-
-    end
-
   end
 
   always @(clk) begin
     if(reset) begin
-      score <= 0;
-      current_bonus_x_pos <= bonus_random_x;
-      current_bonus_y_pos <= bonus_random_y;
       led_red_intensity <= 0;
       led_green_intensity <= 0;
       led_blue_intensity <= 0;
