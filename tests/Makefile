@@ -9,6 +9,7 @@ SRC_DIR = $(PWD)/../src
 PROJECT_SOURCES += LEDs_snake_main.v
 PROJECT_SOURCES += LEDs_snake_core.v
 PROJECT_SOURCES += bonus_manager.v
+PROJECT_SOURCES += player_commands_manager.v
 
 # RTL simulation:
 SIM_BUILD				= sim_build/rtl
