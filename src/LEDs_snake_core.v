@@ -1,8 +1,32 @@
 module SnakeHead (
   input wire reset,
+  input wire clk,
   input wire [1:0] direction,
-  input wire move_act
+  input wire move_act,
+  output reg [3:0] x_pos,
+  output reg [3:0] y_pos
 );
+
+  always @(posedge move_act) begin
+
+    if(direction == 0) begin
+      x_pos <= x_pos + 1;
+    end else if(direction == 1) begin
+      x_pos <= x_pos - 1;
+    end else if(direction == 2) begin
+      y_pos <= y_pos + 1;
+    end else if(direction == 3) begin
+      y_pos <= y_pos - 1;
+    end
+
+  end
+
+  always @(clk) begin
+    if(reset) begin
+      x_pos <= 7;
+      y_pos <= 7;
+    end
+  end
 
 endmodule
 
@@ -34,13 +58,16 @@ module LEDs_snake_core (
   reg [3:0] queue_3_x;
   reg [3:0] queue_3_y;
 
-  reg [3:0] snake_head_x_pos;
-  reg [3:0] snake_head_y_pos;
+  wire [3:0] snake_head_x_pos;
+  wire [3:0] snake_head_y_pos;
 
   SnakeHead snake_head(
+    .clk(clk),
     .reset(reset),
     .direction(direction),
-    .move_act(move_timer)
+    .move_act(move_timer),
+    .x_pos(snake_head_x_pos),
+    .y_pos(snake_head_y_pos)
   );
 
   reg [3:0] current_bonus_x_pos;
@@ -77,23 +104,11 @@ module LEDs_snake_core (
     ) begin
       score <= score + 1;
 
-      snake_head_x_pos <= current_bonus_x_pos;
-      snake_head_y_pos <= current_bonus_y_pos;
- 
       current_bonus_x_pos <= bonus_random_x;
       current_bonus_y_pos <= bonus_random_y;
 
-    end else begin
-      if(direction == 0) begin
-        snake_head_x_pos <= snake_head_x_pos + 1;
-      end else if(direction == 1) begin
-        snake_head_x_pos <= snake_head_x_pos - 1;
-      end else if(direction == 2) begin
-        snake_head_y_pos <= snake_head_y_pos + 1;
-      end else if(direction == 3) begin
-        snake_head_y_pos <= snake_head_y_pos - 1;
-      end
     end
+
   end
 
   always @(clk) begin
@@ -106,8 +121,6 @@ module LEDs_snake_core (
         queue_3_x <= 0;
         queue_3_y <= 0;
         direction <= 0;
-        snake_head_x_pos <= 7;
-        snake_head_y_pos <= 7;
         current_bonus_x_pos <= bonus_random_x;
         current_bonus_y_pos <= bonus_random_y;
         current_bonus_ready <= 1;
