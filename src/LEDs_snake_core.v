@@ -174,8 +174,6 @@ module LEDs_snake_core (
 
   reg [3:0] current_bonus_x_pos;
   reg [3:0] current_bonus_y_pos;
-  reg current_bonus_ready;
-
 
   reg end_game;
 
@@ -207,7 +205,6 @@ module LEDs_snake_core (
       score <= 0;
       current_bonus_x_pos <= bonus_random_x;
       current_bonus_y_pos <= bonus_random_y;
-      current_bonus_ready <= 1;
       led_red_intensity <= 0;
       led_green_intensity <= 0;
       led_blue_intensity <= 0;
@@ -233,7 +230,7 @@ module LEDs_snake_core (
         led_red_intensity <= 0;
         led_green_intensity <= 10;
         led_blue_intensity <= 0;
-      end else if(current_bonus_ready && current_led_x == current_bonus_x_pos && current_led_y == current_bonus_y_pos) begin
+      end else if(current_led_x == current_bonus_x_pos && current_led_y == current_bonus_y_pos) begin
         led_red_intensity <= 10;
         led_green_intensity <= 0;
         led_blue_intensity <= 0;
