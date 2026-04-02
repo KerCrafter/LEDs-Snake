@@ -35,6 +35,8 @@ module LEDs_snake_core (
 
   reg [1:0] direction;
 
+  reg end_game;
+
   always @(posedge move_timer) begin
 
     queue_1_x <= snake_head_x_pos;
@@ -46,7 +48,9 @@ module LEDs_snake_core (
     queue_3_x <= queue_2_x;
     queue_3_y <= queue_2_y;
 
-    if(
+    if(direction == 2 && snake_head_y_pos + 1 == queue_3_y && snake_head_x_pos == queue_3_x) begin
+      end_game <= 1; 
+    end else if(
       (direction == 0 && snake_head_x_pos + 1 == current_bonus_x_pos) ||
       (direction == 1 && snake_head_x_pos - 1 == current_bonus_x_pos) ||
       (direction == 2 && snake_head_y_pos + 1 == current_bonus_y_pos) ||
@@ -91,6 +95,7 @@ module LEDs_snake_core (
         led_red_intensity <= 0;
         led_green_intensity <= 0;
         led_blue_intensity <= 0;
+        end_game <= 0;
     end else begin
       if(players_commands_right && (direction != 1 || score == 0)) begin
         direction <= 0;
@@ -108,7 +113,11 @@ module LEDs_snake_core (
         direction <= 3;
       end
 
-      if(score >= 1 && current_led_x == queue_1_x && current_led_y == queue_1_y) begin
+      if(end_game) begin
+        led_red_intensity <= 10;
+        led_green_intensity <= 0;
+        led_blue_intensity <= 0;
+      end else if(score >= 1 && current_led_x == queue_1_x && current_led_y == queue_1_y) begin
         led_red_intensity <= 0;
         led_green_intensity <= 5;
         led_blue_intensity <= 0;
