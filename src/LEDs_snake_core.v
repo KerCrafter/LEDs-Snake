@@ -120,7 +120,7 @@ module LEDs_snake_core (
   wire [3:0] queue_3_x;
   wire [3:0] queue_3_y;
 
-  reg [1:0] direction;
+  wire [1:0] direction;
 
   PlayerCommandsManager player_commands (
     .clk(clk),
