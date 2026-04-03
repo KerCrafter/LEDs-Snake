@@ -15,6 +15,7 @@ PROJECT_SOURCES += snake_queue.v
 PROJECT_SOURCES += draw_snake_queue.v
 PROJECT_SOURCES += draw_snake_head.v
 PROJECT_SOURCES += draw_bonus.v
+PROJECT_SOURCES += draw_end_game.v
 
 # RTL simulation:
 SIM_BUILD				= sim_build/rtl
