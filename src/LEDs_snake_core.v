@@ -1,3 +1,33 @@
+module DrawSnakeQueue (
+  input wire [3:0] current_led_x,
+  input wire [3:0] current_led_y,
+  input wire [3:0] queue_x_pos,
+  input wire [3:0] queue_y_pos,
+  input wire end_game,
+  input wire [7:0] score,
+  input wire [7:0] show_when_score_min,
+  input wire [7:0] led_red_intensity_in,
+  input wire [7:0] led_blue_intensity_in,
+  input wire [7:0] led_green_intensity_in,
+  output reg [7:0] led_red_intensity_out,
+  output reg [7:0] led_blue_intensity_out,
+  output reg [7:0] led_green_intensity_out
+);
+
+  always @(*) begin
+    if(!end_game && score >= show_when_score_min && current_led_x == queue_x_pos && current_led_y == queue_y_pos) begin
+      led_red_intensity_out <= 0;
+      led_green_intensity_out <= 5;
+      led_blue_intensity_out <= 0;
+    end else begin
+      led_red_intensity_out <= led_red_intensity_in;
+      led_green_intensity_out <= led_green_intensity_in;
+      led_blue_intensity_out <= led_blue_intensity_in;
+    end
+  end
+
+endmodule
+
 module DrawSnakeHead (
   input wire [3:0] current_led_x,
   input wire [3:0] current_led_y,
@@ -230,14 +260,30 @@ module LEDs_snake_core (
     .led_blue_intensity_out(led_blue_intensity_2)
   );
 
-  DrawEndGame draw_end_game (
+  DrawSnakeQueue draw_snake_queue_1 (
     .end_game(queue_last_collide),
+    .score(score),
+    .show_when_score_min(8'd1),
+    .current_led_x(current_led_x),
+    .current_led_y(current_led_y),
+    .queue_x_pos(queue_1_x),
+    .queue_y_pos(queue_1_y),
     .led_red_intensity_in(led_red_intensity_2),
     .led_green_intensity_in(led_green_intensity_2),
     .led_blue_intensity_in(led_blue_intensity_2),
     .led_red_intensity_out(led_red_intensity_3),
     .led_green_intensity_out(led_green_intensity_3),
     .led_blue_intensity_out(led_blue_intensity_3)
+  );
+
+  DrawEndGame draw_end_game (
+    .end_game(queue_last_collide),
+    .led_red_intensity_in(led_red_intensity_3),
+    .led_green_intensity_in(led_green_intensity_3),
+    .led_blue_intensity_in(led_blue_intensity_3),
+    .led_red_intensity_out(led_red_intensity_4),
+    .led_green_intensity_out(led_green_intensity_4),
+    .led_blue_intensity_out(led_blue_intensity_4)
   );
 
 
@@ -253,12 +299,12 @@ module LEDs_snake_core (
   reg [7:0] led_green_intensity_3;
   reg [7:0] led_blue_intensity_3;
 
+  reg [7:0] led_red_intensity_4;
+  reg [7:0] led_green_intensity_4;
+  reg [7:0] led_blue_intensity_4;
+
   always @(*) begin
-    if(!queue_last_collide && score >= 1 && current_led_x == queue_1_x && current_led_y == queue_1_y) begin
-      led_red_intensity <= 0;
-      led_green_intensity <= 5;
-      led_blue_intensity <= 0;
-    end else if(!queue_last_collide && score >= 2 && current_led_x == queue_2_x && current_led_y == queue_2_y) begin
+    if(!queue_last_collide && score >= 2 && current_led_x == queue_2_x && current_led_y == queue_2_y) begin
       led_red_intensity <= 0;
       led_green_intensity <= 5;
       led_blue_intensity <= 0;
@@ -267,9 +313,9 @@ module LEDs_snake_core (
       led_green_intensity <= 5;
       led_blue_intensity <= 0;
     end else begin
-      led_red_intensity <= led_red_intensity_3;
-      led_green_intensity <= led_green_intensity_3;
-      led_blue_intensity <= led_blue_intensity_3;
+      led_red_intensity <= led_red_intensity_4;
+      led_green_intensity <= led_green_intensity_4;
+      led_blue_intensity <= led_blue_intensity_4;
     end
   end
 
