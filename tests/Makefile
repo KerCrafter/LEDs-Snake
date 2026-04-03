@@ -13,6 +13,7 @@ PROJECT_SOURCES += player_commands_manager.v
 PROJECT_SOURCES += snake_head.v
 PROJECT_SOURCES += snake_queue.v
 PROJECT_SOURCES += draw_snake_queue.v
+PROJECT_SOURCES += draw_snake_head.v
 
 # RTL simulation:
 SIM_BUILD				= sim_build/rtl
