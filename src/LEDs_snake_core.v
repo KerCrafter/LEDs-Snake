@@ -76,6 +76,10 @@ module LEDs_snake_core (
     .move_act(move_timer),
     .next_x_pos(snake_head_x_pos),
     .next_y_pos(snake_head_y_pos),
+    .score(score),
+    .direction(direction),
+    .head_x_pos(snake_head_x_pos),
+    .head_y_pos(snake_head_y_pos),
     .x_pos(queue_1_x),
     .y_pos(queue_1_y)
   );
@@ -86,6 +90,10 @@ module LEDs_snake_core (
     .move_act(move_timer),
     .next_x_pos(queue_1_x),
     .next_y_pos(queue_1_y),
+    .score(score),
+    .direction(direction),
+    .head_x_pos(snake_head_x_pos),
+    .head_y_pos(snake_head_y_pos),
     .x_pos(queue_2_x),
     .y_pos(queue_2_y)
   );
@@ -96,6 +104,10 @@ module LEDs_snake_core (
     .move_act(move_timer),
     .next_x_pos(queue_2_x),
     .next_y_pos(queue_2_y),
+    .score(score),
+    .direction(direction),
+    .head_x_pos(snake_head_x_pos),
+    .head_y_pos(snake_head_y_pos),
     .x_pos(queue_3_x),
     .y_pos(queue_3_y)
   );

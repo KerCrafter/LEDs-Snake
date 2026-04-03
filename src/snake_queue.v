@@ -4,6 +4,10 @@ module SnakeQueue (
   input wire move_act,
   input wire [3:0] next_x_pos,
   input wire [3:0] next_y_pos,
+  input wire [7:0] score,
+  input wire [1:0] direction,
+  input wire [3:0] head_x_pos,
+  input wire [3:0] head_y_pos,
   output reg [3:0] x_pos,
   output reg [3:0] y_pos
 );
