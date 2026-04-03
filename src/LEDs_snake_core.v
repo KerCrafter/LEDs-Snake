@@ -205,8 +205,6 @@ module LEDs_snake_core (
   reg [7:0] led_green_intensity_2;
   reg [7:0] led_blue_intensity_2;
 
-  assign end_game = queue_last_collide;
-
   always @(*) begin
     if(score >= 1 && current_led_x == queue_1_x && current_led_y == queue_1_y) begin
       led_red_intensity_2 <= 0;
