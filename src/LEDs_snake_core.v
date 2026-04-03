@@ -30,7 +30,7 @@ module LEDs_snake_core (
 
   wire [3:0] queue_3_x;
   wire [3:0] queue_3_y;
-  wire queue_3_collide;
+  wire queue_last_collide;
 
   wire [1:0] direction;
 
@@ -118,10 +118,10 @@ module LEDs_snake_core (
     .next_collide_head(queue_2_collide),
     .x_pos(queue_3_x),
     .y_pos(queue_3_y),
-    .is_head_collide(queue_3_collide)
+    .is_head_collide(queue_last_collide)
   );
 
-  assign end_game = queue_3_collide;
+  assign end_game = queue_last_collide;
 
   always @(clk) begin
     if(reset) begin
