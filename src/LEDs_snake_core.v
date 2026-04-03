@@ -3,6 +3,7 @@ module DrawBonus (
   input wire [3:0] current_led_y,
   input wire [3:0] bonus_x_pos,
   input wire [3:0] bonus_y_pos,
+  input wire end_game,
   input wire [7:0] led_red_intensity_in,
   input wire [7:0] led_blue_intensity_in,
   input wire [7:0] led_green_intensity_in,
@@ -12,7 +13,7 @@ module DrawBonus (
 );
 
   always @(*) begin
-    if(current_led_x == bonus_x_pos && current_led_y == bonus_y_pos) begin
+    if(!end_game && current_led_x == bonus_x_pos && current_led_y == bonus_y_pos) begin
       led_red_intensity_out <= 10;
       led_green_intensity_out <= 0;
       led_blue_intensity_out <= 0;
@@ -63,9 +64,9 @@ module LEDs_snake_core (
     input  wire [3:0] current_led_x,
     input  wire [3:0] current_led_y,
     output wire update_frame,
-    output wire [7:0] led_red_intensity,
-    output wire [7:0] led_green_intensity,
-    output wire [7:0] led_blue_intensity,
+    output reg [7:0] led_red_intensity,
+    output reg [7:0] led_green_intensity,
+    output reg [7:0] led_blue_intensity,
     output wire [7:0] score
 );
 
@@ -174,13 +175,14 @@ module LEDs_snake_core (
   );
 
   DrawBonus draw_bonus (
+    .end_game(queue_last_collide),
     .current_led_x(current_led_x),
     .current_led_y(current_led_y),
     .bonus_x_pos(current_bonus_x_pos),
     .bonus_y_pos(current_bonus_y_pos),
-    .led_red_intensity_in(0),
-    .led_green_intensity_in(0),
-    .led_blue_intensity_in(0),
+    .led_red_intensity_in(8'd0),
+    .led_green_intensity_in(8'd0),
+    .led_blue_intensity_in(8'd0),
     .led_red_intensity_out(led_red_intensity_1),
     .led_green_intensity_out(led_green_intensity_1),
     .led_blue_intensity_out(led_blue_intensity_1)
@@ -188,12 +190,12 @@ module LEDs_snake_core (
 
   DrawEndGame draw_end_game (
     .end_game(queue_last_collide),
-    .led_red_intensity_in(led_red_intensity_2),
-    .led_green_intensity_in(led_green_intensity_2),
-    .led_blue_intensity_in(led_blue_intensity_2),
-    .led_red_intensity_out(led_red_intensity),
-    .led_green_intensity_out(led_green_intensity),
-    .led_blue_intensity_out(led_blue_intensity)
+    .led_red_intensity_in(led_red_intensity_1),
+    .led_green_intensity_in(led_green_intensity_1),
+    .led_blue_intensity_in(led_blue_intensity_1),
+    .led_red_intensity_out(led_red_intensity_2),
+    .led_green_intensity_out(led_green_intensity_2),
+    .led_blue_intensity_out(led_blue_intensity_2)
   );
 
 
@@ -206,26 +208,26 @@ module LEDs_snake_core (
   reg [7:0] led_blue_intensity_2;
 
   always @(*) begin
-    if(score >= 1 && current_led_x == queue_1_x && current_led_y == queue_1_y) begin
-      led_red_intensity_2 <= 0;
-      led_green_intensity_2 <= 5;
-      led_blue_intensity_2 <= 0;
-    end else if(score >= 2 && current_led_x == queue_2_x && current_led_y == queue_2_y) begin
-      led_red_intensity_2 <= 0;
-      led_green_intensity_2 <= 5;
-      led_blue_intensity_2 <= 0;
-    end else if(score >= 3 && current_led_x == queue_3_x && current_led_y == queue_3_y) begin
-      led_red_intensity_2 <= 0;
-      led_green_intensity_2 <= 5;
-      led_blue_intensity_2 <= 0;
-    end else if(current_led_x == snake_head_x_pos && current_led_y == snake_head_y_pos) begin
-      led_red_intensity_2 <= 0;
-      led_green_intensity_2 <= 10;
-      led_blue_intensity_2 <= 0;
+    if(!queue_last_collide && current_led_x == snake_head_x_pos && current_led_y == snake_head_y_pos) begin
+      led_red_intensity <= 0;
+      led_green_intensity <= 10;
+      led_blue_intensity <= 0;
+    end else if(!queue_last_collide && score >= 1 && current_led_x == queue_1_x && current_led_y == queue_1_y) begin
+      led_red_intensity <= 0;
+      led_green_intensity <= 5;
+      led_blue_intensity <= 0;
+    end else if(!queue_last_collide && score >= 2 && current_led_x == queue_2_x && current_led_y == queue_2_y) begin
+      led_red_intensity <= 0;
+      led_green_intensity <= 5;
+      led_blue_intensity <= 0;
+    end else if(!queue_last_collide && score >= 3 && current_led_x == queue_3_x && current_led_y == queue_3_y) begin
+      led_red_intensity <= 0;
+      led_green_intensity <= 5;
+      led_blue_intensity <= 0;
     end else begin
-      led_red_intensity_2 <= led_red_intensity_1;
-      led_green_intensity_2 <= led_green_intensity_1;
-      led_blue_intensity_2 <= led_blue_intensity_1;
+      led_red_intensity <= led_red_intensity_2;
+      led_green_intensity <= led_green_intensity_2;
+      led_blue_intensity <= led_blue_intensity_2;
     end
   end
 
