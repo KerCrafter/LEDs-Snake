@@ -122,9 +122,9 @@ module LEDs_snake_core (
     input  wire [3:0] current_led_x,
     input  wire [3:0] current_led_y,
     output wire update_frame,
-    output reg [7:0] led_red_intensity,
-    output reg [7:0] led_green_intensity,
-    output reg [7:0] led_blue_intensity,
+    output wire [7:0] led_red_intensity,
+    output wire [7:0] led_green_intensity,
+    output wire [7:0] led_blue_intensity,
     output wire [7:0] score
 );
 
@@ -335,7 +335,6 @@ module LEDs_snake_core (
     .led_green_intensity_out(led_green_intensity),
     .led_blue_intensity_out(led_blue_intensity)
   );
-
 
 endmodule
 
