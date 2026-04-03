@@ -8,8 +8,10 @@ module SnakeQueue (
   input wire [1:0] direction,
   input wire [3:0] head_x_pos,
   input wire [3:0] head_y_pos,
+  input wire next_collide_head,
   output reg [3:0] x_pos,
-  output reg [3:0] y_pos
+  output reg [3:0] y_pos,
+  output reg is_head_collide
 );
 
   always @(posedge move_act) begin

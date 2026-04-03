@@ -22,12 +22,15 @@ module LEDs_snake_core (
 
   wire [3:0] queue_1_x;
   wire [3:0] queue_1_y;
+  wire [3:0] queue_1_collide;
 
   wire [3:0] queue_2_x;
   wire [3:0] queue_2_y;
+  wire [3:0] queue_2_collide;
 
   wire [3:0] queue_3_x;
   wire [3:0] queue_3_y;
+  wire [3:0] queue_3_collide;
 
   wire [1:0] direction;
 
@@ -80,8 +83,10 @@ module LEDs_snake_core (
     .direction(direction),
     .head_x_pos(snake_head_x_pos),
     .head_y_pos(snake_head_y_pos),
+    .next_collide_head(0),
     .x_pos(queue_1_x),
-    .y_pos(queue_1_y)
+    .y_pos(queue_1_y),
+    .is_head_collide(queue_1_collide)
   );
 
   SnakeQueue queue_2 (
@@ -94,8 +99,10 @@ module LEDs_snake_core (
     .direction(direction),
     .head_x_pos(snake_head_x_pos),
     .head_y_pos(snake_head_y_pos),
+    .next_collide_head(queue_1_collide),
     .x_pos(queue_2_x),
-    .y_pos(queue_2_y)
+    .y_pos(queue_2_y),
+    .is_head_collide(queue_2_collide)
   );
 
   SnakeQueue queue_3 (
@@ -108,8 +115,10 @@ module LEDs_snake_core (
     .direction(direction),
     .head_x_pos(snake_head_x_pos),
     .head_y_pos(snake_head_y_pos),
+    .next_collide_head(queue_2_collide),
     .x_pos(queue_3_x),
-    .y_pos(queue_3_y)
+    .y_pos(queue_3_y),
+    .is_head_collide(queue_2_collide)
   );
 
   always @(posedge move_timer) begin
