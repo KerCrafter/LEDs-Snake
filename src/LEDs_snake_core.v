@@ -1,3 +1,28 @@
+module DrawEndGame (
+  input wire end_game,
+  input wire [7:0] led_red_intensity_in,
+  input wire [7:0] led_blue_intensity_in,
+  input wire [7:0] led_green_intensity_in,
+  output reg [7:0] led_red_intensity_out,
+  output reg [7:0] led_blue_intensity_out,
+  output reg [7:0] led_green_intensity_out
+);
+
+  always @(*) begin
+    if(end_game) begin
+      led_red_intensity_out <= 10;
+      led_green_intensity_out <= 0;
+      led_blue_intensity_out <= 0;
+    end else begin
+      led_red_intensity_out <= led_red_intensity_in;
+      led_green_intensity_out <= led_green_intensity_in;
+      led_blue_intensity_out <= led_blue_intensity_in;
+    end
+  end
+
+endmodule
+
+
 module LEDs_snake_core (
     input  wire reset,
     input  wire clk,
@@ -11,9 +36,9 @@ module LEDs_snake_core (
     input  wire [3:0] current_led_x,
     input  wire [3:0] current_led_y,
     output wire update_frame,
-    output reg [7:0] led_red_intensity,
-    output reg [7:0] led_green_intensity,
-    output reg [7:0] led_blue_intensity,
+    output wire [7:0] led_red_intensity,
+    output wire [7:0] led_green_intensity,
+    output wire [7:0] led_blue_intensity,
     output wire [7:0] score
 );
 
@@ -121,42 +146,52 @@ module LEDs_snake_core (
     .is_head_collide(queue_last_collide)
   );
 
+  DrawEndGame draw_end_game (
+    .end_game(queue_last_collide),
+    .led_red_intensity_in(led_red_intensity_1),
+    .led_green_intensity_in(led_green_intensity_1),
+    .led_blue_intensity_in(led_blue_intensity_1),
+    .led_red_intensity_out(led_red_intensity),
+    .led_green_intensity_out(led_green_intensity),
+    .led_blue_intensity_out(led_blue_intensity)
+  );
+
+  reg [7:0] led_red_intensity_1;
+  reg [7:0] led_green_intensity_1;
+  reg [7:0] led_blue_intensity_1;
+
   assign end_game = queue_last_collide;
 
   always @(clk) begin
     if(reset) begin
-      led_red_intensity <= 0;
-      led_green_intensity <= 0;
-      led_blue_intensity <= 0;
+      led_red_intensity_1 <= 0;
+      led_green_intensity_1 <= 0;
+      led_blue_intensity_1 <= 0;
     end else begin
-      if(end_game) begin
-        led_red_intensity <= 10;
-        led_green_intensity <= 0;
-        led_blue_intensity <= 0;
-      end else if(score >= 1 && current_led_x == queue_1_x && current_led_y == queue_1_y) begin
-        led_red_intensity <= 0;
-        led_green_intensity <= 5;
-        led_blue_intensity <= 0;
+      if(score >= 1 && current_led_x == queue_1_x && current_led_y == queue_1_y) begin
+        led_red_intensity_1 <= 0;
+        led_green_intensity_1 <= 5;
+        led_blue_intensity_1 <= 0;
       end else if(score >= 2 && current_led_x == queue_2_x && current_led_y == queue_2_y) begin
-        led_red_intensity <= 0;
-        led_green_intensity <= 5;
-        led_blue_intensity <= 0;
+        led_red_intensity_1 <= 0;
+        led_green_intensity_1 <= 5;
+        led_blue_intensity_1 <= 0;
       end else if(score >= 3 && current_led_x == queue_3_x && current_led_y == queue_3_y) begin
-        led_red_intensity <= 0;
-        led_green_intensity <= 5;
-        led_blue_intensity <= 0;
+        led_red_intensity_1 <= 0;
+        led_green_intensity_1 <= 5;
+        led_blue_intensity_1 <= 0;
       end else if(current_led_x == snake_head_x_pos && current_led_y == snake_head_y_pos) begin
-        led_red_intensity <= 0;
-        led_green_intensity <= 10;
-        led_blue_intensity <= 0;
+        led_red_intensity_1 <= 0;
+        led_green_intensity_1 <= 10;
+        led_blue_intensity_1 <= 0;
       end else if(current_led_x == current_bonus_x_pos && current_led_y == current_bonus_y_pos) begin
-        led_red_intensity <= 10;
-        led_green_intensity <= 0;
-        led_blue_intensity <= 0;
+        led_red_intensity_1 <= 10;
+        led_green_intensity_1 <= 0;
+        led_blue_intensity_1 <= 0;
       end else begin
-        led_red_intensity <= 0;
-        led_green_intensity <= 0;
-        led_blue_intensity <= 0;
+        led_red_intensity_1 <= 0;
+        led_green_intensity_1 <= 0;
+        led_blue_intensity_1 <= 0;
       end
     end
   end
