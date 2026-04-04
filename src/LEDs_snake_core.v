@@ -23,14 +23,17 @@ module LEDs_snake_core (
   wire [3:0] queue_1_x;
   wire [3:0] queue_1_y;
   wire queue_1_collide;
+  wire queue_1_active;
 
   wire [3:0] queue_2_x;
   wire [3:0] queue_2_y;
   wire queue_2_collide;
+  wire queue_2_active;
 
   wire [3:0] queue_3_x;
   wire [3:0] queue_3_y;
   wire queue_last_collide;
+  wire queue_3_active;
 
   wire [1:0] direction;
 
@@ -105,7 +108,8 @@ module LEDs_snake_core (
     .next_collide_head(1'b0),
     .x_pos(queue_1_x),
     .y_pos(queue_1_y),
-    .is_head_collide(queue_1_collide)
+    .is_head_collide(queue_1_collide),
+    .is_active(queue_1_active)
   );
 
   SnakeQueue queue_2 (
@@ -122,7 +126,8 @@ module LEDs_snake_core (
     .next_collide_head(queue_1_collide),
     .x_pos(queue_2_x),
     .y_pos(queue_2_y),
-    .is_head_collide(queue_2_collide)
+    .is_head_collide(queue_2_collide),
+    .is_active(queue_2_active)
   );
 
   SnakeQueue queue_3 (
@@ -139,7 +144,8 @@ module LEDs_snake_core (
     .next_collide_head(queue_2_collide),
     .x_pos(queue_3_x),
     .y_pos(queue_3_y),
-    .is_head_collide(queue_last_collide)
+    .is_head_collide(queue_last_collide),
+    .is_active(queue_3_active)
   );
 
   DrawBonus draw_bonus (

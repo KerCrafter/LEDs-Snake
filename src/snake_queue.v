@@ -12,16 +12,18 @@ module SnakeQueue (
   input wire [7:0] active_when_score_min,
   output reg [3:0] x_pos,
   output reg [3:0] y_pos,
-  output reg is_head_collide
+  output reg is_head_collide,
+  output reg is_active
 );
 
   always @(posedge move_act) begin
+    is_active <= score >= active_when_score_min;
     x_pos <= next_x_pos;
     y_pos <= next_y_pos;
 
     if(
       next_collide_head || (
-        score >= active_when_score_min && (
+        is_active && (
           (direction == 0 && head_x_pos + 1 == x_pos && head_y_pos == y_pos) || 
           (direction == 1 && head_x_pos - 1 == x_pos && head_y_pos == y_pos) ||
           (direction == 2 && head_y_pos + 1 == y_pos && head_x_pos == x_pos) ||
