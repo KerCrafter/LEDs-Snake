@@ -1,5 +1,5 @@
 module DrawEndGame (
-  input wire end_game,
+  input wire collision_detected,
   input wire [7:0] led_red_intensity_in,
   input wire [7:0] led_blue_intensity_in,
   input wire [7:0] led_green_intensity_in,
@@ -9,7 +9,7 @@ module DrawEndGame (
 );
 
   always @(*) begin
-    if(end_game) begin
+    if(collision_detected) begin
       led_red_intensity_out <= 10;
       led_green_intensity_out <= 0;
       led_blue_intensity_out <= 0;

@@ -217,7 +217,7 @@ module LEDs_snake_core (
   );
 
   DrawEndGame draw_end_game (
-    .end_game(queue_last_collide),
+    .collision_detected(queue_last_collide),
     .led_red_intensity_in(led_red_intensity_5),
     .led_green_intensity_in(led_green_intensity_5),
     .led_blue_intensity_in(led_blue_intensity_5),
