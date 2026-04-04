@@ -515,6 +515,40 @@ async def collide_only_if_queue_3_present_from_DOWN_direction(dut, move_timer_PU
   first_bonus_x=8,
   first_bonus_y=7
 )
+async def collide_only_if_queue_3_present_from_UP_direction(dut, move_timer_PULSE):
+
+    dut.bonus_random_x.value = 1; 
+    dut.bonus_random_y.value = 1; 
+
+    await move_timer_PULSE(); #x=8 y=7
+
+    await player_press_DOWN(dut);
+
+    await move_timer_PULSE(); #x=8 y=8
+
+    await player_press_LEFT(dut);
+
+    await move_timer_PULSE(); #x=7 y=8
+
+    await player_press_UP(dut);
+    await move_timer_PULSE(); #x=7 y=7 
+
+    for x in range(0, 15):
+      for y in range(0, 15):
+        if x == 7 and y == 8:
+          await check_LED_is_LIGHT_GREEN(dut, x, y);
+        elif x == 7 and y == 7:
+          await check_LED_is_GREEN(dut, x, y);
+        elif x == 1 and y == 1:
+          await check_LED_is_RED(dut, x, y);
+        else:
+          await check_LED_is_BLACK(dut, x, y);
+
+
+@LEDs_snake_test(
+  first_bonus_x=8,
+  first_bonus_y=7
+)
 async def eating_his_own_queue_finish_game_with_red_screen_from_UP_direction(dut, move_timer_PULSE):
 
     dut.bonus_random_x.value = 9; 
