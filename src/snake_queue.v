@@ -20,11 +20,14 @@ module SnakeQueue (
     y_pos <= next_y_pos;
 
     if(
-      next_collide_head ||
-      (direction == 0 && score >= active_when_score_min && head_x_pos + 1 == x_pos && head_y_pos == y_pos) || 
-      (direction == 1 && score >= active_when_score_min && head_x_pos - 1 == x_pos && head_y_pos == y_pos) ||
-      (direction == 2 && score >= active_when_score_min && head_y_pos + 1 == y_pos && head_x_pos == x_pos) ||
-      (direction == 3 && score >= active_when_score_min && head_y_pos - 1 == y_pos && head_x_pos == x_pos) 
+      next_collide_head || (
+        score >= active_when_score_min && (
+          (direction == 0 && head_x_pos + 1 == x_pos && head_y_pos == y_pos) || 
+          (direction == 1 && head_x_pos - 1 == x_pos && head_y_pos == y_pos) ||
+          (direction == 2 && head_y_pos + 1 == y_pos && head_x_pos == x_pos) ||
+          (direction == 3 && head_y_pos - 1 == y_pos && head_x_pos == x_pos) 
+        )
+      )
     ) begin
       is_head_collide <= 1; 
     end
