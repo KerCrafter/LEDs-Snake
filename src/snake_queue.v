@@ -37,6 +37,7 @@ module SnakeQueue (
   always @(clk) begin
     if(reset) begin
       is_head_collide <= 0;
+      is_active <= 0;
       x_pos <= 0;
       y_pos <= 0;
     end else begin
