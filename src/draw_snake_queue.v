@@ -4,7 +4,6 @@ module DrawSnakeQueue (
   input wire [3:0] current_led_y,
   input wire [3:0] queue_x_pos,
   input wire [3:0] queue_y_pos,
-  input wire end_game,
   input wire [7:0] led_red_intensity_in,
   input wire [7:0] led_blue_intensity_in,
   input wire [7:0] led_green_intensity_in,
@@ -14,7 +13,7 @@ module DrawSnakeQueue (
 );
 
   always @(*) begin
-    if(!end_game && enable && current_led_x == queue_x_pos && current_led_y == queue_y_pos) begin
+    if(enable && current_led_x == queue_x_pos && current_led_y == queue_y_pos) begin
       led_red_intensity_out <= 0;
       led_green_intensity_out <= 5;
       led_blue_intensity_out <= 0;

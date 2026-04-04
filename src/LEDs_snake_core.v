@@ -149,7 +149,6 @@ module LEDs_snake_core (
   );
 
   DrawBonus draw_bonus (
-    .end_game(queue_last_collide),
     .current_led_x(current_led_x),
     .current_led_y(current_led_y),
     .bonus_x_pos(current_bonus_x_pos),
@@ -163,7 +162,6 @@ module LEDs_snake_core (
   );
 
   DrawSnakeHead draw_snake_head (
-    .end_game(queue_last_collide),
     .current_led_x(current_led_x),
     .current_led_y(current_led_y),
     .head_x_pos(snake_head_x_pos),
@@ -177,7 +175,6 @@ module LEDs_snake_core (
   );
 
   DrawSnakeQueue draw_snake_queue_1 (
-    .end_game(queue_last_collide),
     .enable(queue_1_active),
     .current_led_x(current_led_x),
     .current_led_y(current_led_y),
@@ -192,7 +189,6 @@ module LEDs_snake_core (
   );
 
   DrawSnakeQueue draw_snake_queue_2 (
-    .end_game(queue_last_collide),
     .enable(queue_2_active),
     .current_led_x(current_led_x),
     .current_led_y(current_led_y),
@@ -207,7 +203,6 @@ module LEDs_snake_core (
   );
 
   DrawSnakeQueue draw_snake_queue_3 (
-    .end_game(queue_last_collide),
     .enable(queue_3_active),
     .current_led_x(current_led_x),
     .current_led_y(current_led_y),

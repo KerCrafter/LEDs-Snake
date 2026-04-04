@@ -3,7 +3,6 @@ module DrawSnakeHead (
   input wire [3:0] current_led_y,
   input wire [3:0] head_x_pos,
   input wire [3:0] head_y_pos,
-  input wire end_game,
   input wire [7:0] led_red_intensity_in,
   input wire [7:0] led_blue_intensity_in,
   input wire [7:0] led_green_intensity_in,
@@ -13,7 +12,7 @@ module DrawSnakeHead (
 );
 
   always @(*) begin
-    if(!end_game && current_led_x == head_x_pos && current_led_y == head_y_pos) begin
+    if(current_led_x == head_x_pos && current_led_y == head_y_pos) begin
       led_red_intensity_out <= 0;
       led_green_intensity_out <= 10;
       led_blue_intensity_out <= 0;
