@@ -21,7 +21,7 @@ module SnakeQueue (
 
     if(
       next_collide_head ||
-      (direction == 0 && head_x_pos + 1 == x_pos && head_y_pos == y_pos) || 
+      (direction == 0 && score >= active_when_score_min && head_x_pos + 1 == x_pos && head_y_pos == y_pos) || 
       (direction == 1 && score >= active_when_score_min && head_x_pos - 1 == x_pos && head_y_pos == y_pos) ||
       (direction == 2 && score >= active_when_score_min && head_y_pos + 1 == y_pos && head_x_pos == x_pos) ||
       (direction == 3 && score >= active_when_score_min && head_y_pos - 1 == y_pos && head_x_pos == x_pos) 
