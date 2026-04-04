@@ -17,7 +17,6 @@ module SnakeQueue (
 );
 
   always @(posedge move_act) begin
-    is_active <= score >= active_when_score_min;
     x_pos <= next_x_pos;
     y_pos <= next_y_pos;
 
@@ -40,6 +39,8 @@ module SnakeQueue (
       is_head_collide <= 0;
       x_pos <= 0;
       y_pos <= 0;
+    end else begin
+      is_active <= score >= active_when_score_min;
     end
   end
 

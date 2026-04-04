@@ -178,8 +178,7 @@ module LEDs_snake_core (
 
   DrawSnakeQueue draw_snake_queue_1 (
     .end_game(queue_last_collide),
-    .score(score),
-    .show_when_score_min(8'd1),
+    .enable(queue_1_active),
     .current_led_x(current_led_x),
     .current_led_y(current_led_y),
     .queue_x_pos(queue_1_x),
@@ -194,8 +193,7 @@ module LEDs_snake_core (
 
   DrawSnakeQueue draw_snake_queue_2 (
     .end_game(queue_last_collide),
-    .score(score),
-    .show_when_score_min(8'd2),
+    .enable(queue_2_active),
     .current_led_x(current_led_x),
     .current_led_y(current_led_y),
     .queue_x_pos(queue_2_x),
@@ -210,8 +208,7 @@ module LEDs_snake_core (
 
   DrawSnakeQueue draw_snake_queue_3 (
     .end_game(queue_last_collide),
-    .score(score),
-    .show_when_score_min(8'd3),
+    .enable(queue_3_active),
     .current_led_x(current_led_x),
     .current_led_y(current_led_y),
     .queue_x_pos(queue_3_x),
