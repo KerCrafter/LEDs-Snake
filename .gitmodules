@@ -7,3 +7,6 @@
 [submodule "src/WS2812B-driver"]
 	path = src/WS2812B-driver
 	url = git@github.com:KerCrafter/WS2812B-driver.git
+[submodule "tests/cocotb-runner"]
+	path = tests/cocotb-runner
+	url = git@github.com:KerCrafter/cocotb-runner.git
