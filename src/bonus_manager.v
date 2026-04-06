@@ -12,25 +12,36 @@ module BonusManager (
   output reg [7:0] score
 );
 
-  always @(posedge move_act) begin
-    if(
-      (direction == 0 && snake_head_x_pos + 1 == x_pos) ||
-      (direction == 1 && snake_head_x_pos - 1 == x_pos) ||
-      (direction == 2 && snake_head_y_pos + 1 == y_pos) ||
-      (direction == 3 && snake_head_y_pos - 1 == y_pos)
-    ) begin
-      score <= score + 1;
+  reg move_act_prev;
 
-      x_pos <= bonus_random_x;
-      y_pos <= bonus_random_y;
+  always @(posedge clk or posedge reset) begin
+    if(reset) begin
+      move_act_prev <= 0;
+    end else begin
+      move_act_prev <= move_act;
     end
+
   end
 
-  always @(clk) begin
+  wire move_act_rise = move_act & ~move_act_prev; 
+
+  always @(posedge clk or posedge reset) begin
     if(reset) begin
       score <= 0;
       x_pos <= bonus_random_x;
       y_pos <= bonus_random_y;
+    end else if(move_act_rise) begin
+      if(
+        (direction == 0 && snake_head_x_pos + 1 == x_pos) ||
+        (direction == 1 && snake_head_x_pos - 1 == x_pos) ||
+        (direction == 2 && snake_head_y_pos + 1 == y_pos) ||
+        (direction == 3 && snake_head_y_pos - 1 == y_pos)
+      ) begin
+        score <= score + 8'd1;
+
+        x_pos <= bonus_random_x;
+        y_pos <= bonus_random_y;
+      end
     end
   end
 endmodule

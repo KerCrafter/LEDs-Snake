@@ -26,6 +26,8 @@ def LEDs_snake_test(_fn=None, **kwargs):
   return decorator
 
 async def reset(dut, **kwargs):
+    dut.move_timer.value = 0;
+
     dut.bonus_random_x.value = kwargs['first_bonus_x'] if 'first_bonus_x' in kwargs.keys() else 'XXXX';
     dut.bonus_random_y.value = kwargs['first_bonus_y'] if 'first_bonus_y' in kwargs.keys() else 'XXXX';
 
@@ -40,5 +42,14 @@ async def _move_timer_PULSE(dut, times=1):
     for i in range(times):
       dut.move_timer.value = 1;
       await Timer(1, unit="ns");
+      dut.clk.value = 1;
+      await Timer(1, unit="ns");
+      dut.clk.value = 0;
+      await Timer(1, unit="ns");
       dut.move_timer.value = 0;
+      await Timer(1, unit="ns");
+
+      dut.clk.value = 1;
+      await Timer(1, unit="ns");
+      dut.clk.value = 0;
       await Timer(1, unit="ns");

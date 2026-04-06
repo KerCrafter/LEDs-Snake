@@ -7,24 +7,32 @@ module SnakeHead (
   output reg [3:0] y_pos
 );
 
-  always @(posedge move_act) begin
+  reg move_act_prev;
 
-    if(direction == 0) begin
-      x_pos <= x_pos + 1;
-    end else if(direction == 1) begin
-      x_pos <= x_pos - 1;
-    end else if(direction == 2) begin
-      y_pos <= y_pos + 1;
-    end else if(direction == 3) begin
-      y_pos <= y_pos - 1;
+  always @(posedge clk or posedge reset) begin
+    if(reset) begin
+      move_act_prev <= 0;
+    end else begin
+      move_act_prev <= move_act; 
     end
-
   end
 
-  always @(clk) begin
+  wire move_act_rise = move_act & ~move_act_prev;
+
+  always @(posedge clk or posedge reset) begin
     if(reset) begin
       x_pos <= 7;
       y_pos <= 7;
+    end else if(move_act_rise) begin
+      if(direction == 0) begin
+        x_pos <= x_pos + 4'd1;
+      end else if(direction == 1) begin
+        x_pos <= x_pos - 4'd1;
+      end else if(direction == 2) begin
+        y_pos <= y_pos + 4'd1;
+      end else if(direction == 3) begin
+        y_pos <= y_pos - 4'd1;
+      end
     end
   end
 
