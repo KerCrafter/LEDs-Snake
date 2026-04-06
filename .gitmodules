@@ -13,3 +13,6 @@
 [submodule "src/snaked_led_number_to_2d_matrix"]
 	path = src/snaked_led_number_to_2d_matrix
 	url = git@github.com:KerCrafter/snaked_led_number_to_2d_matrix.git
+[submodule "src/random_2d_position"]
+	path = src/random_2d_position
+	url = git@github.com:KerCrafter/random_2d_position.git
