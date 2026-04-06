@@ -21,6 +21,7 @@ set_global_assignment -name VERILOG_FILE src/draw_bonus.v
 set_global_assignment -name VERILOG_FILE src/draw_end_game.v
 set_global_assignment -name VERILOG_FILE src/draw_snake_head.v
 set_global_assignment -name VERILOG_FILE src/draw_snake_queue.v
+set_global_assignment -name VERILOG_FILE src/random_2d_position/src/random_2d_position.v
 
 set_location_assignment PIN_R8 -to clk
 set_location_assignment PIN_T14 -to leds_line

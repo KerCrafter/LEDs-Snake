@@ -13,6 +13,9 @@ module LEDs_snake_main #(
     output wire leds_line
 );
 
+    wire [3:0] bonus_random_x;
+    wire [3:0] bonus_random_y;
+
     wire [3:0] current_led_x;
     wire [3:0] current_led_y;
     wire [$clog2(MAX_POS)-1:0] led_proceed;
@@ -25,6 +28,7 @@ module LEDs_snake_main #(
     wire players_commands_right;
     wire players_commands_up;
     wire players_commands_down;
+
 
     button_debouncer #(
         .DEBOUNCE_CLK_CNT(DEBOUNCE_CLK_CNT)
@@ -81,11 +85,20 @@ module LEDs_snake_main #(
       .y(current_led_y)
     );
 
+    random_2d_position random_2d_position_inst (
+      .clk(clk),
+      .reset(reset),
+      .x(bonus_random_x),
+      .y(bonus_random_y)
+    );
+
     LEDs_snake_core LEDs_snake_core_inst (
         .clk(clk),
         .move_timer(0),
         .reset(reset),
         .update_frame(update_frame),
+        .bonus_random_x(bonus_random_x),
+        .bonus_random_y(bonus_random_y),
         .players_commands_left(players_commands_left),
         .players_commands_right(players_commands_right),
         .players_commands_up(players_commands_up),
