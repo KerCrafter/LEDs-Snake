@@ -772,10 +772,10 @@ async def check_LED_is_BLACK(dut, x, y):
     await check_LED(dut, x, y, red=0, green=0, blue=0);
 
 async def check_LED_is_LIGHT_GREEN(dut, x, y):
-    await check_LED(dut, x, y, red=0, green=5, blue=0);
+    await check_LED(dut, x, y, red=0, green=1, blue=0);
 
 async def check_LED_is_GREEN(dut, x, y):
-    await check_LED(dut, x, y, red=0, green=10, blue=0);
+    await check_LED(dut, x, y, red=2, green=5, blue=0);
 
 async def check_LED_is_RED(dut, x, y):
     await check_LED(dut, x, y, red=10, green=0, blue=0);

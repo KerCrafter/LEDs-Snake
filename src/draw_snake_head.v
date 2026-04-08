@@ -13,8 +13,8 @@ module DrawSnakeHead (
 
   always @(*) begin
     if(current_led_x == head_x_pos && current_led_y == head_y_pos) begin
-      led_red_intensity_out <= 0;
-      led_green_intensity_out <= 10;
+      led_red_intensity_out <= 2;
+      led_green_intensity_out <= 5;
       led_blue_intensity_out <= 0;
     end else begin
       led_red_intensity_out <= led_red_intensity_in;

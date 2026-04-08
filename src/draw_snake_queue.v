@@ -15,7 +15,7 @@ module DrawSnakeQueue (
   always @(*) begin
     if(enable && current_led_x == queue_x_pos && current_led_y == queue_y_pos) begin
       led_red_intensity_out <= 0;
-      led_green_intensity_out <= 5;
+      led_green_intensity_out <= 1;
       led_blue_intensity_out <= 0;
     end else begin
       led_red_intensity_out <= led_red_intensity_in;
