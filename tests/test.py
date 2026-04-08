@@ -651,7 +651,7 @@ async def not_eat_bonus_if_not_exactly_in_when_UP_direction(dut, move_timer_PULS
   first_bonus_x=1,
   first_bonus_y=8
 )
-async def not_eat_bonus_if_not_exactly_in_when_UP_direction(dut, move_timer_PULSE):
+async def not_eat_bonus_if_not_exactly_in_when_DOWN_direction(dut, move_timer_PULSE):
     await player_press_DOWN(dut);
     await move_timer_PULSE(); #x=7 y=8 
 
