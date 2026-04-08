@@ -614,6 +614,21 @@ async def collide_only_if_queue_3_present_from_RIGHT_direction(dut, move_timer_P
         else:
           await check_LED_is_BLACK(dut, x, y);
 
+@LEDs_snake_test(
+  first_bonus_x=8,
+  first_bonus_y=1
+)
+async def not_eat_bonus_if_not_exactly_in_when_RIGHT_direction(dut, move_timer_PULSE):
+    await move_timer_PULSE(); #x=8 y=7 
+
+    for x in range(0, 15):
+      for y in range(0, 15):
+        if x == 8 and y == 7:
+          await check_LED_is_GREEN(dut, x, y);
+        elif x == 8 and y == 1:
+          await check_LED_is_RED(dut, x, y);
+        else:
+          await check_LED_is_BLACK(dut, x, y);
 
 @LEDs_snake_test(
   first_bonus_x=8,
