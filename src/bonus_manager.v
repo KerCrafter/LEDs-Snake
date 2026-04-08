@@ -35,7 +35,7 @@ module BonusManager (
         (direction == 0 && snake_head_x_pos + 1 == x_pos && snake_head_y_pos == y_pos) ||
         (direction == 1 && snake_head_x_pos - 1 == x_pos) ||
         (direction == 2 && snake_head_y_pos + 1 == y_pos) ||
-        (direction == 3 && snake_head_y_pos - 1 == y_pos)
+        (direction == 3 && snake_head_y_pos - 1 == y_pos && snake_head_x_pos == x_pos)
       ) begin
         score <= score + 8'd1;
 
