@@ -665,6 +665,26 @@ async def not_eat_bonus_if_not_exactly_in_when_DOWN_direction(dut, move_timer_PU
           await check_LED_is_BLACK(dut, x, y);
 
 @LEDs_snake_test(
+  first_bonus_x=6,
+  first_bonus_y=1
+)
+async def not_eat_bonus_if_not_exactly_in_when_LEFT_direction(dut, move_timer_PULSE):
+    await player_press_DOWN(dut);
+    await move_timer_PULSE(); #x=7 y=8 
+
+    await player_press_LEFT(dut);
+    await move_timer_PULSE(); #x=6 y=8 
+
+    for x in range(0, 15):
+      for y in range(0, 15):
+        if x == 6 and y == 8:
+          await check_LED_is_GREEN(dut, x, y);
+        elif x == 6 and y == 1:
+          await check_LED_is_RED(dut, x, y);
+        else:
+          await check_LED_is_BLACK(dut, x, y);
+
+@LEDs_snake_test(
   first_bonus_x=8,
   first_bonus_y=7
 )
