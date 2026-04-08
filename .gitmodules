@@ -16,3 +16,6 @@
 [submodule "src/random_2d_position"]
 	path = src/random_2d_position
 	url = git@github.com:KerCrafter/random_2d_position.git
+[submodule "src/timer"]
+	path = src/timer
+	url = git@github.com:KerCrafter/timer.git

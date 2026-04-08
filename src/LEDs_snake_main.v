@@ -29,6 +29,14 @@ module LEDs_snake_main #(
     wire players_commands_up;
     wire players_commands_down;
 
+    timer #(
+        .CLK_COUNT(16666666)
+    ) act_timer (
+        .clk(clk),
+        .reset(reset),
+        .enable(1),
+        .tick(update_frame)
+    );
 
     button_debouncer #(
         .DEBOUNCE_CLK_CNT(DEBOUNCE_CLK_CNT)
@@ -94,9 +102,8 @@ module LEDs_snake_main #(
 
     LEDs_snake_core LEDs_snake_core_inst (
         .clk(clk),
-        .move_timer(0),
+        .move_timer(update_frame),
         .reset(reset),
-        .update_frame(update_frame),
         .bonus_random_x(bonus_random_x),
         .bonus_random_y(bonus_random_y),
         .players_commands_left(players_commands_left),
