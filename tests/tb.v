@@ -22,7 +22,6 @@ module tb ();
 
   wire [3:0] current_led_x;
   wire [3:0] current_led_y;
-  wire update_frame;
   wire [7:0] led_red_intensity;
   wire [7:0] led_green_intensity;
   wire [7:0] led_blue_intensity;
@@ -40,7 +39,6 @@ module tb ();
       .players_commands_down (players_commands_down),
       .current_led_x(current_led_x),
       .current_led_y(current_led_y),
-      .update_frame(update_frame),
       .led_red_intensity(led_red_intensity),
       .led_green_intensity(led_green_intensity),
       .led_blue_intensity(led_blue_intensity),
