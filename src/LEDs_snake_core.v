@@ -212,6 +212,18 @@ module LEDs_snake_core (
   wire [7:0] led_green_intensity_22;
   wire [7:0] led_blue_intensity_22;
 
+  reg move_act_prev;
+
+  always @(posedge clk or posedge reset) begin
+    if(reset) begin
+      move_act_prev <= 0;
+    end else begin
+      move_act_prev <= move_timer; 
+    end
+  end
+
+  wire move_act_rise = move_timer & ~move_act_prev;
+
   PlayerCommandsManager player_commands (
     .clk(clk),
     .reset(reset),
@@ -226,7 +238,7 @@ module LEDs_snake_core (
   BonusManager bonus_manager (
     .clk(clk),
     .reset(reset),
-    .move_act(move_timer),
+    .move_act(move_act_rise),
     .direction(direction),
     .snake_head_x_pos(snake_head_x_pos),
     .snake_head_y_pos(snake_head_y_pos),
@@ -241,7 +253,7 @@ module LEDs_snake_core (
     .clk(clk),
     .reset(reset),
     .direction(direction),
-    .move_act(move_timer),
+    .move_act(move_act_rise),
     .x_pos(snake_head_x_pos),
     .y_pos(snake_head_y_pos)
   );
@@ -249,7 +261,7 @@ module LEDs_snake_core (
   SnakeQueue queue_1 (
     .clk(clk),
     .reset(reset),
-    .move_act(move_timer),
+    .move_act(move_act_rise),
     .next_x_pos(snake_head_x_pos),
     .next_y_pos(snake_head_y_pos),
     .score(score),
@@ -267,7 +279,7 @@ module LEDs_snake_core (
   SnakeQueue queue_2 (
     .clk(clk),
     .reset(reset),
-    .move_act(move_timer),
+    .move_act(move_act_rise),
     .next_x_pos(queue_1_x),
     .next_y_pos(queue_1_y),
     .score(score),
@@ -285,7 +297,7 @@ module LEDs_snake_core (
   SnakeQueue queue_3 (
     .clk(clk),
     .reset(reset),
-    .move_act(move_timer),
+    .move_act(move_act_rise),
     .next_x_pos(queue_2_x),
     .next_y_pos(queue_2_y),
     .score(score),
@@ -303,7 +315,7 @@ module LEDs_snake_core (
   SnakeQueue queue_4 (
     .clk(clk),
     .reset(reset),
-    .move_act(move_timer),
+    .move_act(move_act_rise),
     .next_x_pos(queue_3_x),
     .next_y_pos(queue_3_y),
     .score(score),
@@ -321,7 +333,7 @@ module LEDs_snake_core (
   SnakeQueue queue_5 (
     .clk(clk),
     .reset(reset),
-    .move_act(move_timer),
+    .move_act(move_act_rise),
     .next_x_pos(queue_4_x),
     .next_y_pos(queue_4_y),
     .score(score),
@@ -339,7 +351,7 @@ module LEDs_snake_core (
   SnakeQueue queue_6 (
     .clk(clk),
     .reset(reset),
-    .move_act(move_timer),
+    .move_act(move_act_rise),
     .next_x_pos(queue_5_x),
     .next_y_pos(queue_5_y),
     .score(score),
@@ -357,7 +369,7 @@ module LEDs_snake_core (
   SnakeQueue queue_7 (
     .clk(clk),
     .reset(reset),
-    .move_act(move_timer),
+    .move_act(move_act_rise),
     .next_x_pos(queue_6_x),
     .next_y_pos(queue_6_y),
     .score(score),
@@ -375,7 +387,7 @@ module LEDs_snake_core (
   SnakeQueue queue_8 (
     .clk(clk),
     .reset(reset),
-    .move_act(move_timer),
+    .move_act(move_act_rise),
     .next_x_pos(queue_7_x),
     .next_y_pos(queue_7_y),
     .score(score),
@@ -393,7 +405,7 @@ module LEDs_snake_core (
   SnakeQueue queue_9 (
     .clk(clk),
     .reset(reset),
-    .move_act(move_timer),
+    .move_act(move_act_rise),
     .next_x_pos(queue_8_x),
     .next_y_pos(queue_8_y),
     .score(score),
@@ -411,7 +423,7 @@ module LEDs_snake_core (
   SnakeQueue queue_10 (
     .clk(clk),
     .reset(reset),
-    .move_act(move_timer),
+    .move_act(move_act_rise),
     .next_x_pos(queue_9_x),
     .next_y_pos(queue_9_y),
     .score(score),
@@ -429,7 +441,7 @@ module LEDs_snake_core (
   SnakeQueue queue_11 (
     .clk(clk),
     .reset(reset),
-    .move_act(move_timer),
+    .move_act(move_act_rise),
     .next_x_pos(queue_10_x),
     .next_y_pos(queue_10_y),
     .score(score),
@@ -447,7 +459,7 @@ module LEDs_snake_core (
   SnakeQueue queue_12 (
     .clk(clk),
     .reset(reset),
-    .move_act(move_timer),
+    .move_act(move_act_rise),
     .next_x_pos(queue_11_x),
     .next_y_pos(queue_11_y),
     .score(score),
@@ -465,7 +477,7 @@ module LEDs_snake_core (
   SnakeQueue queue_13 (
     .clk(clk),
     .reset(reset),
-    .move_act(move_timer),
+    .move_act(move_act_rise),
     .next_x_pos(queue_12_x),
     .next_y_pos(queue_12_y),
     .score(score),
@@ -483,7 +495,7 @@ module LEDs_snake_core (
   SnakeQueue queue_14 (
     .clk(clk),
     .reset(reset),
-    .move_act(move_timer),
+    .move_act(move_act_rise),
     .next_x_pos(queue_13_x),
     .next_y_pos(queue_13_y),
     .score(score),
@@ -501,7 +513,7 @@ module LEDs_snake_core (
   SnakeQueue queue_15 (
     .clk(clk),
     .reset(reset),
-    .move_act(move_timer),
+    .move_act(move_act_rise),
     .next_x_pos(queue_14_x),
     .next_y_pos(queue_14_y),
     .score(score),
@@ -519,7 +531,7 @@ module LEDs_snake_core (
   SnakeQueue queue_16 (
     .clk(clk),
     .reset(reset),
-    .move_act(move_timer),
+    .move_act(move_act_rise),
     .next_x_pos(queue_15_x),
     .next_y_pos(queue_15_y),
     .score(score),
@@ -537,7 +549,7 @@ module LEDs_snake_core (
   SnakeQueue queue_17 (
     .clk(clk),
     .reset(reset),
-    .move_act(move_timer),
+    .move_act(move_act_rise),
     .next_x_pos(queue_16_x),
     .next_y_pos(queue_16_y),
     .score(score),
@@ -555,7 +567,7 @@ module LEDs_snake_core (
   SnakeQueue queue_18 (
     .clk(clk),
     .reset(reset),
-    .move_act(move_timer),
+    .move_act(move_act_rise),
     .next_x_pos(queue_17_x),
     .next_y_pos(queue_17_y),
     .score(score),
@@ -573,7 +585,7 @@ module LEDs_snake_core (
   SnakeQueue queue_19 (
     .clk(clk),
     .reset(reset),
-    .move_act(move_timer),
+    .move_act(move_act_rise),
     .next_x_pos(queue_18_x),
     .next_y_pos(queue_18_y),
     .score(score),
@@ -591,7 +603,7 @@ module LEDs_snake_core (
   SnakeQueue queue_20 (
     .clk(clk),
     .reset(reset),
-    .move_act(move_timer),
+    .move_act(move_act_rise),
     .next_x_pos(queue_19_x),
     .next_y_pos(queue_19_y),
     .score(score),

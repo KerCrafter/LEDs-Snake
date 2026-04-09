@@ -16,19 +16,8 @@ module SnakeQueue (
   output wire is_active
 );
 
-  reg move_act_prev;
   reg is_collide_with_head;
 
-  always @(posedge clk or posedge reset) begin
-    if(reset) begin
-      move_act_prev <= 0;
-    end else begin
-      move_act_prev <= move_act;
-    end
-
-  end
-
-  wire move_act_rise = move_act & ~move_act_prev;
   assign is_head_collide = is_collide_with_head || next_collide_head; 
   assign is_active = score >= active_when_score_min;
 
@@ -37,7 +26,7 @@ module SnakeQueue (
       is_collide_with_head <= 0;
       x_pos <= 0;
       y_pos <= 0;
-    end else if(move_act_rise) begin
+    end else if(move_act) begin
       x_pos <= next_x_pos;
       y_pos <= next_y_pos;
 
