@@ -19,3 +19,6 @@
 [submodule "src/timer"]
 	path = src/timer
 	url = git@github.com:KerCrafter/timer.git
+[submodule "src/joystick_8_directions"]
+	path = src/joystick_8_directions
+	url = git@github.com:KerCrafter/joystick_8_directions.git
