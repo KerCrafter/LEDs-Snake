@@ -28,8 +28,8 @@ set_global_assignment -name VERILOG_FILE src/joystick_8_directions/src/joystick_
 set_location_assignment PIN_R8 -to clk
 set_location_assignment PIN_T14 -to leds_line
 set_location_assignment PIN_R14 -to top_left_sw
-set_location_assignment PIN_J16 -to top_right_sw
-set_location_assignment PIN_N12 -to bottom_left_sw
-set_location_assignment PIN_R13 -to bottom_right_sw
+set_location_assignment PIN_J16 -to bottom_left_sw
+set_location_assignment PIN_N12 -to bottom_right_sw
+set_location_assignment PIN_R13 -to top_right_sw
 
 project_close
