@@ -16,3 +16,4 @@ simulation/
 vunit_out/
 .qsys_edit/
 *.swn
+output_files_with_joystick/
