@@ -4,21 +4,22 @@ module SnakeQueue (
   input wire move_act,
   input wire [3:0] next_x_pos,
   input wire [3:0] next_y_pos,
+  //input wire [1:0] next_direction,
   input wire [7:0] score,
-  input wire [1:0] direction,
+  input wire [1:0] head_direction,
   input wire [3:0] head_x_pos,
   input wire [3:0] head_y_pos,
   input wire next_collide_head,
   input wire [7:0] active_when_score_min,
   output reg [3:0] x_pos,
   output reg [3:0] y_pos,
+  output reg [1:0] direction,
   output wire is_head_collide,
   output wire is_active
 );
 
   reg is_collide_with_head;
 
-  reg [1:0] next_direction;
   reg [3:0] calc_x_pos;
   reg [3:0] calc_y_pos;
 
@@ -30,15 +31,19 @@ module SnakeQueue (
       is_collide_with_head <= 0;
       x_pos <= 0;
       y_pos <= 0;
+      //direction <= 0;
+
     end else if(move_act) begin
+      //direction <= next_direction;
+
       x_pos <= next_x_pos;
       y_pos <= next_y_pos;
 
       if(is_active && (
-            (direction == 0 && head_x_pos + 1 == x_pos && head_y_pos == y_pos) || 
-            (direction == 1 && head_x_pos - 1 == x_pos && head_y_pos == y_pos) ||
-            (direction == 2 && head_y_pos + 1 == y_pos && head_x_pos == x_pos) ||
-            (direction == 3 && head_y_pos - 1 == y_pos && head_x_pos == x_pos) 
+            (head_direction == 0 && head_x_pos + 1 == x_pos && head_y_pos == y_pos) || 
+            (head_direction == 1 && head_x_pos - 1 == x_pos && head_y_pos == y_pos) ||
+            (head_direction == 2 && head_y_pos + 1 == y_pos && head_x_pos == x_pos) ||
+            (head_direction == 3 && head_y_pos - 1 == y_pos && head_x_pos == x_pos) 
         )
       ) begin
         is_collide_with_head <= 1;
@@ -48,16 +53,16 @@ module SnakeQueue (
   end
 
   always @(*) begin
-    if(next_direction == 0) begin
+    if(direction == 0) begin
       calc_x_pos <= next_x_pos - 1;
       calc_y_pos <= next_y_pos;
-    end if(next_direction == 1) begin
+    end if(direction == 1) begin
       calc_x_pos <= next_x_pos + 1;
       calc_y_pos <= next_y_pos;
-    end if(next_direction == 2) begin
+    end if(direction == 2) begin
       calc_x_pos <= next_x_pos;
       calc_y_pos <= next_y_pos - 1;
-    end if(next_direction == 3) begin
+    end if(direction == 3) begin
       calc_x_pos <= next_x_pos;
       calc_y_pos <= next_y_pos + 1;
     end
