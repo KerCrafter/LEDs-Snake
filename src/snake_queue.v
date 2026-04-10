@@ -18,6 +18,10 @@ module SnakeQueue (
 
   reg is_collide_with_head;
 
+  reg [1:0] next_direction;
+  reg [3:0] calc_x_pos;
+  reg [3:0] calc_y_pos;
+
   assign is_head_collide = is_collide_with_head || next_collide_head; 
   assign is_active = score >= active_when_score_min;
 
@@ -41,6 +45,22 @@ module SnakeQueue (
       end
     end
 
+  end
+
+  always @(*) begin
+    if(next_direction == 0) begin
+      calc_x_pos <= next_x_pos - 1;
+      calc_y_pos <= next_y_pos;
+    end if(next_direction == 1) begin
+      calc_x_pos <= next_x_pos + 1;
+      calc_y_pos <= next_y_pos;
+    end if(next_direction == 2) begin
+      calc_x_pos <= next_x_pos;
+      calc_y_pos <= next_y_pos - 1;
+    end if(next_direction == 3) begin
+      calc_x_pos <= next_x_pos;
+      calc_y_pos <= next_y_pos + 1;
+    end
   end
 
 
