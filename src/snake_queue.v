@@ -11,20 +11,14 @@ module SnakeQueue (
   input wire [3:0] head_y_pos,
   input wire next_collide_head,
   input wire [7:0] active_when_score_min,
-  output wire [3:0] x_pos,
-  output wire [3:0] y_pos,
+  output reg [3:0] x_pos,
+  output reg [3:0] y_pos,
   output reg [1:0] direction,
   output wire is_head_collide,
   output wire is_active
 );
 
   reg is_collide_with_head;
-
-  reg [3:0] calc_x_pos;
-  reg [3:0] calc_y_pos;
-
-  assign x_pos = calc_x_pos;
-  assign y_pos = calc_y_pos;
 
   assign is_head_collide = is_collide_with_head || next_collide_head; 
   assign is_active = score >= active_when_score_min;
@@ -52,20 +46,20 @@ module SnakeQueue (
 
   always @(*) begin
     if(direction == 0) begin
-      calc_x_pos <= next_x_pos - 4'd1;
-      calc_y_pos <= next_y_pos;
+      x_pos <= next_x_pos - 4'd1;
+      y_pos <= next_y_pos;
     end else if(direction == 1) begin
-      calc_x_pos <= next_x_pos + 4'd1;
-      calc_y_pos <= next_y_pos;
+      x_pos <= next_x_pos + 4'd1;
+      y_pos <= next_y_pos;
     end else if(direction == 2) begin
-      calc_x_pos <= next_x_pos;
-      calc_y_pos <= next_y_pos - 4'd1;
+      x_pos <= next_x_pos;
+      y_pos <= next_y_pos - 4'd1;
     end else if(direction == 3) begin
-      calc_x_pos <= next_x_pos;
-      calc_y_pos <= next_y_pos + 4'd1;
+      x_pos <= next_x_pos;
+      y_pos <= next_y_pos + 4'd1;
     end else begin
-      calc_x_pos <= 0;
-      calc_y_pos <= 0;
+      x_pos <= 0;
+      y_pos <= 0;
     end
   end
 
