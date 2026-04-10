@@ -259,7 +259,7 @@ module LEDs_snake_core (
     .clk(clk),
     .reset(reset),
     .move_act(move_act_rise),
-    .direction(head_direction),
+    .head_direction(head_direction),
     .snake_head_x_pos(snake_head_x_pos),
     .snake_head_y_pos(snake_head_y_pos),
     .bonus_random_x(bonus_random_x),
