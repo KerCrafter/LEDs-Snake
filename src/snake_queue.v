@@ -4,7 +4,7 @@ module SnakeQueue (
   input wire move_act,
   input wire [3:0] next_x_pos,
   input wire [3:0] next_y_pos,
-  //input wire [1:0] next_direction,
+  input wire [1:0] next_direction,
   input wire [7:0] score,
   input wire [1:0] head_direction,
   input wire [3:0] head_x_pos,
@@ -31,10 +31,10 @@ module SnakeQueue (
       is_collide_with_head <= 0;
       x_pos <= 0;
       y_pos <= 0;
-      //direction <= 0;
+      direction <= 0;
 
     end else if(move_act) begin
-      //direction <= next_direction;
+      direction <= next_direction;
 
       x_pos <= next_x_pos;
       y_pos <= next_y_pos;
