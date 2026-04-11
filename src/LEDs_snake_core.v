@@ -21,83 +21,64 @@ module LEDs_snake_core (
 
   wire [3:0] queue_x [19:0];
   wire [3:0] queue_y [19:0];
-  wire [1:0] queue_1_direction;
+  wire [1:0] queue_direction [19:0];
   wire queue_1_collide;
   wire queue_1_active;
 
-  wire [1:0] queue_2_direction;
   wire queue_2_collide;
   wire queue_2_active;
 
-  wire [1:0] queue_3_direction;
   wire queue_3_collide;
   wire queue_3_active;
 
-  wire [1:0] queue_4_direction;
   wire queue_4_collide;
   wire queue_4_active;
 
-  wire [1:0] queue_5_direction;
   wire queue_5_collide;
   wire queue_5_active;
 
-  wire [1:0] queue_6_direction;
   wire queue_6_collide;
   wire queue_6_active;
 
-  wire [1:0] queue_7_direction;
   wire queue_7_collide;
   wire queue_7_active;
 
-  wire [1:0] queue_8_direction;
   wire queue_8_collide;
   wire queue_8_active;
 
-  wire [1:0] queue_9_direction;
   wire queue_9_collide;
   wire queue_9_active;
 
-  wire [1:0] queue_10_direction;
   wire queue_10_collide;
   wire queue_10_active;
 
-  wire [1:0] queue_11_direction;
   wire queue_11_collide;
   wire queue_11_active;
 
-  wire [1:0] queue_12_direction;
   wire queue_12_collide;
   wire queue_12_active;
 
-  wire [1:0] queue_13_direction;
   wire queue_13_collide;
   wire queue_13_active;
 
-  wire [1:0] queue_14_direction;
   wire queue_14_collide;
   wire queue_14_active;
 
-  wire [1:0] queue_15_direction;
   wire queue_15_collide;
   wire queue_15_active;
 
-  wire [1:0] queue_16_direction;
   wire queue_16_collide;
   wire queue_16_active;
 
-  wire [1:0] queue_17_direction;
   wire queue_17_collide;
   wire queue_17_active;
 
-  wire [1:0] queue_18_direction;
   wire queue_18_collide;
   wire queue_18_active;
 
-  wire [1:0] queue_19_direction;
   wire queue_19_collide;
   wire queue_19_active;
 
-  wire [1:0] queue_20_direction;
   wire queue_last_collide;
   wire queue_20_active;
 
@@ -253,7 +234,7 @@ module LEDs_snake_core (
     .head_x_pos(head_x_pos),
     .head_y_pos(head_y_pos),
     .next_collide_head(1'b0),
-    .direction(queue_1_direction),
+    .direction(queue_direction[0]),
     .x_pos(queue_x[0]),
     .y_pos(queue_y[0]),
     .is_head_collide(queue_1_collide),
@@ -264,7 +245,7 @@ module LEDs_snake_core (
     .clk(clk),
     .reset(reset),
     .move_act(move_act_rise),
-    .next_direction(queue_1_direction),
+    .next_direction(queue_direction[0]),
     .next_x_pos(queue_x[0]),
     .next_y_pos(queue_y[0]),
     .score(score),
@@ -273,7 +254,7 @@ module LEDs_snake_core (
     .head_x_pos(head_x_pos),
     .head_y_pos(head_y_pos),
     .next_collide_head(queue_1_collide),
-    .direction(queue_2_direction),
+    .direction(queue_direction[1]),
     .x_pos(queue_x[1]),
     .y_pos(queue_y[1]),
     .is_head_collide(queue_2_collide),
@@ -284,7 +265,7 @@ module LEDs_snake_core (
     .clk(clk),
     .reset(reset),
     .move_act(move_act_rise),
-    .next_direction(queue_2_direction),
+    .next_direction(queue_direction[1]),
     .next_x_pos(queue_x[1]),
     .next_y_pos(queue_y[1]),
     .score(score),
@@ -293,7 +274,7 @@ module LEDs_snake_core (
     .head_x_pos(head_x_pos),
     .head_y_pos(head_y_pos),
     .next_collide_head(queue_2_collide),
-    .direction(queue_3_direction),
+    .direction(queue_direction[2]),
     .x_pos(queue_x[2]),
     .y_pos(queue_y[2]),
     .is_head_collide(queue_3_collide),
@@ -304,7 +285,7 @@ module LEDs_snake_core (
     .clk(clk),
     .reset(reset),
     .move_act(move_act_rise),
-    .next_direction(queue_3_direction),
+    .next_direction(queue_direction[2]),
     .next_x_pos(queue_x[2]),
     .next_y_pos(queue_y[2]),
     .score(score),
@@ -313,7 +294,7 @@ module LEDs_snake_core (
     .head_x_pos(head_x_pos),
     .head_y_pos(head_y_pos),
     .next_collide_head(queue_3_collide),
-    .direction(queue_4_direction),
+    .direction(queue_direction[3]),
     .x_pos(queue_x[3]),
     .y_pos(queue_y[3]),
     .is_head_collide(queue_4_collide),
@@ -324,7 +305,7 @@ module LEDs_snake_core (
     .clk(clk),
     .reset(reset),
     .move_act(move_act_rise),
-    .next_direction(queue_4_direction),
+    .next_direction(queue_direction[3]),
     .next_x_pos(queue_x[3]),
     .next_y_pos(queue_y[3]),
     .score(score),
@@ -333,7 +314,7 @@ module LEDs_snake_core (
     .head_x_pos(head_x_pos),
     .head_y_pos(head_y_pos),
     .next_collide_head(queue_4_collide),
-    .direction(queue_5_direction),
+    .direction(queue_direction[4]),
     .x_pos(queue_x[4]),
     .y_pos(queue_y[4]),
     .is_head_collide(queue_5_collide),
@@ -344,7 +325,7 @@ module LEDs_snake_core (
     .clk(clk),
     .reset(reset),
     .move_act(move_act_rise),
-    .next_direction(queue_5_direction),
+    .next_direction(queue_direction[4]),
     .next_x_pos(queue_x[4]),
     .next_y_pos(queue_y[4]),
     .score(score),
@@ -353,7 +334,7 @@ module LEDs_snake_core (
     .head_x_pos(head_x_pos),
     .head_y_pos(head_y_pos),
     .next_collide_head(queue_5_collide),
-    .direction(queue_6_direction),
+    .direction(queue_direction[5]),
     .x_pos(queue_x[5]),
     .y_pos(queue_y[5]),
     .is_head_collide(queue_6_collide),
@@ -364,7 +345,7 @@ module LEDs_snake_core (
     .clk(clk),
     .reset(reset),
     .move_act(move_act_rise),
-    .next_direction(queue_6_direction),
+    .next_direction(queue_direction[5]),
     .next_x_pos(queue_x[5]),
     .next_y_pos(queue_y[5]),
     .score(score),
@@ -373,7 +354,7 @@ module LEDs_snake_core (
     .head_x_pos(head_x_pos),
     .head_y_pos(head_y_pos),
     .next_collide_head(queue_6_collide),
-    .direction(queue_7_direction),
+    .direction(queue_direction[6]),
     .x_pos(queue_x[6]),
     .y_pos(queue_y[6]),
     .is_head_collide(queue_7_collide),
@@ -384,7 +365,7 @@ module LEDs_snake_core (
     .clk(clk),
     .reset(reset),
     .move_act(move_act_rise),
-    .next_direction(queue_7_direction),
+    .next_direction(queue_direction[6]),
     .next_x_pos(queue_x[6]),
     .next_y_pos(queue_y[6]),
     .score(score),
@@ -393,7 +374,7 @@ module LEDs_snake_core (
     .head_x_pos(head_x_pos),
     .head_y_pos(head_y_pos),
     .next_collide_head(queue_7_collide),
-    .direction(queue_8_direction),
+    .direction(queue_direction[7]),
     .x_pos(queue_x[7]),
     .y_pos(queue_y[7]),
     .is_head_collide(queue_8_collide),
@@ -404,7 +385,7 @@ module LEDs_snake_core (
     .clk(clk),
     .reset(reset),
     .move_act(move_act_rise),
-    .next_direction(queue_8_direction),
+    .next_direction(queue_direction[7]),
     .next_x_pos(queue_x[7]),
     .next_y_pos(queue_y[7]),
     .score(score),
@@ -413,7 +394,7 @@ module LEDs_snake_core (
     .head_x_pos(head_x_pos),
     .head_y_pos(head_y_pos),
     .next_collide_head(queue_8_collide),
-    .direction(queue_9_direction),
+    .direction(queue_direction[8]),
     .x_pos(queue_x[8]),
     .y_pos(queue_y[8]),
     .is_head_collide(queue_9_collide),
@@ -424,7 +405,7 @@ module LEDs_snake_core (
     .clk(clk),
     .reset(reset),
     .move_act(move_act_rise),
-    .next_direction(queue_9_direction),
+    .next_direction(queue_direction[8]),
     .next_x_pos(queue_x[8]),
     .next_y_pos(queue_y[8]),
     .score(score),
@@ -433,7 +414,7 @@ module LEDs_snake_core (
     .head_x_pos(head_x_pos),
     .head_y_pos(head_y_pos),
     .next_collide_head(queue_9_collide),
-    .direction(queue_10_direction),
+    .direction(queue_direction[9]),
     .x_pos(queue_x[9]),
     .y_pos(queue_y[9]),
     .is_head_collide(queue_10_collide),
@@ -444,7 +425,7 @@ module LEDs_snake_core (
     .clk(clk),
     .reset(reset),
     .move_act(move_act_rise),
-    .next_direction(queue_10_direction),
+    .next_direction(queue_direction[9]),
     .next_x_pos(queue_x[9]),
     .next_y_pos(queue_y[9]),
     .score(score),
@@ -453,7 +434,7 @@ module LEDs_snake_core (
     .head_x_pos(head_x_pos),
     .head_y_pos(head_y_pos),
     .next_collide_head(queue_10_collide),
-    .direction(queue_11_direction),
+    .direction(queue_direction[10]),
     .x_pos(queue_x[10]),
     .y_pos(queue_y[10]),
     .is_head_collide(queue_11_collide),
@@ -464,7 +445,7 @@ module LEDs_snake_core (
     .clk(clk),
     .reset(reset),
     .move_act(move_act_rise),
-    .next_direction(queue_11_direction),
+    .next_direction(queue_direction[10]),
     .next_x_pos(queue_x[10]),
     .next_y_pos(queue_y[10]),
     .score(score),
@@ -473,7 +454,7 @@ module LEDs_snake_core (
     .head_x_pos(head_x_pos),
     .head_y_pos(head_y_pos),
     .next_collide_head(queue_11_collide),
-    .direction(queue_12_direction),
+    .direction(queue_direction[11]),
     .x_pos(queue_x[11]),
     .y_pos(queue_y[11]),
     .is_head_collide(queue_12_collide),
@@ -484,7 +465,7 @@ module LEDs_snake_core (
     .clk(clk),
     .reset(reset),
     .move_act(move_act_rise),
-    .next_direction(queue_12_direction),
+    .next_direction(queue_direction[11]),
     .next_x_pos(queue_x[11]),
     .next_y_pos(queue_y[11]),
     .score(score),
@@ -493,7 +474,7 @@ module LEDs_snake_core (
     .head_x_pos(head_x_pos),
     .head_y_pos(head_y_pos),
     .next_collide_head(queue_12_collide),
-    .direction(queue_13_direction),
+    .direction(queue_direction[12]),
     .x_pos(queue_x[12]),
     .y_pos(queue_y[12]),
     .is_head_collide(queue_13_collide),
@@ -504,7 +485,7 @@ module LEDs_snake_core (
     .clk(clk),
     .reset(reset),
     .move_act(move_act_rise),
-    .next_direction(queue_13_direction),
+    .next_direction(queue_direction[12]),
     .next_x_pos(queue_x[12]),
     .next_y_pos(queue_y[12]),
     .score(score),
@@ -513,7 +494,7 @@ module LEDs_snake_core (
     .head_x_pos(head_x_pos),
     .head_y_pos(head_y_pos),
     .next_collide_head(queue_13_collide),
-    .direction(queue_14_direction),
+    .direction(queue_direction[13]),
     .x_pos(queue_x[13]),
     .y_pos(queue_y[13]),
     .is_head_collide(queue_14_collide),
@@ -524,7 +505,7 @@ module LEDs_snake_core (
     .clk(clk),
     .reset(reset),
     .move_act(move_act_rise),
-    .next_direction(queue_14_direction),
+    .next_direction(queue_direction[13]),
     .next_x_pos(queue_x[13]),
     .next_y_pos(queue_y[13]),
     .score(score),
@@ -533,7 +514,7 @@ module LEDs_snake_core (
     .head_x_pos(head_x_pos),
     .head_y_pos(head_y_pos),
     .next_collide_head(queue_14_collide),
-    .direction(queue_15_direction),
+    .direction(queue_direction[14]),
     .x_pos(queue_x[14]),
     .y_pos(queue_y[14]),
     .is_head_collide(queue_15_collide),
@@ -544,7 +525,7 @@ module LEDs_snake_core (
     .clk(clk),
     .reset(reset),
     .move_act(move_act_rise),
-    .next_direction(queue_15_direction),
+    .next_direction(queue_direction[14]),
     .next_x_pos(queue_x[14]),
     .next_y_pos(queue_y[14]),
     .score(score),
@@ -553,7 +534,7 @@ module LEDs_snake_core (
     .head_x_pos(head_x_pos),
     .head_y_pos(head_y_pos),
     .next_collide_head(queue_15_collide),
-    .direction(queue_16_direction),
+    .direction(queue_direction[15]),
     .x_pos(queue_x[15]),
     .y_pos(queue_y[15]),
     .is_head_collide(queue_16_collide),
@@ -564,7 +545,7 @@ module LEDs_snake_core (
     .clk(clk),
     .reset(reset),
     .move_act(move_act_rise),
-    .next_direction(queue_16_direction),
+    .next_direction(queue_direction[15]),
     .next_x_pos(queue_x[15]),
     .next_y_pos(queue_y[15]),
     .score(score),
@@ -573,7 +554,7 @@ module LEDs_snake_core (
     .head_x_pos(head_x_pos),
     .head_y_pos(head_y_pos),
     .next_collide_head(queue_16_collide),
-    .direction(queue_17_direction),
+    .direction(queue_direction[16]),
     .x_pos(queue_x[16]),
     .y_pos(queue_y[16]),
     .is_head_collide(queue_17_collide),
@@ -584,7 +565,7 @@ module LEDs_snake_core (
     .clk(clk),
     .reset(reset),
     .move_act(move_act_rise),
-    .next_direction(queue_17_direction),
+    .next_direction(queue_direction[16]),
     .next_x_pos(queue_x[16]),
     .next_y_pos(queue_y[16]),
     .score(score),
@@ -593,7 +574,7 @@ module LEDs_snake_core (
     .head_x_pos(head_x_pos),
     .head_y_pos(head_y_pos),
     .next_collide_head(queue_17_collide),
-    .direction(queue_18_direction),
+    .direction(queue_direction[17]),
     .x_pos(queue_x[17]),
     .y_pos(queue_y[17]),
     .is_head_collide(queue_18_collide),
@@ -604,7 +585,7 @@ module LEDs_snake_core (
     .clk(clk),
     .reset(reset),
     .move_act(move_act_rise),
-    .next_direction(queue_18_direction),
+    .next_direction(queue_direction[17]),
     .next_x_pos(queue_x[17]),
     .next_y_pos(queue_y[17]),
     .score(score),
@@ -613,7 +594,7 @@ module LEDs_snake_core (
     .head_x_pos(head_x_pos),
     .head_y_pos(head_y_pos),
     .next_collide_head(queue_18_collide),
-    .direction(queue_19_direction),
+    .direction(queue_direction[18]),
     .x_pos(queue_x[18]),
     .y_pos(queue_y[18]),
     .is_head_collide(queue_19_collide),
@@ -624,7 +605,7 @@ module LEDs_snake_core (
     .clk(clk),
     .reset(reset),
     .move_act(move_act_rise),
-    .next_direction(queue_19_direction),
+    .next_direction(queue_direction[18]),
     .next_x_pos(queue_x[18]),
     .next_y_pos(queue_y[18]),
     .score(score),
@@ -633,7 +614,7 @@ module LEDs_snake_core (
     .head_x_pos(head_x_pos),
     .head_y_pos(head_y_pos),
     .next_collide_head(queue_19_collide),
-    .direction(queue_20_direction),
+    .direction(queue_direction[19]),
     .x_pos(queue_x[19]),
     .y_pos(queue_y[19]),
     .is_head_collide(queue_last_collide),
