@@ -164,405 +164,52 @@ module LEDs_snake_core (
     .y_pos(head_y_pos)
   );
 
-  SnakeQueue queue_1 (
-    .clk(clk),
-    .reset(reset),
-    .move_act(move_act_rise),
-    .next_direction(head_direction),
-    .next_x_pos(head_x_pos),
-    .next_y_pos(head_y_pos),
-    .score(score),
-    .active_when_score_min(8'd1),
-    .head_direction(head_direction),
-    .head_x_pos(head_x_pos),
-    .head_y_pos(head_y_pos),
-    .next_collide_head(1'b0),
-    .direction(queue_direction[0]),
-    .x_pos(queue_x[0]),
-    .y_pos(queue_y[0]),
-    .is_head_collide(queue_collide[0]),
-    .is_active(queue_active[0])
-  );
-
-  SnakeQueue queue_2 (
-    .clk(clk),
-    .reset(reset),
-    .move_act(move_act_rise),
-    .next_direction(queue_direction[0]),
-    .next_x_pos(queue_x[0]),
-    .next_y_pos(queue_y[0]),
-    .next_collide_head(queue_collide[0]),
-    .score(score),
-    .active_when_score_min(8'd2),
-    .head_direction(head_direction),
-    .head_x_pos(head_x_pos),
-    .head_y_pos(head_y_pos),
-    .direction(queue_direction[1]),
-    .x_pos(queue_x[1]),
-    .y_pos(queue_y[1]),
-    .is_head_collide(queue_collide[1]),
-    .is_active(queue_active[1])
-  );
-
-  SnakeQueue queue_3 (
-    .clk(clk),
-    .reset(reset),
-    .move_act(move_act_rise),
-    .next_direction(queue_direction[1]),
-    .next_x_pos(queue_x[1]),
-    .next_y_pos(queue_y[1]),
-    .next_collide_head(queue_collide[1]),
-    .score(score),
-    .active_when_score_min(8'd3),
-    .head_direction(head_direction),
-    .head_x_pos(head_x_pos),
-    .head_y_pos(head_y_pos),
-    .direction(queue_direction[2]),
-    .x_pos(queue_x[2]),
-    .y_pos(queue_y[2]),
-    .is_head_collide(queue_collide[2]),
-    .is_active(queue_active[2])
-  );
-
-  SnakeQueue queue_4 (
-    .clk(clk),
-    .reset(reset),
-    .move_act(move_act_rise),
-    .next_direction(queue_direction[2]),
-    .next_x_pos(queue_x[2]),
-    .next_y_pos(queue_y[2]),
-    .next_collide_head(queue_collide[2]),
-    .score(score),
-    .active_when_score_min(8'd4),
-    .head_direction(head_direction),
-    .head_x_pos(head_x_pos),
-    .head_y_pos(head_y_pos),
-    .direction(queue_direction[3]),
-    .x_pos(queue_x[3]),
-    .y_pos(queue_y[3]),
-    .is_head_collide(queue_collide[3]),
-    .is_active(queue_active[3])
-  );
-
-  SnakeQueue queue_5 (
-    .clk(clk),
-    .reset(reset),
-    .move_act(move_act_rise),
-    .next_direction(queue_direction[3]),
-    .next_x_pos(queue_x[3]),
-    .next_y_pos(queue_y[3]),
-    .next_collide_head(queue_collide[3]),
-    .score(score),
-    .active_when_score_min(8'd5),
-    .head_direction(head_direction),
-    .head_x_pos(head_x_pos),
-    .head_y_pos(head_y_pos),
-    .direction(queue_direction[4]),
-    .x_pos(queue_x[4]),
-    .y_pos(queue_y[4]),
-    .is_head_collide(queue_collide[4]),
-    .is_active(queue_active[4])
-  );
-
-  SnakeQueue queue_6 (
-    .clk(clk),
-    .reset(reset),
-    .move_act(move_act_rise),
-    .next_direction(queue_direction[4]),
-    .next_x_pos(queue_x[4]),
-    .next_y_pos(queue_y[4]),
-    .next_collide_head(queue_collide[4]),
-    .score(score),
-    .active_when_score_min(8'd6),
-    .head_direction(head_direction),
-    .head_x_pos(head_x_pos),
-    .head_y_pos(head_y_pos),
-    .direction(queue_direction[5]),
-    .x_pos(queue_x[5]),
-    .y_pos(queue_y[5]),
-    .is_head_collide(queue_collide[5]),
-    .is_active(queue_active[5])
-  );
-
-  SnakeQueue queue_7 (
-    .clk(clk),
-    .reset(reset),
-    .move_act(move_act_rise),
-    .next_direction(queue_direction[5]),
-    .next_x_pos(queue_x[5]),
-    .next_y_pos(queue_y[5]),
-    .next_collide_head(queue_collide[5]),
-    .score(score),
-    .active_when_score_min(8'd7),
-    .head_direction(head_direction),
-    .head_x_pos(head_x_pos),
-    .head_y_pos(head_y_pos),
-    .direction(queue_direction[6]),
-    .x_pos(queue_x[6]),
-    .y_pos(queue_y[6]),
-    .is_head_collide(queue_collide[6]),
-    .is_active(queue_active[6])
-  );
-
-  SnakeQueue queue_8 (
-    .clk(clk),
-    .reset(reset),
-    .move_act(move_act_rise),
-    .next_direction(queue_direction[6]),
-    .next_x_pos(queue_x[6]),
-    .next_y_pos(queue_y[6]),
-    .next_collide_head(queue_collide[6]),
-    .score(score),
-    .active_when_score_min(8'd8),
-    .head_direction(head_direction),
-    .head_x_pos(head_x_pos),
-    .head_y_pos(head_y_pos),
-    .direction(queue_direction[7]),
-    .x_pos(queue_x[7]),
-    .y_pos(queue_y[7]),
-    .is_head_collide(queue_collide[7]),
-    .is_active(queue_active[7])
-  );
-
-  SnakeQueue queue_9 (
-    .clk(clk),
-    .reset(reset),
-    .move_act(move_act_rise),
-    .next_direction(queue_direction[7]),
-    .next_x_pos(queue_x[7]),
-    .next_y_pos(queue_y[7]),
-    .next_collide_head(queue_collide[7]),
-    .score(score),
-    .active_when_score_min(8'd9),
-    .head_direction(head_direction),
-    .head_x_pos(head_x_pos),
-    .head_y_pos(head_y_pos),
-    .direction(queue_direction[8]),
-    .x_pos(queue_x[8]),
-    .y_pos(queue_y[8]),
-    .is_head_collide(queue_collide[8]),
-    .is_active(queue_active[8])
-  );
-
-  SnakeQueue queue_10 (
-    .clk(clk),
-    .reset(reset),
-    .move_act(move_act_rise),
-    .next_direction(queue_direction[8]),
-    .next_x_pos(queue_x[8]),
-    .next_y_pos(queue_y[8]),
-    .next_collide_head(queue_collide[8]),
-    .score(score),
-    .active_when_score_min(8'd10),
-    .head_direction(head_direction),
-    .head_x_pos(head_x_pos),
-    .head_y_pos(head_y_pos),
-    .direction(queue_direction[9]),
-    .x_pos(queue_x[9]),
-    .y_pos(queue_y[9]),
-    .is_head_collide(queue_collide[9]),
-    .is_active(queue_active[9])
-  );
-
-  SnakeQueue queue_11 (
-    .clk(clk),
-    .reset(reset),
-    .move_act(move_act_rise),
-    .next_direction(queue_direction[9]),
-    .next_x_pos(queue_x[9]),
-    .next_y_pos(queue_y[9]),
-    .next_collide_head(queue_collide[9]),
-    .score(score),
-    .active_when_score_min(8'd11),
-    .head_direction(head_direction),
-    .head_x_pos(head_x_pos),
-    .head_y_pos(head_y_pos),
-    .direction(queue_direction[10]),
-    .x_pos(queue_x[10]),
-    .y_pos(queue_y[10]),
-    .is_head_collide(queue_collide[10]),
-    .is_active(queue_active[10])
-  );
-
-  SnakeQueue queue_12 (
-    .clk(clk),
-    .reset(reset),
-    .move_act(move_act_rise),
-    .next_direction(queue_direction[10]),
-    .next_x_pos(queue_x[10]),
-    .next_y_pos(queue_y[10]),
-    .next_collide_head(queue_collide[10]),
-    .score(score),
-    .active_when_score_min(8'd12),
-    .head_direction(head_direction),
-    .head_x_pos(head_x_pos),
-    .head_y_pos(head_y_pos),
-    .direction(queue_direction[11]),
-    .x_pos(queue_x[11]),
-    .y_pos(queue_y[11]),
-    .is_head_collide(queue_collide[11]),
-    .is_active(queue_active[11])
-  );
-
-  SnakeQueue queue_13 (
-    .clk(clk),
-    .reset(reset),
-    .move_act(move_act_rise),
-    .next_direction(queue_direction[11]),
-    .next_x_pos(queue_x[11]),
-    .next_y_pos(queue_y[11]),
-    .next_collide_head(queue_collide[11]),
-    .score(score),
-    .active_when_score_min(8'd13),
-    .head_direction(head_direction),
-    .head_x_pos(head_x_pos),
-    .head_y_pos(head_y_pos),
-    .direction(queue_direction[12]),
-    .x_pos(queue_x[12]),
-    .y_pos(queue_y[12]),
-    .is_head_collide(queue_collide[12]),
-    .is_active(queue_active[12])
-  );
-
-  SnakeQueue queue_14 (
-    .clk(clk),
-    .reset(reset),
-    .move_act(move_act_rise),
-    .next_direction(queue_direction[12]),
-    .next_x_pos(queue_x[12]),
-    .next_y_pos(queue_y[12]),
-    .next_collide_head(queue_collide[12]),
-    .score(score),
-    .active_when_score_min(8'd14),
-    .head_direction(head_direction),
-    .head_x_pos(head_x_pos),
-    .head_y_pos(head_y_pos),
-    .direction(queue_direction[13]),
-    .x_pos(queue_x[13]),
-    .y_pos(queue_y[13]),
-    .is_head_collide(queue_collide[13]),
-    .is_active(queue_active[13])
-  );
-
-  SnakeQueue queue_15 (
-    .clk(clk),
-    .reset(reset),
-    .move_act(move_act_rise),
-    .next_direction(queue_direction[13]),
-    .next_x_pos(queue_x[13]),
-    .next_y_pos(queue_y[13]),
-    .next_collide_head(queue_collide[13]),
-    .score(score),
-    .active_when_score_min(8'd15),
-    .head_direction(head_direction),
-    .head_x_pos(head_x_pos),
-    .head_y_pos(head_y_pos),
-    .direction(queue_direction[14]),
-    .x_pos(queue_x[14]),
-    .y_pos(queue_y[14]),
-    .is_head_collide(queue_collide[14]),
-    .is_active(queue_active[14])
-  );
-
-  SnakeQueue queue_16 (
-    .clk(clk),
-    .reset(reset),
-    .move_act(move_act_rise),
-    .next_direction(queue_direction[14]),
-    .next_x_pos(queue_x[14]),
-    .next_y_pos(queue_y[14]),
-    .next_collide_head(queue_collide[14]),
-    .score(score),
-    .active_when_score_min(8'd16),
-    .head_direction(head_direction),
-    .head_x_pos(head_x_pos),
-    .head_y_pos(head_y_pos),
-    .direction(queue_direction[15]),
-    .x_pos(queue_x[15]),
-    .y_pos(queue_y[15]),
-    .is_head_collide(queue_collide[15]),
-    .is_active(queue_active[15])
-  );
-
-  SnakeQueue queue_17 (
-    .clk(clk),
-    .reset(reset),
-    .move_act(move_act_rise),
-    .next_direction(queue_direction[15]),
-    .next_x_pos(queue_x[15]),
-    .next_y_pos(queue_y[15]),
-    .next_collide_head(queue_collide[15]),
-    .score(score),
-    .active_when_score_min(8'd17),
-    .head_direction(head_direction),
-    .head_x_pos(head_x_pos),
-    .head_y_pos(head_y_pos),
-    .direction(queue_direction[16]),
-    .x_pos(queue_x[16]),
-    .y_pos(queue_y[16]),
-    .is_head_collide(queue_collide[16]),
-    .is_active(queue_active[16])
-  );
-
-  SnakeQueue queue_18 (
-    .clk(clk),
-    .reset(reset),
-    .move_act(move_act_rise),
-    .next_direction(queue_direction[16]),
-    .next_x_pos(queue_x[16]),
-    .next_y_pos(queue_y[16]),
-    .next_collide_head(queue_collide[16]),
-    .score(score),
-    .active_when_score_min(8'd18),
-    .head_direction(head_direction),
-    .head_x_pos(head_x_pos),
-    .head_y_pos(head_y_pos),
-    .direction(queue_direction[17]),
-    .x_pos(queue_x[17]),
-    .y_pos(queue_y[17]),
-    .is_head_collide(queue_collide[17]),
-    .is_active(queue_active[17])
-  );
-
-  SnakeQueue queue_19 (
-    .clk(clk),
-    .reset(reset),
-    .move_act(move_act_rise),
-    .next_direction(queue_direction[17]),
-    .next_x_pos(queue_x[17]),
-    .next_y_pos(queue_y[17]),
-    .next_collide_head(queue_collide[17]),
-    .score(score),
-    .active_when_score_min(8'd19),
-    .head_direction(head_direction),
-    .head_x_pos(head_x_pos),
-    .head_y_pos(head_y_pos),
-    .direction(queue_direction[18]),
-    .x_pos(queue_x[18]),
-    .y_pos(queue_y[18]),
-    .is_head_collide(queue_collide[18]),
-    .is_active(queue_active[18])
-  );
-
-  SnakeQueue queue_20 (
-    .clk(clk),
-    .reset(reset),
-    .move_act(move_act_rise),
-    .next_direction(queue_direction[18]),
-    .next_x_pos(queue_x[18]),
-    .next_y_pos(queue_y[18]),
-    .next_collide_head(queue_collide[18]),
-    .score(score),
-    .active_when_score_min(8'd20),
-    .head_direction(head_direction),
-    .head_x_pos(head_x_pos),
-    .head_y_pos(head_y_pos),
-    .direction(queue_direction[19]),
-    .x_pos(queue_x[19]),
-    .y_pos(queue_y[19]),
-    .is_head_collide(queue_collide[19]),
-    .is_active(queue_active[19])
-  );
+  genvar i;
+  generate
+    for(i = 0; i < 20 ; i = i + 1) begin : queues_gen
+      if(i == 0) begin
+        SnakeQueue queue_1 (
+          .clk(clk),
+          .reset(reset),
+          .move_act(move_act_rise),
+          .next_direction(head_direction),
+          .next_x_pos(head_x_pos),
+          .next_y_pos(head_y_pos),
+          .score(score),
+          .active_when_score_min(8'd1),
+          .head_direction(head_direction),
+          .head_x_pos(head_x_pos),
+          .head_y_pos(head_y_pos),
+          .next_collide_head(1'b0),
+          .direction(queue_direction[0]),
+          .x_pos(queue_x[0]),
+          .y_pos(queue_y[0]),
+          .is_head_collide(queue_collide[0]),
+          .is_active(queue_active[0])
+        );
+      end else begin
+        SnakeQueue queue (
+          .clk(clk),
+          .reset(reset),
+          .move_act(move_act_rise),
+          .next_direction(queue_direction[i-1]),
+          .next_x_pos(queue_x[i-1]),
+          .next_y_pos(queue_y[i-1]),
+          .next_collide_head(queue_collide[i-1]),
+          .score(score),
+          .active_when_score_min(i+1),
+          .head_direction(head_direction),
+          .head_x_pos(head_x_pos),
+          .head_y_pos(head_y_pos),
+          .direction(queue_direction[i]),
+          .x_pos(queue_x[i]),
+          .y_pos(queue_y[i]),
+          .is_head_collide(queue_collide[i]),
+          .is_active(queue_active[i])
+        );
+      end
+    end
+  endgenerate
 
   DrawBonus draw_bonus (
     .current_led_x(current_led_x),
