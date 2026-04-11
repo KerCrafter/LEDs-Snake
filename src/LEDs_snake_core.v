@@ -34,89 +34,13 @@ module LEDs_snake_core (
   wire [7:0] led_green_intensity_1;
   wire [7:0] led_blue_intensity_1;
 
-  wire [7:0] led_red_intensity_2;
-  wire [7:0] led_green_intensity_2;
-  wire [7:0] led_blue_intensity_2;
+  wire [7:0] led_red_intensity_queue [19:0];
+  wire [7:0] led_green_intensity_queue [19:0];
+  wire [7:0] led_blue_intensity_queue [19:0];
 
-  wire [7:0] led_red_intensity_3;
-  wire [7:0] led_green_intensity_3;
-  wire [7:0] led_blue_intensity_3;
-
-  wire [7:0] led_red_intensity_4;
-  wire [7:0] led_green_intensity_4;
-  wire [7:0] led_blue_intensity_4;
-
-  wire [7:0] led_red_intensity_5;
-  wire [7:0] led_green_intensity_5;
-  wire [7:0] led_blue_intensity_5;
-
-  wire [7:0] led_red_intensity_6;
-  wire [7:0] led_green_intensity_6;
-  wire [7:0] led_blue_intensity_6;
-
-  wire [7:0] led_red_intensity_7;
-  wire [7:0] led_green_intensity_7;
-  wire [7:0] led_blue_intensity_7;
-
-  wire [7:0] led_red_intensity_8;
-  wire [7:0] led_green_intensity_8;
-  wire [7:0] led_blue_intensity_8;
-
-  wire [7:0] led_red_intensity_9;
-  wire [7:0] led_green_intensity_9;
-  wire [7:0] led_blue_intensity_9;
-
-  wire [7:0] led_red_intensity_10;
-  wire [7:0] led_green_intensity_10;
-  wire [7:0] led_blue_intensity_10;
-
-  wire [7:0] led_red_intensity_11;
-  wire [7:0] led_green_intensity_11;
-  wire [7:0] led_blue_intensity_11;
-
-  wire [7:0] led_red_intensity_12;
-  wire [7:0] led_green_intensity_12;
-  wire [7:0] led_blue_intensity_12;
-
-  wire [7:0] led_red_intensity_13;
-  wire [7:0] led_green_intensity_13;
-  wire [7:0] led_blue_intensity_13;
-
-  wire [7:0] led_red_intensity_14;
-  wire [7:0] led_green_intensity_14;
-  wire [7:0] led_blue_intensity_14;
-
-  wire [7:0] led_red_intensity_15;
-  wire [7:0] led_green_intensity_15;
-  wire [7:0] led_blue_intensity_15;
-
-  wire [7:0] led_red_intensity_16;
-  wire [7:0] led_green_intensity_16;
-  wire [7:0] led_blue_intensity_16;
-
-  wire [7:0] led_red_intensity_17;
-  wire [7:0] led_green_intensity_17;
-  wire [7:0] led_blue_intensity_17;
-
-  wire [7:0] led_red_intensity_18;
-  wire [7:0] led_green_intensity_18;
-  wire [7:0] led_blue_intensity_18;
-
-  wire [7:0] led_red_intensity_19;
-  wire [7:0] led_green_intensity_19;
-  wire [7:0] led_blue_intensity_19;
-
-  wire [7:0] led_red_intensity_20;
-  wire [7:0] led_green_intensity_20;
-  wire [7:0] led_blue_intensity_20;
-
-  wire [7:0] led_red_intensity_21;
-  wire [7:0] led_green_intensity_21;
-  wire [7:0] led_blue_intensity_21;
-
-  wire [7:0] led_red_intensity_22;
-  wire [7:0] led_green_intensity_22;
-  wire [7:0] led_blue_intensity_22;
+  wire [7:0] led_red_intensity_end;
+  wire [7:0] led_green_intensity_end;
+  wire [7:0] led_blue_intensity_end;
 
   reg move_act_prev;
 
@@ -232,9 +156,9 @@ module LEDs_snake_core (
     .led_red_intensity_in(led_red_intensity_1),
     .led_green_intensity_in(led_green_intensity_1),
     .led_blue_intensity_in(led_blue_intensity_1),
-    .led_red_intensity_out(led_red_intensity_2),
-    .led_green_intensity_out(led_green_intensity_2),
-    .led_blue_intensity_out(led_blue_intensity_2)
+    .led_red_intensity_out(led_red_intensity_queue[0]),
+    .led_green_intensity_out(led_green_intensity_queue[0]),
+    .led_blue_intensity_out(led_blue_intensity_queue[0])
   );
 
   DrawSnakeQueue draw_snake_queue_1 (
@@ -243,12 +167,12 @@ module LEDs_snake_core (
     .current_led_y(current_led_y),
     .queue_x_pos(queue_x[0]),
     .queue_y_pos(queue_y[0]),
-    .led_red_intensity_in(led_red_intensity_2),
-    .led_green_intensity_in(led_green_intensity_2),
-    .led_blue_intensity_in(led_blue_intensity_2),
-    .led_red_intensity_out(led_red_intensity_3),
-    .led_green_intensity_out(led_green_intensity_3),
-    .led_blue_intensity_out(led_blue_intensity_3)
+    .led_red_intensity_in(led_red_intensity_queue[0]),
+    .led_green_intensity_in(led_green_intensity_queue[0]),
+    .led_blue_intensity_in(led_blue_intensity_queue[0]),
+    .led_red_intensity_out(led_red_intensity_queue[1]),
+    .led_green_intensity_out(led_green_intensity_queue[1]),
+    .led_blue_intensity_out(led_blue_intensity_queue[1])
   );
 
   DrawSnakeQueue draw_snake_queue_2 (
@@ -257,12 +181,12 @@ module LEDs_snake_core (
     .current_led_y(current_led_y),
     .queue_x_pos(queue_x[1]),
     .queue_y_pos(queue_y[1]),
-    .led_red_intensity_in(led_red_intensity_3),
-    .led_green_intensity_in(led_green_intensity_3),
-    .led_blue_intensity_in(led_blue_intensity_3),
-    .led_red_intensity_out(led_red_intensity_4),
-    .led_green_intensity_out(led_green_intensity_4),
-    .led_blue_intensity_out(led_blue_intensity_4)
+    .led_red_intensity_in(led_red_intensity_queue[1]),
+    .led_green_intensity_in(led_green_intensity_queue[1]),
+    .led_blue_intensity_in(led_blue_intensity_queue[1]),
+    .led_red_intensity_out(led_red_intensity_queue[2]),
+    .led_green_intensity_out(led_green_intensity_queue[2]),
+    .led_blue_intensity_out(led_blue_intensity_queue[2])
   );
 
   DrawSnakeQueue draw_snake_queue_3 (
@@ -271,12 +195,12 @@ module LEDs_snake_core (
     .current_led_y(current_led_y),
     .queue_x_pos(queue_x[2]),
     .queue_y_pos(queue_y[2]),
-    .led_red_intensity_in(led_red_intensity_4),
-    .led_green_intensity_in(led_green_intensity_4),
-    .led_blue_intensity_in(led_blue_intensity_4),
-    .led_red_intensity_out(led_red_intensity_5),
-    .led_green_intensity_out(led_green_intensity_5),
-    .led_blue_intensity_out(led_blue_intensity_5)
+    .led_red_intensity_in(led_red_intensity_queue[2]),
+    .led_green_intensity_in(led_green_intensity_queue[2]),
+    .led_blue_intensity_in(led_blue_intensity_queue[2]),
+    .led_red_intensity_out(led_red_intensity_queue[3]),
+    .led_green_intensity_out(led_green_intensity_queue[3]),
+    .led_blue_intensity_out(led_blue_intensity_queue[3])
   );
 
   DrawSnakeQueue draw_snake_queue_4 (
@@ -285,12 +209,12 @@ module LEDs_snake_core (
     .current_led_y(current_led_y),
     .queue_x_pos(queue_x[3]),
     .queue_y_pos(queue_y[3]),
-    .led_red_intensity_in(led_red_intensity_5),
-    .led_green_intensity_in(led_green_intensity_5),
-    .led_blue_intensity_in(led_blue_intensity_5),
-    .led_red_intensity_out(led_red_intensity_6),
-    .led_green_intensity_out(led_green_intensity_6),
-    .led_blue_intensity_out(led_blue_intensity_6)
+    .led_red_intensity_in(led_red_intensity_queue[3]),
+    .led_green_intensity_in(led_green_intensity_queue[3]),
+    .led_blue_intensity_in(led_blue_intensity_queue[3]),
+    .led_red_intensity_out(led_red_intensity_queue[4]),
+    .led_green_intensity_out(led_green_intensity_queue[4]),
+    .led_blue_intensity_out(led_blue_intensity_queue[4])
   );
 
   DrawSnakeQueue draw_snake_queue_5 (
@@ -299,12 +223,12 @@ module LEDs_snake_core (
     .current_led_y(current_led_y),
     .queue_x_pos(queue_x[4]),
     .queue_y_pos(queue_y[4]),
-    .led_red_intensity_in(led_red_intensity_6),
-    .led_green_intensity_in(led_green_intensity_6),
-    .led_blue_intensity_in(led_blue_intensity_6),
-    .led_red_intensity_out(led_red_intensity_7),
-    .led_green_intensity_out(led_green_intensity_7),
-    .led_blue_intensity_out(led_blue_intensity_7)
+    .led_red_intensity_in(led_red_intensity_queue[4]),
+    .led_green_intensity_in(led_green_intensity_queue[4]),
+    .led_blue_intensity_in(led_blue_intensity_queue[4]),
+    .led_red_intensity_out(led_red_intensity_queue[5]),
+    .led_green_intensity_out(led_green_intensity_queue[5]),
+    .led_blue_intensity_out(led_blue_intensity_queue[5])
   );
 
   DrawSnakeQueue draw_snake_queue_6 (
@@ -313,12 +237,12 @@ module LEDs_snake_core (
     .current_led_y(current_led_y),
     .queue_x_pos(queue_x[5]),
     .queue_y_pos(queue_y[5]),
-    .led_red_intensity_in(led_red_intensity_7),
-    .led_green_intensity_in(led_green_intensity_7),
-    .led_blue_intensity_in(led_blue_intensity_7),
-    .led_red_intensity_out(led_red_intensity_8),
-    .led_green_intensity_out(led_green_intensity_8),
-    .led_blue_intensity_out(led_blue_intensity_8)
+    .led_red_intensity_in(led_red_intensity_queue[5]),
+    .led_green_intensity_in(led_green_intensity_queue[5]),
+    .led_blue_intensity_in(led_blue_intensity_queue[5]),
+    .led_red_intensity_out(led_red_intensity_queue[6]),
+    .led_green_intensity_out(led_green_intensity_queue[6]),
+    .led_blue_intensity_out(led_blue_intensity_queue[6])
   );
 
   DrawSnakeQueue draw_snake_queue_7 (
@@ -327,12 +251,12 @@ module LEDs_snake_core (
     .current_led_y(current_led_y),
     .queue_x_pos(queue_x[6]),
     .queue_y_pos(queue_y[6]),
-    .led_red_intensity_in(led_red_intensity_8),
-    .led_green_intensity_in(led_green_intensity_8),
-    .led_blue_intensity_in(led_blue_intensity_8),
-    .led_red_intensity_out(led_red_intensity_9),
-    .led_green_intensity_out(led_green_intensity_9),
-    .led_blue_intensity_out(led_blue_intensity_9)
+    .led_red_intensity_in(led_red_intensity_queue[6]),
+    .led_green_intensity_in(led_green_intensity_queue[6]),
+    .led_blue_intensity_in(led_blue_intensity_queue[6]),
+    .led_red_intensity_out(led_red_intensity_queue[7]),
+    .led_green_intensity_out(led_green_intensity_queue[7]),
+    .led_blue_intensity_out(led_blue_intensity_queue[7])
   );
 
   DrawSnakeQueue draw_snake_queue_8 (
@@ -341,12 +265,12 @@ module LEDs_snake_core (
     .current_led_y(current_led_y),
     .queue_x_pos(queue_x[7]),
     .queue_y_pos(queue_y[7]),
-    .led_red_intensity_in(led_red_intensity_9),
-    .led_green_intensity_in(led_green_intensity_9),
-    .led_blue_intensity_in(led_blue_intensity_9),
-    .led_red_intensity_out(led_red_intensity_10),
-    .led_green_intensity_out(led_green_intensity_10),
-    .led_blue_intensity_out(led_blue_intensity_10)
+    .led_red_intensity_in(led_red_intensity_queue[7]),
+    .led_green_intensity_in(led_green_intensity_queue[7]),
+    .led_blue_intensity_in(led_blue_intensity_queue[7]),
+    .led_red_intensity_out(led_red_intensity_queue[8]),
+    .led_green_intensity_out(led_green_intensity_queue[8]),
+    .led_blue_intensity_out(led_blue_intensity_queue[8])
   );
 
   DrawSnakeQueue draw_snake_queue_9 (
@@ -355,12 +279,12 @@ module LEDs_snake_core (
     .current_led_y(current_led_y),
     .queue_x_pos(queue_x[8]),
     .queue_y_pos(queue_y[8]),
-    .led_red_intensity_in(led_red_intensity_10),
-    .led_green_intensity_in(led_green_intensity_10),
-    .led_blue_intensity_in(led_blue_intensity_10),
-    .led_red_intensity_out(led_red_intensity_11),
-    .led_green_intensity_out(led_green_intensity_11),
-    .led_blue_intensity_out(led_blue_intensity_11)
+    .led_red_intensity_in(led_red_intensity_queue[8]),
+    .led_green_intensity_in(led_green_intensity_queue[8]),
+    .led_blue_intensity_in(led_blue_intensity_queue[8]),
+    .led_red_intensity_out(led_red_intensity_queue[9]),
+    .led_green_intensity_out(led_green_intensity_queue[9]),
+    .led_blue_intensity_out(led_blue_intensity_queue[9])
   );
 
   DrawSnakeQueue draw_snake_queue_10 (
@@ -369,12 +293,12 @@ module LEDs_snake_core (
     .current_led_y(current_led_y),
     .queue_x_pos(queue_x[9]),
     .queue_y_pos(queue_y[9]),
-    .led_red_intensity_in(led_red_intensity_11),
-    .led_green_intensity_in(led_green_intensity_11),
-    .led_blue_intensity_in(led_blue_intensity_11),
-    .led_red_intensity_out(led_red_intensity_12),
-    .led_green_intensity_out(led_green_intensity_12),
-    .led_blue_intensity_out(led_blue_intensity_12)
+    .led_red_intensity_in(led_red_intensity_queue[9]),
+    .led_green_intensity_in(led_green_intensity_queue[9]),
+    .led_blue_intensity_in(led_blue_intensity_queue[9]),
+    .led_red_intensity_out(led_red_intensity_queue[10]),
+    .led_green_intensity_out(led_green_intensity_queue[10]),
+    .led_blue_intensity_out(led_blue_intensity_queue[10])
   );
 
   DrawSnakeQueue draw_snake_queue_11 (
@@ -383,12 +307,12 @@ module LEDs_snake_core (
     .current_led_y(current_led_y),
     .queue_x_pos(queue_x[10]),
     .queue_y_pos(queue_y[10]),
-    .led_red_intensity_in(led_red_intensity_12),
-    .led_green_intensity_in(led_green_intensity_12),
-    .led_blue_intensity_in(led_blue_intensity_12),
-    .led_red_intensity_out(led_red_intensity_13),
-    .led_green_intensity_out(led_green_intensity_13),
-    .led_blue_intensity_out(led_blue_intensity_13)
+    .led_red_intensity_in(led_red_intensity_queue[10]),
+    .led_green_intensity_in(led_green_intensity_queue[10]),
+    .led_blue_intensity_in(led_blue_intensity_queue[10]),
+    .led_red_intensity_out(led_red_intensity_queue[11]),
+    .led_green_intensity_out(led_green_intensity_queue[11]),
+    .led_blue_intensity_out(led_blue_intensity_queue[11])
   );
 
   DrawSnakeQueue draw_snake_queue_12 (
@@ -397,12 +321,12 @@ module LEDs_snake_core (
     .current_led_y(current_led_y),
     .queue_x_pos(queue_x[11]),
     .queue_y_pos(queue_y[11]),
-    .led_red_intensity_in(led_red_intensity_13),
-    .led_green_intensity_in(led_green_intensity_13),
-    .led_blue_intensity_in(led_blue_intensity_13),
-    .led_red_intensity_out(led_red_intensity_14),
-    .led_green_intensity_out(led_green_intensity_14),
-    .led_blue_intensity_out(led_blue_intensity_14)
+    .led_red_intensity_in(led_red_intensity_queue[11]),
+    .led_green_intensity_in(led_green_intensity_queue[11]),
+    .led_blue_intensity_in(led_blue_intensity_queue[11]),
+    .led_red_intensity_out(led_red_intensity_queue[12]),
+    .led_green_intensity_out(led_green_intensity_queue[12]),
+    .led_blue_intensity_out(led_blue_intensity_queue[12])
   );
 
   DrawSnakeQueue draw_snake_queue_13 (
@@ -411,12 +335,12 @@ module LEDs_snake_core (
     .current_led_y(current_led_y),
     .queue_x_pos(queue_x[12]),
     .queue_y_pos(queue_y[12]),
-    .led_red_intensity_in(led_red_intensity_14),
-    .led_green_intensity_in(led_green_intensity_14),
-    .led_blue_intensity_in(led_blue_intensity_14),
-    .led_red_intensity_out(led_red_intensity_15),
-    .led_green_intensity_out(led_green_intensity_15),
-    .led_blue_intensity_out(led_blue_intensity_15)
+    .led_red_intensity_in(led_red_intensity_queue[12]),
+    .led_green_intensity_in(led_green_intensity_queue[12]),
+    .led_blue_intensity_in(led_blue_intensity_queue[12]),
+    .led_red_intensity_out(led_red_intensity_queue[13]),
+    .led_green_intensity_out(led_green_intensity_queue[13]),
+    .led_blue_intensity_out(led_blue_intensity_queue[13])
   );
 
   DrawSnakeQueue draw_snake_queue_14 (
@@ -425,12 +349,12 @@ module LEDs_snake_core (
     .current_led_y(current_led_y),
     .queue_x_pos(queue_x[13]),
     .queue_y_pos(queue_y[13]),
-    .led_red_intensity_in(led_red_intensity_15),
-    .led_green_intensity_in(led_green_intensity_15),
-    .led_blue_intensity_in(led_blue_intensity_15),
-    .led_red_intensity_out(led_red_intensity_16),
-    .led_green_intensity_out(led_green_intensity_16),
-    .led_blue_intensity_out(led_blue_intensity_16)
+    .led_red_intensity_in(led_red_intensity_queue[13]),
+    .led_green_intensity_in(led_green_intensity_queue[13]),
+    .led_blue_intensity_in(led_blue_intensity_queue[13]),
+    .led_red_intensity_out(led_red_intensity_queue[14]),
+    .led_green_intensity_out(led_green_intensity_queue[14]),
+    .led_blue_intensity_out(led_blue_intensity_queue[14])
   );
 
   DrawSnakeQueue draw_snake_queue_15 (
@@ -439,12 +363,12 @@ module LEDs_snake_core (
     .current_led_y(current_led_y),
     .queue_x_pos(queue_x[14]),
     .queue_y_pos(queue_y[14]),
-    .led_red_intensity_in(led_red_intensity_16),
-    .led_green_intensity_in(led_green_intensity_16),
-    .led_blue_intensity_in(led_blue_intensity_16),
-    .led_red_intensity_out(led_red_intensity_17),
-    .led_green_intensity_out(led_green_intensity_17),
-    .led_blue_intensity_out(led_blue_intensity_17)
+    .led_red_intensity_in(led_red_intensity_queue[14]),
+    .led_green_intensity_in(led_green_intensity_queue[14]),
+    .led_blue_intensity_in(led_blue_intensity_queue[14]),
+    .led_red_intensity_out(led_red_intensity_queue[15]),
+    .led_green_intensity_out(led_green_intensity_queue[15]),
+    .led_blue_intensity_out(led_blue_intensity_queue[15])
   );
 
   DrawSnakeQueue draw_snake_queue_16 (
@@ -453,12 +377,12 @@ module LEDs_snake_core (
     .current_led_y(current_led_y),
     .queue_x_pos(queue_x[15]),
     .queue_y_pos(queue_y[15]),
-    .led_red_intensity_in(led_red_intensity_17),
-    .led_green_intensity_in(led_green_intensity_17),
-    .led_blue_intensity_in(led_blue_intensity_17),
-    .led_red_intensity_out(led_red_intensity_18),
-    .led_green_intensity_out(led_green_intensity_18),
-    .led_blue_intensity_out(led_blue_intensity_18)
+    .led_red_intensity_in(led_red_intensity_queue[15]),
+    .led_green_intensity_in(led_green_intensity_queue[15]),
+    .led_blue_intensity_in(led_blue_intensity_queue[15]),
+    .led_red_intensity_out(led_red_intensity_queue[16]),
+    .led_green_intensity_out(led_green_intensity_queue[16]),
+    .led_blue_intensity_out(led_blue_intensity_queue[16])
   );
 
   DrawSnakeQueue draw_snake_queue_17 (
@@ -467,12 +391,12 @@ module LEDs_snake_core (
     .current_led_y(current_led_y),
     .queue_x_pos(queue_x[16]),
     .queue_y_pos(queue_y[16]),
-    .led_red_intensity_in(led_red_intensity_18),
-    .led_green_intensity_in(led_green_intensity_18),
-    .led_blue_intensity_in(led_blue_intensity_18),
-    .led_red_intensity_out(led_red_intensity_19),
-    .led_green_intensity_out(led_green_intensity_19),
-    .led_blue_intensity_out(led_blue_intensity_19)
+    .led_red_intensity_in(led_red_intensity_queue[16]),
+    .led_green_intensity_in(led_green_intensity_queue[16]),
+    .led_blue_intensity_in(led_blue_intensity_queue[16]),
+    .led_red_intensity_out(led_red_intensity_queue[17]),
+    .led_green_intensity_out(led_green_intensity_queue[17]),
+    .led_blue_intensity_out(led_blue_intensity_queue[17])
   );
 
   DrawSnakeQueue draw_snake_queue_18 (
@@ -481,12 +405,12 @@ module LEDs_snake_core (
     .current_led_y(current_led_y),
     .queue_x_pos(queue_x[17]),
     .queue_y_pos(queue_y[17]),
-    .led_red_intensity_in(led_red_intensity_19),
-    .led_green_intensity_in(led_green_intensity_19),
-    .led_blue_intensity_in(led_blue_intensity_19),
-    .led_red_intensity_out(led_red_intensity_20),
-    .led_green_intensity_out(led_green_intensity_20),
-    .led_blue_intensity_out(led_blue_intensity_20)
+    .led_red_intensity_in(led_red_intensity_queue[17]),
+    .led_green_intensity_in(led_green_intensity_queue[17]),
+    .led_blue_intensity_in(led_blue_intensity_queue[17]),
+    .led_red_intensity_out(led_red_intensity_queue[18]),
+    .led_green_intensity_out(led_green_intensity_queue[18]),
+    .led_blue_intensity_out(led_blue_intensity_queue[18])
   );
 
   DrawSnakeQueue draw_snake_queue_19 (
@@ -495,12 +419,12 @@ module LEDs_snake_core (
     .current_led_y(current_led_y),
     .queue_x_pos(queue_x[18]),
     .queue_y_pos(queue_y[18]),
-    .led_red_intensity_in(led_red_intensity_20),
-    .led_green_intensity_in(led_green_intensity_20),
-    .led_blue_intensity_in(led_blue_intensity_20),
-    .led_red_intensity_out(led_red_intensity_21),
-    .led_green_intensity_out(led_green_intensity_21),
-    .led_blue_intensity_out(led_blue_intensity_21)
+    .led_red_intensity_in(led_red_intensity_queue[18]),
+    .led_green_intensity_in(led_green_intensity_queue[18]),
+    .led_blue_intensity_in(led_blue_intensity_queue[18]),
+    .led_red_intensity_out(led_red_intensity_queue[19]),
+    .led_green_intensity_out(led_green_intensity_queue[19]),
+    .led_blue_intensity_out(led_blue_intensity_queue[19])
   );
 
   DrawSnakeQueue draw_snake_queue_20 (
@@ -509,19 +433,19 @@ module LEDs_snake_core (
     .current_led_y(current_led_y),
     .queue_x_pos(queue_x[19]),
     .queue_y_pos(queue_y[19]),
-    .led_red_intensity_in(led_red_intensity_21),
-    .led_green_intensity_in(led_green_intensity_21),
-    .led_blue_intensity_in(led_blue_intensity_21),
-    .led_red_intensity_out(led_red_intensity_22),
-    .led_green_intensity_out(led_green_intensity_22),
-    .led_blue_intensity_out(led_blue_intensity_22)
+    .led_red_intensity_in(led_red_intensity_queue[19]),
+    .led_green_intensity_in(led_green_intensity_queue[19]),
+    .led_blue_intensity_in(led_blue_intensity_queue[19]),
+    .led_red_intensity_out(led_red_intensity_end),
+    .led_green_intensity_out(led_green_intensity_end),
+    .led_blue_intensity_out(led_blue_intensity_end)
   );
 
   DrawEndGame draw_end_game (
     .collision_detected(queue_collide[19]),
-    .led_red_intensity_in(led_red_intensity_22),
-    .led_green_intensity_in(led_green_intensity_22),
-    .led_blue_intensity_in(led_blue_intensity_22),
+    .led_red_intensity_in(led_red_intensity_end),
+    .led_green_intensity_in(led_green_intensity_end),
+    .led_blue_intensity_in(led_blue_intensity_end),
     .led_red_intensity_out(led_red_intensity),
     .led_green_intensity_out(led_green_intensity),
     .led_blue_intensity_out(led_blue_intensity)
