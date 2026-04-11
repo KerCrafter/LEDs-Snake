@@ -16,14 +16,16 @@ module LEDs_snake_core (
     output wire [7:0] score
 );
 
+  localparam SNAKE_MAX_SIZE = 50;
+
   wire [3:0] head_x_pos;
   wire [3:0] head_y_pos;
 
-  wire [3:0] queue_x [19:0];
-  wire [3:0] queue_y [19:0];
-  wire [1:0] queue_direction [19:0];
-  wire queue_active [19:0];
-  wire queue_collide [19:0];
+  wire [3:0] queue_x [SNAKE_MAX_SIZE-1:0];
+  wire [3:0] queue_y [SNAKE_MAX_SIZE-1:0];
+  wire [1:0] queue_direction [SNAKE_MAX_SIZE-1:0];
+  wire queue_active [SNAKE_MAX_SIZE-1:0];
+  wire queue_collide [SNAKE_MAX_SIZE-1:0];
 
   wire [1:0] head_direction;
 
@@ -38,9 +40,9 @@ module LEDs_snake_core (
   wire [7:0] led_green_intensity_2;
   wire [7:0] led_blue_intensity_2;
 
-  wire [7:0] led_red_intensity_queue [19:0];
-  wire [7:0] led_green_intensity_queue [19:0];
-  wire [7:0] led_blue_intensity_queue [19:0];
+  wire [7:0] led_red_intensity_queue [SNAKE_MAX_SIZE-1:0];
+  wire [7:0] led_green_intensity_queue [SNAKE_MAX_SIZE-1:0];
+  wire [7:0] led_blue_intensity_queue [SNAKE_MAX_SIZE-1:0];
 
   wire [7:0] led_red_intensity_end;
   wire [7:0] led_green_intensity_end;
@@ -94,7 +96,7 @@ module LEDs_snake_core (
 
   genvar i;
   generate
-    for(i = 0; i <= 19 ; i = i + 1) begin : queues_gen
+    for(i = 0; i <= SNAKE_MAX_SIZE-1; i = i + 1) begin : queues_gen
       if(i == 0) begin
         SnakeQueue queue_1 (
           .clk(clk),
@@ -196,10 +198,10 @@ module LEDs_snake_core (
   );
 
   DrawEndGame draw_end_game (
-    .collision_detected(queue_collide[19]),
-    .led_red_intensity_in(led_red_intensity_queue[19]),
-    .led_green_intensity_in(led_green_intensity_queue[19]),
-    .led_blue_intensity_in(led_blue_intensity_queue[19]),
+    .collision_detected(queue_collide[SNAKE_MAX_SIZE-1]),
+    .led_red_intensity_in(led_red_intensity_queue[SNAKE_MAX_SIZE-1]),
+    .led_green_intensity_in(led_green_intensity_queue[SNAKE_MAX_SIZE-1]),
+    .led_blue_intensity_in(led_blue_intensity_queue[SNAKE_MAX_SIZE-1]),
     .led_red_intensity_out(led_red_intensity),
     .led_green_intensity_out(led_green_intensity),
     .led_blue_intensity_out(led_blue_intensity)
