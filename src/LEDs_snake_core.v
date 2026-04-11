@@ -22,65 +22,48 @@ module LEDs_snake_core (
   wire [3:0] queue_x [19:0];
   wire [3:0] queue_y [19:0];
   wire [1:0] queue_direction [19:0];
+  wire queue_active [19:0];
+
+
   wire queue_1_collide;
-  wire queue_1_active;
 
   wire queue_2_collide;
-  wire queue_2_active;
 
   wire queue_3_collide;
-  wire queue_3_active;
 
   wire queue_4_collide;
-  wire queue_4_active;
 
   wire queue_5_collide;
-  wire queue_5_active;
 
   wire queue_6_collide;
-  wire queue_6_active;
 
   wire queue_7_collide;
-  wire queue_7_active;
 
   wire queue_8_collide;
-  wire queue_8_active;
 
   wire queue_9_collide;
-  wire queue_9_active;
 
   wire queue_10_collide;
-  wire queue_10_active;
 
   wire queue_11_collide;
-  wire queue_11_active;
 
   wire queue_12_collide;
-  wire queue_12_active;
 
   wire queue_13_collide;
-  wire queue_13_active;
 
   wire queue_14_collide;
-  wire queue_14_active;
 
   wire queue_15_collide;
-  wire queue_15_active;
 
   wire queue_16_collide;
-  wire queue_16_active;
 
   wire queue_17_collide;
-  wire queue_17_active;
 
   wire queue_18_collide;
-  wire queue_18_active;
 
   wire queue_19_collide;
-  wire queue_19_active;
 
   wire queue_last_collide;
-  wire queue_20_active;
 
   wire [1:0] head_direction;
 
@@ -238,7 +221,7 @@ module LEDs_snake_core (
     .x_pos(queue_x[0]),
     .y_pos(queue_y[0]),
     .is_head_collide(queue_1_collide),
-    .is_active(queue_1_active)
+    .is_active(queue_active[0])
   );
 
   SnakeQueue queue_2 (
@@ -258,7 +241,7 @@ module LEDs_snake_core (
     .x_pos(queue_x[1]),
     .y_pos(queue_y[1]),
     .is_head_collide(queue_2_collide),
-    .is_active(queue_2_active)
+    .is_active(queue_active[1])
   );
 
   SnakeQueue queue_3 (
@@ -278,7 +261,7 @@ module LEDs_snake_core (
     .x_pos(queue_x[2]),
     .y_pos(queue_y[2]),
     .is_head_collide(queue_3_collide),
-    .is_active(queue_3_active)
+    .is_active(queue_active[2])
   );
 
   SnakeQueue queue_4 (
@@ -298,7 +281,7 @@ module LEDs_snake_core (
     .x_pos(queue_x[3]),
     .y_pos(queue_y[3]),
     .is_head_collide(queue_4_collide),
-    .is_active(queue_4_active)
+    .is_active(queue_active[3])
   );
 
   SnakeQueue queue_5 (
@@ -318,7 +301,7 @@ module LEDs_snake_core (
     .x_pos(queue_x[4]),
     .y_pos(queue_y[4]),
     .is_head_collide(queue_5_collide),
-    .is_active(queue_5_active)
+    .is_active(queue_active[4])
   );
 
   SnakeQueue queue_6 (
@@ -338,7 +321,7 @@ module LEDs_snake_core (
     .x_pos(queue_x[5]),
     .y_pos(queue_y[5]),
     .is_head_collide(queue_6_collide),
-    .is_active(queue_6_active)
+    .is_active(queue_active[5])
   );
 
   SnakeQueue queue_7 (
@@ -358,7 +341,7 @@ module LEDs_snake_core (
     .x_pos(queue_x[6]),
     .y_pos(queue_y[6]),
     .is_head_collide(queue_7_collide),
-    .is_active(queue_7_active)
+    .is_active(queue_active[6])
   );
 
   SnakeQueue queue_8 (
@@ -378,7 +361,7 @@ module LEDs_snake_core (
     .x_pos(queue_x[7]),
     .y_pos(queue_y[7]),
     .is_head_collide(queue_8_collide),
-    .is_active(queue_8_active)
+    .is_active(queue_active[7])
   );
 
   SnakeQueue queue_9 (
@@ -398,7 +381,7 @@ module LEDs_snake_core (
     .x_pos(queue_x[8]),
     .y_pos(queue_y[8]),
     .is_head_collide(queue_9_collide),
-    .is_active(queue_9_active)
+    .is_active(queue_active[8])
   );
 
   SnakeQueue queue_10 (
@@ -418,7 +401,7 @@ module LEDs_snake_core (
     .x_pos(queue_x[9]),
     .y_pos(queue_y[9]),
     .is_head_collide(queue_10_collide),
-    .is_active(queue_10_active)
+    .is_active(queue_active[9])
   );
 
   SnakeQueue queue_11 (
@@ -438,7 +421,7 @@ module LEDs_snake_core (
     .x_pos(queue_x[10]),
     .y_pos(queue_y[10]),
     .is_head_collide(queue_11_collide),
-    .is_active(queue_11_active)
+    .is_active(queue_active[10])
   );
 
   SnakeQueue queue_12 (
@@ -458,7 +441,7 @@ module LEDs_snake_core (
     .x_pos(queue_x[11]),
     .y_pos(queue_y[11]),
     .is_head_collide(queue_12_collide),
-    .is_active(queue_12_active)
+    .is_active(queue_active[11])
   );
 
   SnakeQueue queue_13 (
@@ -478,7 +461,7 @@ module LEDs_snake_core (
     .x_pos(queue_x[12]),
     .y_pos(queue_y[12]),
     .is_head_collide(queue_13_collide),
-    .is_active(queue_13_active)
+    .is_active(queue_active[12])
   );
 
   SnakeQueue queue_14 (
@@ -498,7 +481,7 @@ module LEDs_snake_core (
     .x_pos(queue_x[13]),
     .y_pos(queue_y[13]),
     .is_head_collide(queue_14_collide),
-    .is_active(queue_14_active)
+    .is_active(queue_active[13])
   );
 
   SnakeQueue queue_15 (
@@ -518,7 +501,7 @@ module LEDs_snake_core (
     .x_pos(queue_x[14]),
     .y_pos(queue_y[14]),
     .is_head_collide(queue_15_collide),
-    .is_active(queue_15_active)
+    .is_active(queue_active[14])
   );
 
   SnakeQueue queue_16 (
@@ -538,7 +521,7 @@ module LEDs_snake_core (
     .x_pos(queue_x[15]),
     .y_pos(queue_y[15]),
     .is_head_collide(queue_16_collide),
-    .is_active(queue_16_active)
+    .is_active(queue_active[15])
   );
 
   SnakeQueue queue_17 (
@@ -558,7 +541,7 @@ module LEDs_snake_core (
     .x_pos(queue_x[16]),
     .y_pos(queue_y[16]),
     .is_head_collide(queue_17_collide),
-    .is_active(queue_17_active)
+    .is_active(queue_active[16])
   );
 
   SnakeQueue queue_18 (
@@ -578,7 +561,7 @@ module LEDs_snake_core (
     .x_pos(queue_x[17]),
     .y_pos(queue_y[17]),
     .is_head_collide(queue_18_collide),
-    .is_active(queue_18_active)
+    .is_active(queue_active[17])
   );
 
   SnakeQueue queue_19 (
@@ -598,7 +581,7 @@ module LEDs_snake_core (
     .x_pos(queue_x[18]),
     .y_pos(queue_y[18]),
     .is_head_collide(queue_19_collide),
-    .is_active(queue_19_active)
+    .is_active(queue_active[18])
   );
 
   SnakeQueue queue_20 (
@@ -618,7 +601,7 @@ module LEDs_snake_core (
     .x_pos(queue_x[19]),
     .y_pos(queue_y[19]),
     .is_head_collide(queue_last_collide),
-    .is_active(queue_20_active)
+    .is_active(queue_active[19])
   );
 
   DrawBonus draw_bonus (
@@ -648,7 +631,7 @@ module LEDs_snake_core (
   );
 
   DrawSnakeQueue draw_snake_queue_1 (
-    .enable(queue_1_active),
+    .enable(queue_active[0]),
     .current_led_x(current_led_x),
     .current_led_y(current_led_y),
     .queue_x_pos(queue_x[0]),
@@ -662,7 +645,7 @@ module LEDs_snake_core (
   );
 
   DrawSnakeQueue draw_snake_queue_2 (
-    .enable(queue_2_active),
+    .enable(queue_active[1]),
     .current_led_x(current_led_x),
     .current_led_y(current_led_y),
     .queue_x_pos(queue_x[1]),
@@ -676,7 +659,7 @@ module LEDs_snake_core (
   );
 
   DrawSnakeQueue draw_snake_queue_3 (
-    .enable(queue_3_active),
+    .enable(queue_active[2]),
     .current_led_x(current_led_x),
     .current_led_y(current_led_y),
     .queue_x_pos(queue_x[2]),
@@ -690,7 +673,7 @@ module LEDs_snake_core (
   );
 
   DrawSnakeQueue draw_snake_queue_4 (
-    .enable(queue_4_active),
+    .enable(queue_active[3]),
     .current_led_x(current_led_x),
     .current_led_y(current_led_y),
     .queue_x_pos(queue_x[3]),
@@ -704,7 +687,7 @@ module LEDs_snake_core (
   );
 
   DrawSnakeQueue draw_snake_queue_5 (
-    .enable(queue_5_active),
+    .enable(queue_active[4]),
     .current_led_x(current_led_x),
     .current_led_y(current_led_y),
     .queue_x_pos(queue_x[4]),
@@ -718,7 +701,7 @@ module LEDs_snake_core (
   );
 
   DrawSnakeQueue draw_snake_queue_6 (
-    .enable(queue_6_active),
+    .enable(queue_active[5]),
     .current_led_x(current_led_x),
     .current_led_y(current_led_y),
     .queue_x_pos(queue_x[5]),
@@ -732,7 +715,7 @@ module LEDs_snake_core (
   );
 
   DrawSnakeQueue draw_snake_queue_7 (
-    .enable(queue_7_active),
+    .enable(queue_active[6]),
     .current_led_x(current_led_x),
     .current_led_y(current_led_y),
     .queue_x_pos(queue_x[6]),
@@ -746,7 +729,7 @@ module LEDs_snake_core (
   );
 
   DrawSnakeQueue draw_snake_queue_8 (
-    .enable(queue_8_active),
+    .enable(queue_active[7]),
     .current_led_x(current_led_x),
     .current_led_y(current_led_y),
     .queue_x_pos(queue_x[7]),
@@ -760,7 +743,7 @@ module LEDs_snake_core (
   );
 
   DrawSnakeQueue draw_snake_queue_9 (
-    .enable(queue_9_active),
+    .enable(queue_active[8]),
     .current_led_x(current_led_x),
     .current_led_y(current_led_y),
     .queue_x_pos(queue_x[8]),
@@ -774,7 +757,7 @@ module LEDs_snake_core (
   );
 
   DrawSnakeQueue draw_snake_queue_10 (
-    .enable(queue_10_active),
+    .enable(queue_active[9]),
     .current_led_x(current_led_x),
     .current_led_y(current_led_y),
     .queue_x_pos(queue_x[9]),
@@ -788,7 +771,7 @@ module LEDs_snake_core (
   );
 
   DrawSnakeQueue draw_snake_queue_11 (
-    .enable(queue_11_active),
+    .enable(queue_active[10]),
     .current_led_x(current_led_x),
     .current_led_y(current_led_y),
     .queue_x_pos(queue_x[10]),
@@ -802,7 +785,7 @@ module LEDs_snake_core (
   );
 
   DrawSnakeQueue draw_snake_queue_12 (
-    .enable(queue_12_active),
+    .enable(queue_active[11]),
     .current_led_x(current_led_x),
     .current_led_y(current_led_y),
     .queue_x_pos(queue_x[11]),
@@ -816,7 +799,7 @@ module LEDs_snake_core (
   );
 
   DrawSnakeQueue draw_snake_queue_13 (
-    .enable(queue_13_active),
+    .enable(queue_active[12]),
     .current_led_x(current_led_x),
     .current_led_y(current_led_y),
     .queue_x_pos(queue_x[12]),
@@ -830,7 +813,7 @@ module LEDs_snake_core (
   );
 
   DrawSnakeQueue draw_snake_queue_14 (
-    .enable(queue_14_active),
+    .enable(queue_active[13]),
     .current_led_x(current_led_x),
     .current_led_y(current_led_y),
     .queue_x_pos(queue_x[13]),
@@ -844,7 +827,7 @@ module LEDs_snake_core (
   );
 
   DrawSnakeQueue draw_snake_queue_15 (
-    .enable(queue_15_active),
+    .enable(queue_active[14]),
     .current_led_x(current_led_x),
     .current_led_y(current_led_y),
     .queue_x_pos(queue_x[14]),
@@ -858,7 +841,7 @@ module LEDs_snake_core (
   );
 
   DrawSnakeQueue draw_snake_queue_16 (
-    .enable(queue_16_active),
+    .enable(queue_active[15]),
     .current_led_x(current_led_x),
     .current_led_y(current_led_y),
     .queue_x_pos(queue_x[15]),
@@ -872,7 +855,7 @@ module LEDs_snake_core (
   );
 
   DrawSnakeQueue draw_snake_queue_17 (
-    .enable(queue_17_active),
+    .enable(queue_active[16]),
     .current_led_x(current_led_x),
     .current_led_y(current_led_y),
     .queue_x_pos(queue_x[16]),
@@ -886,7 +869,7 @@ module LEDs_snake_core (
   );
 
   DrawSnakeQueue draw_snake_queue_18 (
-    .enable(queue_18_active),
+    .enable(queue_active[17]),
     .current_led_x(current_led_x),
     .current_led_y(current_led_y),
     .queue_x_pos(queue_x[17]),
@@ -900,7 +883,7 @@ module LEDs_snake_core (
   );
 
   DrawSnakeQueue draw_snake_queue_19 (
-    .enable(queue_19_active),
+    .enable(queue_active[18]),
     .current_led_x(current_led_x),
     .current_led_y(current_led_y),
     .queue_x_pos(queue_x[18]),
@@ -914,7 +897,7 @@ module LEDs_snake_core (
   );
 
   DrawSnakeQueue draw_snake_queue_20 (
-    .enable(queue_20_active),
+    .enable(queue_active[19]),
     .current_led_x(current_led_x),
     .current_led_y(current_led_y),
     .queue_x_pos(queue_x[19]),
