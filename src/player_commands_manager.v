@@ -13,21 +13,22 @@ module PlayerCommandsManager (
     if(reset) begin
       direction <= 0;
     end else begin
-      if(right && (direction != 1 || score == 0)) begin
+      if(right && (direction != 2'b1 || score == 8'd0)) begin
         direction <= 0;
       end
 
-      if(left && (direction != 0 || score == 0)) begin
+      if(left && (direction != 2'd0 || score == 8'd0)) begin
         direction <= 1;
       end
 
-      if(down && (direction != 3 || score == 0)) begin
+      if(down && (direction != 2'd3 || score == 8'd0)) begin
         direction <= 2;
       end
 
-      if(up && (direction != 2 || score == 0)) begin
+      if(up && (direction != 2'd2 || score == 8'd0)) begin
         direction <= 3;
       end
+
     end
   end
 
