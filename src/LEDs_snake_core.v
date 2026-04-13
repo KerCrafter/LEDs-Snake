@@ -97,6 +97,8 @@ module LEDs_snake_core (
   genvar i;
   generate
     for(i = 0; i <= SNAKE_MAX_SIZE-1; i = i + 1) begin : queues_gen
+      localparam [7:0] ID_QUEUE = i[7:0] + 8'd1;
+
       if(i == 0) begin
         SnakeQueue queue_1 (
           .clk(clk),
@@ -106,7 +108,7 @@ module LEDs_snake_core (
           .next_x_pos(head_x_pos),
           .next_y_pos(head_y_pos),
           .score(score),
-          .active_when_score_min(8'd1),
+          .active_when_score_min(ID_QUEUE),
           .head_direction(head_direction),
           .head_x_pos(head_x_pos),
           .head_y_pos(head_y_pos),
@@ -142,7 +144,7 @@ module LEDs_snake_core (
           .next_y_pos(queue_y[i-1]),
           .next_collide_head(queue_collide[i-1]),
           .score(score),
-          .active_when_score_min(i+1),
+          .active_when_score_min(ID_QUEUE),
           .head_direction(head_direction),
           .head_x_pos(head_x_pos),
           .head_y_pos(head_y_pos),
