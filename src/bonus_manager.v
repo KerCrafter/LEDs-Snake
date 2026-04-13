@@ -17,10 +17,10 @@ module BonusManager (
       x_pos <= bonus_random_x;
       y_pos <= bonus_random_y;
     end else if(move_act && (
-      (head_direction == 0 && head_x_pos + 1 == x_pos && head_y_pos == y_pos) ||
-      (head_direction == 1 && head_x_pos - 1 == x_pos && head_y_pos == y_pos) ||
-      (head_direction == 2 && head_y_pos + 1 == y_pos && head_x_pos == x_pos) ||
-      (head_direction == 3 && head_y_pos - 1 == y_pos && head_x_pos == x_pos)
+      (head_direction == 2'd0 && head_x_pos + 1 == x_pos && head_y_pos == y_pos) ||
+      (head_direction == 2'd1 && head_x_pos - 1 == x_pos && head_y_pos == y_pos) ||
+      (head_direction == 2'd2 && head_y_pos + 1 == y_pos && head_x_pos == x_pos) ||
+      (head_direction == 2'd3 && head_y_pos - 1 == y_pos && head_x_pos == x_pos)
     )) begin
       score <= score + 8'd1;
 

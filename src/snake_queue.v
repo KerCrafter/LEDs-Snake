@@ -32,10 +32,10 @@ module SnakeQueue (
       direction <= next_direction;
 
       if(is_active && (
-            (head_direction == 0 && head_x_pos + 1 == x_pos && head_y_pos == y_pos) || 
-            (head_direction == 1 && head_x_pos - 1 == x_pos && head_y_pos == y_pos) ||
-            (head_direction == 2 && head_y_pos + 1 == y_pos && head_x_pos == x_pos) ||
-            (head_direction == 3 && head_y_pos - 1 == y_pos && head_x_pos == x_pos) 
+            (head_direction == 2'd0 && head_x_pos + 1 == x_pos && head_y_pos == y_pos) || 
+            (head_direction == 2'd1 && head_x_pos - 1 == x_pos && head_y_pos == y_pos) ||
+            (head_direction == 2'd2 && head_y_pos + 1 == y_pos && head_x_pos == x_pos) ||
+            (head_direction == 2'd3 && head_y_pos - 1 == y_pos && head_x_pos == x_pos) 
         )
       ) begin
         is_collide_with_head <= 1;
@@ -45,16 +45,16 @@ module SnakeQueue (
   end
 
   always @(*) begin
-    if(direction == 0) begin
+    if(direction == 2'd0) begin
       x_pos <= next_x_pos - 4'd1;
       y_pos <= next_y_pos;
-    end else if(direction == 1) begin
+    end else if(direction == 2'd1) begin
       x_pos <= next_x_pos + 4'd1;
       y_pos <= next_y_pos;
-    end else if(direction == 2) begin
+    end else if(direction == 2'd2) begin
       x_pos <= next_x_pos;
       y_pos <= next_y_pos - 4'd1;
-    end else if(direction == 3) begin
+    end else if(direction == 2'd3) begin
       x_pos <= next_x_pos;
       y_pos <= next_y_pos + 4'd1;
     end else begin
