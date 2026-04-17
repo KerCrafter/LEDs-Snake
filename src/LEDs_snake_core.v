@@ -27,6 +27,8 @@ module LEDs_snake_core (
   wire queue_active [SNAKE_MAX_SIZE-1:0];
   wire queue_collide [SNAKE_MAX_SIZE-1:0];
 
+  wire collide_detected = queue_collide[SNAKE_MAX_SIZE-1];
+
   wire [1:0] head_direction;
 
   wire [3:0] current_bonus_x_pos;
@@ -200,7 +202,7 @@ module LEDs_snake_core (
   );
 
   DrawEndGame draw_end_game (
-    .collision_detected(queue_collide[SNAKE_MAX_SIZE-1]),
+    .collision_detected(collide_detected),
     .led_red_intensity_in(led_red_intensity_queue[SNAKE_MAX_SIZE-1]),
     .led_green_intensity_in(led_green_intensity_queue[SNAKE_MAX_SIZE-1]),
     .led_blue_intensity_in(led_blue_intensity_queue[SNAKE_MAX_SIZE-1]),
