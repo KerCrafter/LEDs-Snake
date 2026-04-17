@@ -220,5 +220,26 @@ module LEDs_snake_core (
     .led_blue_intensity_out(led_blue_intensity)
   );
 
+  always @(*) begin
+
+    if(queue_current_scan == 0) begin
+      scan_queue_x <= queue_x[0];
+      scan_queue_y <= queue_y[0];
+    end else if(queue_current_scan == 1) begin
+      scan_queue_x <= queue_x[1];
+      scan_queue_y <= queue_y[1];
+    end else if(queue_current_scan == 2) begin
+      scan_queue_x <= queue_x[2];
+      scan_queue_y <= queue_y[2];
+    end else if(queue_current_scan == 3) begin
+      scan_queue_x <= queue_x[3];
+      scan_queue_y <= queue_y[3];
+    end else if(queue_current_scan == 4) begin
+      scan_queue_x <= queue_x[4];
+      scan_queue_y <= queue_y[4];
+    end
+
+  end
+
 endmodule
 
