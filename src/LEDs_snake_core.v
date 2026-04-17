@@ -211,7 +211,7 @@ module LEDs_snake_core (
   );
 
   DrawEndGame draw_end_game (
-    .collision_detected(collide_detected),
+    .collision_detected(_collide_detected),
     .led_red_intensity_in(led_red_intensity_queue[SNAKE_MAX_SIZE-1]),
     .led_green_intensity_in(led_green_intensity_queue[SNAKE_MAX_SIZE-1]),
     .led_blue_intensity_in(led_blue_intensity_queue[SNAKE_MAX_SIZE-1]),
@@ -220,25 +220,14 @@ module LEDs_snake_core (
     .led_blue_intensity_out(led_blue_intensity)
   );
 
-  always @(*) begin
-
-    if(queue_active[0] && queue_current_scan == 0) begin
-      scan_queue_x <= queue_x[0];
-      scan_queue_y <= queue_y[0];
-    end else if(queue_active[1] && queue_current_scan == 1) begin
-      scan_queue_x <= queue_x[1];
-      scan_queue_y <= queue_y[1];
-    end else if(queue_active[2] && queue_current_scan == 2) begin
-      scan_queue_x <= queue_x[2];
-      scan_queue_y <= queue_y[2];
-    end else if(queue_active[3] && queue_current_scan == 3) begin
-      scan_queue_x <= queue_x[3];
-      scan_queue_y <= queue_y[3];
-    end else if(queue_active[4] && queue_current_scan == 4) begin
-      scan_queue_x <= queue_x[4];
-      scan_queue_y <= queue_y[4];
+  always @(posedge clk) begin
+    if(queue_current_scan != 0 && queue_active[queue_current_scan-1]) begin
+      scan_queue_x <= queue_x[queue_current_scan-1];
+      scan_queue_y <= queue_y[queue_current_scan-1];
+    end else begin
+      scan_queue_x <= 15;
+      scan_queue_y <= 15;
     end
-
   end
 
 endmodule
