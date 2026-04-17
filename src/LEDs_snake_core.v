@@ -222,19 +222,19 @@ module LEDs_snake_core (
 
   always @(*) begin
 
-    if(queue_current_scan == 0) begin
+    if(queue_active[0] && queue_current_scan == 0) begin
       scan_queue_x <= queue_x[0];
       scan_queue_y <= queue_y[0];
-    end else if(queue_current_scan == 1) begin
+    end else if(queue_active[1] && queue_current_scan == 1) begin
       scan_queue_x <= queue_x[1];
       scan_queue_y <= queue_y[1];
-    end else if(queue_current_scan == 2) begin
+    end else if(queue_active[2] && queue_current_scan == 2) begin
       scan_queue_x <= queue_x[2];
       scan_queue_y <= queue_y[2];
-    end else if(queue_current_scan == 3) begin
+    end else if(queue_active[3] && queue_current_scan == 3) begin
       scan_queue_x <= queue_x[3];
       scan_queue_y <= queue_y[3];
-    end else if(queue_current_scan == 4) begin
+    end else if(queue_active[4] && queue_current_scan == 4) begin
       scan_queue_x <= queue_x[4];
       scan_queue_y <= queue_y[4];
     end
