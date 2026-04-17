@@ -4,7 +4,8 @@ module SnakeHead (
   input wire [1:0] direction,
   input wire move_act,
   output reg [3:0] x_pos,
-  output reg [3:0] y_pos
+  output reg [3:0] y_pos,
+  output wire collide_detected
 );
   always @(posedge clk or posedge reset) begin
     if(reset) begin
