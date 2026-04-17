@@ -3,8 +3,8 @@ module SnakeHead (
   input wire clk,
   input wire [1:0] direction,
   input wire move_act,
-  input wire [3:0] queue_x [49:0],
-  input wire [3:0] queue_y [49:0],
+  input wire [3:0] scan_queue_x,
+  input wire [3:0] scan_queue_y,
   output reg [3:0] x_pos,
   output reg [3:0] y_pos,
   output wire collide_detected

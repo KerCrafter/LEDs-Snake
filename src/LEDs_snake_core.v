@@ -95,6 +95,8 @@ module LEDs_snake_core (
     .move_act(move_act_rise),
     .x_pos(head_x_pos),
     .y_pos(head_y_pos),
+    .scan_queue_x(4'd0),
+    .scan_queue_y(4'd0),
     .collide_detected(_collide_detected)
   );
 
