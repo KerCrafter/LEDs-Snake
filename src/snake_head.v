@@ -7,6 +7,7 @@ module SnakeHead (
   input wire [3:0] scan_queue_y,
   output reg [3:0] x_pos,
   output reg [3:0] y_pos,
+  output wire [5:0] queue_current_scan,
   output wire collide_detected
 );
   always @(posedge clk or posedge reset) begin
