@@ -31,6 +31,9 @@ module LEDs_snake_core (
   wire _collide_detected;
   wire [5:0] queue_current_scan;
 
+  reg [3:0] scan_queue_x;
+  reg [3:0] scan_queue_y;
+
   wire [1:0] head_direction;
 
   wire [3:0] current_bonus_x_pos;
@@ -94,8 +97,8 @@ module LEDs_snake_core (
     .reset(reset),
     .direction(head_direction),
     .move_act(move_act_rise),
-    .scan_queue_x(4'd0),
-    .scan_queue_y(4'd0),
+    .scan_queue_x(scan_queue_x),
+    .scan_queue_y(scan_queue_y),
     .x_pos(head_x_pos),
     .y_pos(head_y_pos),
     .queue_current_scan(queue_current_scan),
