@@ -215,7 +215,7 @@ module LEDs_snake_core (
 
     end else if(run_check_collision) begin
 
-      if(queue_active[iter] && head_x_pos == queue_x[iter] && head_y_pos == queue_y[iter]) begin
+      if(queue_active[iter+1] && head_x_pos == queue_x[iter+2] && head_y_pos == queue_y[iter+2]) begin
         run_check_collision <= 0;
 
         __collide_detected <= 1;
