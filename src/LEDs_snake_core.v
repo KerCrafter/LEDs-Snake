@@ -25,14 +25,10 @@ module LEDs_snake_core (
   wire [3:0] queue_y [SNAKE_MAX_SIZE-1:0];
   wire [1:0] queue_direction [SNAKE_MAX_SIZE-1:0];
   wire queue_active [SNAKE_MAX_SIZE-1:0];
-  wire queue_collide [SNAKE_MAX_SIZE-1:0];
 
-  wire collide_detected = queue_collide[SNAKE_MAX_SIZE-1];
-  wire _collide_detected;
-  wire [5:0] queue_current_scan;
-
-  reg [3:0] scan_queue_x;
-  reg [3:0] scan_queue_y;
+  reg run_check_collision;
+  reg __collide_detected;
+  reg [5:0] iter;
 
   wire [1:0] head_direction;
 
@@ -97,12 +93,8 @@ module LEDs_snake_core (
     .reset(reset),
     .direction(head_direction),
     .move_act(move_act_rise),
-    .scan_queue_x(scan_queue_x),
-    .scan_queue_y(scan_queue_y),
     .x_pos(head_x_pos),
-    .y_pos(head_y_pos),
-    .queue_current_scan(queue_current_scan),
-    .collide_detected(_collide_detected)
+    .y_pos(head_y_pos)
   );
 
   genvar i;
@@ -121,14 +113,10 @@ module LEDs_snake_core (
           .score(score),
           .active_when_score_min(ID_QUEUE),
           .head_direction(head_direction),
-          .head_x_pos(head_x_pos),
-          .head_y_pos(head_y_pos),
-          .next_collide_head(1'b0),
-          .direction(queue_direction[0]),
-          .x_pos(queue_x[0]),
-          .y_pos(queue_y[0]),
-          .is_head_collide(queue_collide[0]),
-          .is_active(queue_active[0])
+          .direction(queue_direction[i]),
+          .x_pos(queue_x[i]),
+          .y_pos(queue_y[i]),
+          .is_active(queue_active[i])
         );
 
         DrawSnakeQueue draw_snake_queue_1 (
@@ -153,16 +141,12 @@ module LEDs_snake_core (
           .next_direction(queue_direction[i-1]),
           .next_x_pos(queue_x[i-1]),
           .next_y_pos(queue_y[i-1]),
-          .next_collide_head(queue_collide[i-1]),
           .score(score),
           .active_when_score_min(ID_QUEUE),
           .head_direction(head_direction),
-          .head_x_pos(head_x_pos),
-          .head_y_pos(head_y_pos),
           .direction(queue_direction[i]),
           .x_pos(queue_x[i]),
           .y_pos(queue_y[i]),
-          .is_head_collide(queue_collide[i]),
           .is_active(queue_active[i])
         );
 
@@ -211,7 +195,7 @@ module LEDs_snake_core (
   );
 
   DrawEndGame draw_end_game (
-    .collision_detected(_collide_detected),
+    .collision_detected(__collide_detected),
     .led_red_intensity_in(led_red_intensity_queue[SNAKE_MAX_SIZE-1]),
     .led_green_intensity_in(led_green_intensity_queue[SNAKE_MAX_SIZE-1]),
     .led_blue_intensity_in(led_blue_intensity_queue[SNAKE_MAX_SIZE-1]),
@@ -221,12 +205,26 @@ module LEDs_snake_core (
   );
 
   always @(posedge clk) begin
-    if(queue_current_scan != 0 && queue_active[queue_current_scan-1]) begin
-      scan_queue_x <= queue_x[queue_current_scan-1];
-      scan_queue_y <= queue_y[queue_current_scan-1];
-    end else begin
-      scan_queue_x <= 15;
-      scan_queue_y <= 15;
+    if(reset) begin
+      run_check_collision <= 0;
+      iter <= 0;
+      __collide_detected <= 0;
+
+    end else if(move_act_rise) begin
+      run_check_collision <= 1;
+
+    end else if(run_check_collision) begin
+
+      if(queue_active[iter] && head_x_pos == queue_x[iter] && head_y_pos == queue_y[iter]) begin
+        run_check_collision <= 0;
+
+        __collide_detected <= 1;
+      end else if(queue_active[iter+1]) begin
+        iter <= iter + 1;
+      end else begin
+        run_check_collision <= 0;
+        iter <= 0;
+      end
     end
   end
 

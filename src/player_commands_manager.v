@@ -9,7 +9,7 @@ module PlayerCommandsManager (
   output reg [1:0] direction
 );
 
-  always @(posedge clk or posedge reset) begin
+  always @(posedge clk) begin
     if(reset) begin
       direction <= 0;
     end else begin

@@ -77,3 +77,88 @@ async def _move_timer_PULSE(dut, times=1):
       await Timer(1, unit="ns");
       dut.clk.value = 0;
       await Timer(1, unit="ns");
+
+      dut.clk.value = 1;
+      await Timer(1, unit="ns");
+      dut.clk.value = 0;
+      await Timer(1, unit="ns");
+
+      dut.clk.value = 1;
+      await Timer(1, unit="ns");
+      dut.clk.value = 0;
+      await Timer(1, unit="ns");
+
+      dut.clk.value = 1;
+      await Timer(1, unit="ns");
+      dut.clk.value = 0;
+      await Timer(1, unit="ns");
+
+      dut.clk.value = 1;
+      await Timer(1, unit="ns");
+      dut.clk.value = 0;
+      await Timer(1, unit="ns");
+
+      dut.clk.value = 1;
+      await Timer(1, unit="ns");
+      dut.clk.value = 0;
+      await Timer(1, unit="ns");
+
+      dut.clk.value = 1;
+      await Timer(1, unit="ns");
+      dut.clk.value = 0;
+      await Timer(1, unit="ns");
+
+      dut.clk.value = 1;
+      await Timer(1, unit="ns");
+      dut.clk.value = 0;
+      await Timer(1, unit="ns");
+
+      dut.clk.value = 1;
+      await Timer(1, unit="ns");
+      dut.clk.value = 0;
+      await Timer(1, unit="ns");
+
+      dut.clk.value = 1;
+      await Timer(1, unit="ns");
+      dut.clk.value = 0;
+      await Timer(1, unit="ns");
+
+      dut.clk.value = 1;
+      await Timer(1, unit="ns");
+      dut.clk.value = 0;
+      await Timer(1, unit="ns");
+
+      dut.clk.value = 1;
+      await Timer(1, unit="ns");
+      dut.clk.value = 0;
+      await Timer(1, unit="ns");
+
+      dut.clk.value = 1;
+      await Timer(1, unit="ns");
+      dut.clk.value = 0;
+      await Timer(1, unit="ns");
+
+      dut.clk.value = 1;
+      await Timer(1, unit="ns");
+      dut.clk.value = 0;
+      await Timer(1, unit="ns");
+
+      dut.clk.value = 1;
+      await Timer(1, unit="ns");
+      dut.clk.value = 0;
+      await Timer(1, unit="ns");
+
+      dut.clk.value = 1;
+      await Timer(1, unit="ns");
+      dut.clk.value = 0;
+      await Timer(1, unit="ns");
+
+      dut.clk.value = 1;
+      await Timer(1, unit="ns");
+      dut.clk.value = 0;
+      await Timer(1, unit="ns");
+
+      dut.clk.value = 1;
+      await Timer(1, unit="ns");
+      dut.clk.value = 0;
+      await Timer(1, unit="ns");
